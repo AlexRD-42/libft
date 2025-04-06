@@ -8,7 +8,7 @@
 
 # Need better definition for trim and split
 
-
+# 42 Header isn't auto updating
 
 int		ft_atoi(const char *nptr);
 char	*ft_itoa(int n);

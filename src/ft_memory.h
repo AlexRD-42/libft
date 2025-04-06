@@ -10,7 +10,60 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "..\includes\libft.h"
+#include <stddef.h>
+
+int	ft_memcmp(const void *addr1_void, const void *addr2_void, size_t n)
+{
+	const unsigned char	*addr1;
+	const unsigned char	*addr2;
+	size_t				i;
+
+	addr1 = (const unsigned char *) addr1_void;
+	addr2 = (const unsigned char *) addr2_void;
+	if (n == 0)
+		return (0);
+	i = 0;
+	while (i < n)
+	{
+		if (addr1[i] != addr2[i])
+			return (addr1[i] - addr2[i]);
+		i++;
+	}
+	return (0);
+}
+
+void	*ft_memchr(const void *addr_void, int c, size_t n)
+{
+	const unsigned char	*addr;
+	size_t				i;
+
+	c = (unsigned char) c;
+	addr = (const unsigned char *) addr_void;
+	i = 0;
+	while (i < n)
+	{
+		if (addr[i] == c)
+			return ((void *) (addr + i));
+		i++;
+	}
+	return (NULL);
+}
+
+void	*ft_memset(void *dst_void, int c, size_t n)
+{
+	char	*dst;
+	size_t	i;
+
+	c = (unsigned char) c;
+	dst = (char *) dst_void;
+	i = 0;
+	while (i < n)
+	{
+		dst[i] = c;
+		i++;
+	}
+	return (dst_void);
+}
 
 void	*ft_memcpy(void *dst_void, const void *src_void, size_t n)
 {
@@ -41,7 +94,7 @@ void	*ft_memmove(void *dst_void, const void *src_void, size_t n)
 	src = (const char *) src_void;
 	if (n == 0 || dst == src)
 		return (dst_void);
-	if ((unsigned long) dst < (unsigned long) src)
+	if ((uintptr_t) dst < (uintptr_t) src)
 	{
 		i = 0;
 		while (i < n)
@@ -59,53 +112,24 @@ void	*ft_memmove(void *dst_void, const void *src_void, size_t n)
 	return (dst_void);
 }
 
-void	*ft_memchr(const void *addr_void, int c, size_t n)
+void	ft_bzero(void *addr_void, size_t n)
 {
-	const char	*addr;
-	size_t		i;
+	char *addr;
 
-	addr = (const char *) addr_void;
-	i = 0;
-	while (i < n)
-	{
-		if (addr[i] == (unsigned char) c)
-			return ((void *) (addr + i));
-		i++;
-	}
-	return (NULL);
+	addr = (char *) addr_void;
+	while (n > 0)
+		addr[--n] = 0;
 }
 
-int	ft_memcmp(const void *addr1_void, const void *addr2_void, size_t n)
+void	*ft_calloc(size_t array_size, size_t data_size)
 {
-	const char	*addr1;
-	const char	*addr2;
-	size_t	i;
+	void	*array;
 
-	addr1 = (const char *) addr1_void;
-	addr2 = (const char *) addr2_void;
-	if (n == 0)
-		return (0);
-	i = 0;
-	while (i < n)
-	{
-		if (addr1[i] != addr2[i])
-			return ((unsigned char) addr1[i] - (unsigned char) addr2[i]);
-		i++;
-	}
-	return (0);
-}
-
-void	*ft_memset(void *dst_void, int c, size_t n)
-{
-	char	*dst;
-	size_t	i;
-
-	dst = (char *) dst_void;
-	i = 0;
-	while (i < n)
-	{
-		dst[i] = (unsigned char) c;
-		i++;
-	}
-	return(dst_void);
+	if (array_size == 0 || data_size == 0)
+		return (NULL);
+	array = (void *) malloc (array_size * data_size);
+	if (array == NULL)
+		return (NULL);
+	ft_bzero(array, data_size);
+	return (array);
 }

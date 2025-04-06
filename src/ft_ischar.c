@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "..\includes\libft.h"
-
 int	ft_isalpha(int c)
 {
 	c = (unsigned char) c;
@@ -39,20 +37,4 @@ int	ft_isprint(int c)
 {
 	c = (unsigned char) c;
 	return (c >= 32 && c <= 126);
-}
-
-int	ft_toupper(int c)
-{
-	c = (unsigned char) c;
-	if (c >= 'a' && c <= 'z')
-		c -= 32;
-	return (c);
-}
-
-int	ft_tolower(int c)
-{
-	c = (unsigned char) c;
-	if (c >= 'A' && c <= 'Z')
-		c += 32;
-	return (c);
 }
