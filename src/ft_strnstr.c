@@ -20,25 +20,25 @@
 
 char	*ft_strnstr(const char *str, const char *substr, size_t len)
 {
-	size_t	i;
-	size_t	str_len;
+	size_t	max_len;
 	size_t	substr_len;
 
 	if (str == NULL || substr == NULL)
 		return (NULL);
 	if (*substr == 0)
 		return ((char *) str);
-	str_len = ft_strlen(str);
 	substr_len = ft_strlen(substr);
-	if (substr_len > str_len)
+	max_len = ft_strlen(str) - substr_len;
+	if (substr_len > max_len)
 		return (NULL);
-	if (len > str_len - substr_len)
-		len = str_len - substr_len;
-	while (i < len)
+	if (len > max_len)
+		len = max_len;
+	while (len > 0)
 	{
-		if (ft_strncmp(str + i, substr, substr_len) == 0)
-			return ((char *) (str + i));
-		i++;
+		if (ft_strncmp(str, substr, substr_len) == 0)
+			return ((char *) str);
+		str++;
+		len--;
 	}
 	return (NULL);
 }

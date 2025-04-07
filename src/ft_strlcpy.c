@@ -14,20 +14,38 @@
 
 // ft_strlen
 // dst == NULL check
+// size_t	ft_strlcpy(char *dst, const char *src, size_t dst_size)
+// {
+// 	size_t	i;
+// 	size_t	src_size;
+
+// 	src_size = ft_strlen(src);
+// 	if (dst_size == 0)
+// 		return (src_size);
+// 	i = 0;
+// 	while (i < src_size && i < dst_size - 1)
+// 	{
+// 		dst[i] = src[i];
+// 		i++;
+// 	}
+// 	dst[i] = 0;
+// 	return (src_size);
+// }
+
 size_t	ft_strlcpy(char *dst, const char *src, size_t dst_size)
 {
-	size_t	i;
-	size_t	src_size;
+	char	*start;
 
-	src_size = ft_strlen(src);
 	if (dst_size == 0)
-		return (src_size);
-	i = 0;
-	while (i < src_size && i < dst_size - 1)
+		return (ft_strlen(src));
+	start = src;
+	while (*src != 0 && dst_size > 1)
 	{
-		dst[i] = src[i];
-		i++;
+		*dst = *src;
+		dst++;
+		src++;
+		dst_size--;
 	}
-	dst[i] = 0;
-	return (src_size);
+	*dst = 0;
+	return (src - start);
 }
