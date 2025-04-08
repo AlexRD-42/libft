@@ -6,22 +6,19 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:28:43 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/07 11:28:43 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:50:59 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 // ft_bzero
-void	*ft_calloc(size_t array_size, size_t data_size)
+void	*ft_calloc(size_t arr_size, size_t type_size)
 {
 	void	*array;
 
-	// need to pass unique info
-	if (array_size == 0 || data_size == 0)
-		return (NULL);
-	array = (void *) malloc (array_size * data_size);
+	array = (void *) malloc (arr_size * type_size + !(arr_size && type_size));
 	if (array == NULL)
 		return (NULL);
-	ft_bzero(array, data_size * array_size);
+	ft_bzero(array, type_size * arr_size);
 	return (array);
 }

@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:32:55 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/07 11:32:55 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:11:26 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ char	*ft_strnstr(const char *str, const char *substr, size_t len)
 	size_t	max_len;
 	size_t	substr_len;
 
-	if (str == NULL || substr == NULL)
-		return (NULL);
 	if (*substr == 0)
 		return ((char *) str);
 	substr_len = ft_strlen(substr);
