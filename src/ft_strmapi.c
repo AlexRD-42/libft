@@ -17,7 +17,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	char			*new_str;
 	unsigned int	i;
 
-	new_str = (char *) ft_strdup(s);
+	new_str = ft_strdup(s);
 	if (new_str == NULL)
 		return (NULL);
 	i = 0;
@@ -26,5 +26,6 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 		new_str[i] = f(i, new_str[i]);
 		i++;
 	}
+	new_str[i] = 0; // is this needed?
 	return (new_str);
 }

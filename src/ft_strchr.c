@@ -15,11 +15,14 @@
 // ft_strlen
 char	*ft_strchr(const char *str, int c)
 {
+	unsigned char	byte;
+
 	if (c == 0)
 		return ((char *) (str + ft_strlen(str)));
+	byte = (unsigned char) c;
 	while (*str != 0)
 	{
-		if (*str == (unsigned char) c)
+		if (*str == byte)
 			return ((char *) str);
 		str++;
 	}

@@ -12,7 +12,6 @@
 
 #include "libft.h"
 
-
 // Behavior: Skips whitespaces until either sign or number
 // Edge Cases: INT_MIN, INT_MAX, 0
 

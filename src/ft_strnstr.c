@@ -12,7 +12,6 @@
 
 #include "libft.h"
 
-// Replace to use strchr
 // ft_strlen
 // Finds the first occurrence of substr in str, up to i < len
 // Return: str if substr is empty, NULL if no matches
@@ -20,18 +19,16 @@
 
 char	*ft_strnstr(const char *str, const char *substr, size_t len)
 {
-	size_t	max_len;
 	size_t	substr_len;
+	size_t	str_len;
 
 	if (*substr == 0)
 		return ((char *) str);
 	substr_len = ft_strlen(substr);
-	max_len = ft_strlen(str) - substr_len;
-	if (substr_len > max_len)
-		return (NULL);
-	if (len > max_len)
-		len = max_len;
-	while (len > 0)
+	str_len = ft_strlen(str);
+	if (len > str_len)
+		len = str_len;
+	while (len >= substr_len)
 	{
 		if (ft_strncmp(str, substr, substr_len) == 0)
 			return ((char *) str);
@@ -40,6 +37,29 @@ char	*ft_strnstr(const char *str, const char *substr, size_t len)
 	}
 	return (NULL);
 }
+
+// char *	strnstr(const char *str, const char *substr, size_t len)
+// {
+// 	char c, sc;
+// 	size_t slen;
+
+// 	if ((c = *substr++) != '\0')
+// 	{
+// 		slen = ft_strlen(substr);
+// 		do
+// 		{
+// 			do
+// 			{
+// 				if (len-- < 1 || (sc = *str++) == '\0')
+// 					return (NULL);
+// 			} while (sc != c);
+// 			if (len > slen)
+// 				return (NULL);
+// 		} while (ft_strncmp(str, substr, slen) != 0);
+// 		str--;
+// 	}
+// 	return ((char *)str);
+// }
 
 /* #include <string.h>
 int	main(void)

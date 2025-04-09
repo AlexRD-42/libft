@@ -16,18 +16,17 @@ int	ft_memcmp(const void *addr1_void, const void *addr2_void, size_t n)
 {
 	const unsigned char	*addr1;
 	const unsigned char	*addr2;
-	size_t				i;
 
 	addr1 = (const unsigned char *) addr1_void;
 	addr2 = (const unsigned char *) addr2_void;
 	if (n == 0)
 		return (0);
-	i = 0;
-	while (i < n)
+	while (n > 0)
 	{
-		if (addr1[i] != addr2[i])
-			return (addr1[i] - addr2[i]);
-		i++;
+		if (*addr1 != *addr2)
+			return (*addr1 - *addr2);
+		addr1++;
+		addr2++;
 	}
 	return (0);
 }

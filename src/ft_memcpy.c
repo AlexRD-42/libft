@@ -19,7 +19,7 @@ void	*ft_memcpy(void *dst_void, const void *src_void, size_t n)
 
 	dst = (char *) dst_void;
 	src = (const char *) src_void;
-	if (n == 0 || dst == src)
+	if (dst == src)
 		return (dst_void);
 	while (n > 0)
 	{

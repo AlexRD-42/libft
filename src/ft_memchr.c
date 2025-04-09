@@ -12,19 +12,20 @@
 
 #include "libft.h"
 
+// to check: better to use unsigned_c, for register width
 void	*ft_memchr(const void *addr_void, int c, size_t n)
 {
 	const unsigned char	*addr;
-	size_t				i;
+	unsigned char		byte;
 
-	c = (unsigned char) c;
+	byte = (unsigned char) c;
 	addr = (const unsigned char *) addr_void;
-	i = 0;
-	while (i < n)
+	while (n > 0)
 	{
-		if (addr[i] == c)
-			return ((void *) (addr + i));
-		i++;
+		if (*addr == byte)
+			return ((void *) addr);
+		n--;
+		addr++;
 	}
 	return (NULL);
 }

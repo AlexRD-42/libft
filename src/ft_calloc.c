@@ -11,12 +11,13 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-// ft_bzero
+// ft_bzero, !(arr_size && type_size)
+// libc implementation truncates size to 1
 void	*ft_calloc(size_t arr_size, size_t type_size)
 {
 	void	*array;
 
-	array = (void *) malloc (arr_size * type_size + !(arr_size && type_size));
+	array = (void *) malloc (arr_size * type_size);
 	if (array == NULL)
 		return (NULL);
 	ft_bzero(array, type_size * arr_size);

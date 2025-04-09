@@ -15,16 +15,19 @@
 // ft_strlen
 char	*ft_strrchr(const char *str, int c)
 {
-	size_t	len;
+	size_t			len;
+	unsigned char	byte;
 
-	len = ft_strlen(str);
 	if (c == 0)
-		return ((char *) (str + len));
+		return ((char *) (str + ft_strlen(str)));
+	str += ft_strlen(str) - 1;
+	byte = (unsigned char) c;
 	while (len > 0)
 	{
+		if (*str == byte)
+			return ((char *) str);
 		len--;
-		if (str[len] == (unsigned char) c)
-			return ((char *) (str + len));
+		str--;	
 	}
 	return (NULL);
 }
