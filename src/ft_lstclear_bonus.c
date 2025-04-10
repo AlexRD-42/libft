@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/07 20:14:42 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/10 16:50:56 by adeimlin         ###   ########.fr       */
+/*   Created: 2025/04/07 19:48:14 by adeimlin          #+#    #+#             */
+/*   Updated: 2025/04/10 17:02:55 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// Iterates through the list ’lst’ and applies the
-// function ’f’ to the content of each node.
-
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	if (lst == NULL || f == NULL)
+	t_list	*next;
+
+	if (lst == NULL || (*lst) == NULL || del == NULL)
 		return ;
-	while (lst != NULL)
+	while (*lst != NULL)
 	{
-		f(lst->content);
-		lst = lst->next;
+		next = (*lst)->next;
+		ft_lstdelone(*lst, del);
+		*lst = next;
 	}
 }

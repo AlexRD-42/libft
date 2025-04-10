@@ -6,16 +6,11 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:32:55 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/10 16:32:23 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/10 17:04:27 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-// ft_strlen
-// Finds the first occurrence of substr in str, up to i < len
-// Return: str if substr is empty, NULL if no matches
-// Edge Case: str == NULL, substr == NULL
 
 char	*ft_strnstr(const char *str, const char *substr, size_t len)
 {

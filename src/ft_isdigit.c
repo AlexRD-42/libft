@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:24:38 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/10 16:29:30 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/10 17:46:36 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,5 @@
 
 int	ft_isdigit(int c)
 {
-	unsigned char	byte;
-
-	byte = (unsigned char) c;
-	return (byte >= '0' && byte <= '9');
+	return (c >= '0' && c <= '9');
 }

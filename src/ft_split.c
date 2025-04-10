@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 16:35:51 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/10 16:37:34 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/10 18:48:28 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,3 @@ char	**ft_split(char const *s, char c)
 	str_array[count] = 0;
 	return (ft_checkstr(str_array, count));
 }
-
-// #include <stdio.h>
-// int	main(void)
-// {
-// 	char *str = "";
-// 	char c = ',';
-
-// 	// printf("%d", ft_cw(str, c));
-// 	char **str_array = ft_split(str, c);
-// 	while (*str_array != 0)
-// 	{
-// 		printf("%s\n", *str_array);
-// 		str_array++;
-// 	}
-// }

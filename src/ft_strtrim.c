@@ -6,17 +6,11 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:31:56 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/10 16:32:45 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/10 17:04:35 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-// Check possibility of using ft_strmapi
-
-// Allocates memory and returns a copy of s1 with characters from set removed
-// from the beginning and the end.
-// Return: NULL if the allocation fails
 
 char	*ft_strtrim(char const *s1, char const *set)
 {

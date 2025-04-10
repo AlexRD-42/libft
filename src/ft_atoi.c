@@ -6,14 +6,11 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 10:47:42 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/10 16:33:18 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/10 17:02:06 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-// Behavior: Skips whitespaces until either sign or number
-// Edge Cases: INT_MIN, INT_MAX, 0
 
 int32_t	ft_atoi(const char *num_str)
 {

@@ -6,15 +6,12 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:33:45 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/10 15:46:00 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/10 17:04:09 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// Allocates memory and concatenates s1 and s2
-// Return: NULL if allocation fails
-// Edge Case: s1 or s2 == NULL, 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	size_t	str_size;

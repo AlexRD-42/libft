@@ -6,13 +6,12 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:28:43 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/10 16:29:19 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/10 17:01:59 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-// ft_bzero, !(arr_size && type_size)
-// libc implementation truncates size to 1
+
 void	*ft_calloc(size_t arr_size, size_t type_size)
 {
 	void	*array;
