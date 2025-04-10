@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 19:17:36 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/07 19:17:36 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:50:40 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
 	if (lst == NULL || new == NULL)
-		return;
+		return ;
 	new->next = *lst;
 	*lst = new;
 }

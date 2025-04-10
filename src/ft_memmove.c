@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:29:05 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/07 11:29:05 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:30:19 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,17 @@ void	*ft_memmove(void *dst_void, const void *src_void, size_t n)
 	{
 		while (n > 0)
 		{
-			*dst = *src;
-			dst++;
-			src++;
+			n--;
+			*dst++ = *src++;
 		}
 	}
 	else
 	{
-		while (--n > 0)
+		while (n > 0)
+		{
+			n--;
 			dst[n] = src[n];
-		dst[0] = src[0];
+		}
 	}
 	return (dst_void);
 }

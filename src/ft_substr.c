@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:31:25 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/08 12:15:44 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:32:49 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	str_len;
 
 	str_len = ft_strlen(s);
-	if (start > str_len || s == NULL)
+	if (s == NULL)
 		return (NULL);
-	if (start == str_len)
+	if (start >= str_len)
 		return (ft_strdup(""));
 	str_len -= start;
 	if (len > str_len)

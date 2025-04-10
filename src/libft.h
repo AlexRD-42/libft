@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 12:11:22 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/07 12:11:22 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:50:20 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,26 @@
 # define LIBFT_H
 
 // Includes	and Structs ------------------------------------------------------
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <stddef.h>
-#include <unistd.h>
-#include <limits.h>
-#include <string.h> // REMOVE
+# include <stdlib.h>
+# include <stdint.h>
+# include <stddef.h>
+# include <unistd.h>
 
 typedef struct s_list
 {
-	void *content;
-	struct s_list *next;
-} t_list;
+	void			*content;
+	struct s_list	*next;
+}	t_list;
 //----------------------------------------------------------------------------
 
 // Prototypes: Char Information ----------------------------------------------
-int	ft_isalpha(int c);
-int	ft_isdigit(int c);
-int	ft_isalnum(int c);
-int	ft_isascii(int c);
-int	ft_isprint(int c);
-int	ft_toupper(int c);
-int	ft_tolower(int c);
+int		ft_isalpha(int c);
+int		ft_isdigit(int c);
+int		ft_isalnum(int c);
+int		ft_isascii(int c);
+int		ft_isprint(int c);
+int		ft_toupper(int c);
+int		ft_tolower(int c);
 //----------------------------------------------------------------------------
 
 // Prototypes: String --------------------------------------------------------

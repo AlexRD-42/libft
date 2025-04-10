@@ -6,13 +6,11 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 19:19:37 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/07 19:19:37 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:51:57 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-// Counts the number of nodes in the list
 
 int	ft_lstsize(t_list *lst)
 {

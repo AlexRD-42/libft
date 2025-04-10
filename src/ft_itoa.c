@@ -6,16 +6,15 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 10:47:52 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/07 10:47:52 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:34:52 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// ft_strdup
-char *ft_itoa(int32_t n)
+char	*ft_itoa(int32_t n)
 {
-	int32_t sign;
+	int32_t	sign;
 	char	str[12];
 	char	*ptr;
 

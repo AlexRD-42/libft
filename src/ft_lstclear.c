@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 19:48:14 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/07 19:48:14 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:50:50 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 	t_list	*next;
 
 	if (lst == NULL || (*lst) == NULL || del == NULL)
-		return;
+		return ;
 	while (*lst != NULL)
 	{
 		next = (*lst)->next;

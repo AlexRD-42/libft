@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:34:03 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/07 11:34:03 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:32:00 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 		new_str[i] = f(i, new_str[i]);
 		i++;
 	}
-	new_str[i] = 0; // is this needed?
+	new_str[i] = 0;
 	return (new_str);
 }

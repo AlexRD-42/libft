@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:29:56 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/07 11:29:56 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:30:13 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	ft_memcmp(const void *addr1_void, const void *addr2_void, size_t n)
 			return (*addr1 - *addr2);
 		addr1++;
 		addr2++;
+		n--;
 	}
 	return (0);
 }

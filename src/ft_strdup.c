@@ -1,19 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strldup.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:30:53 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/07 11:30:53 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:31:11 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// check if strlcpy is fine
-// ft_strlen, ft_strlcpy
 char	*ft_strdup(const char *str)
 {
 	size_t	str_size;

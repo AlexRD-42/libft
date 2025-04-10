@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:31:56 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/08 19:32:09 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:32:45 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 		return (ft_strdup(""));
 	return (ft_substr(s1, 0, end - s1 + 1));
 }
-
-/* #include <stdio.h>
-int	main(void)
-{
-	char *str = ", , , asd 123123 , , asdasd ,, aaaa,,,  , , , ";
-	char set[2] = {',' , ' '};
-	char *new_str = ft_strtrim(str, set);
-
-	printf("%s", new_str);
-} */

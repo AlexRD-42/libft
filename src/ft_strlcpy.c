@@ -6,13 +6,11 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:30:21 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/08 19:36:43 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:31:47 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-// ft_strlen
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dst_size)
 {
@@ -24,8 +22,9 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dst_size)
 		*dst++ = *src++;
 		dst_size--;
 	}
+	if (dst_size != 0)
+		*dst = 0;
 	while (*src != 0)
 		src++;
-	*dst = 0;
 	return (src - osrc);
 }

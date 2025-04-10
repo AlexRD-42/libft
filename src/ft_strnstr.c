@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:32:55 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/08 13:11:26 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:32:23 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,36 +37,3 @@ char	*ft_strnstr(const char *str, const char *substr, size_t len)
 	}
 	return (NULL);
 }
-
-// char *	strnstr(const char *str, const char *substr, size_t len)
-// {
-// 	char c, sc;
-// 	size_t slen;
-
-// 	if ((c = *substr++) != '\0')
-// 	{
-// 		slen = ft_strlen(substr);
-// 		do
-// 		{
-// 			do
-// 			{
-// 				if (len-- < 1 || (sc = *str++) == '\0')
-// 					return (NULL);
-// 			} while (sc != c);
-// 			if (len > slen)
-// 				return (NULL);
-// 		} while (ft_strncmp(str, substr, slen) != 0);
-// 		str--;
-// 	}
-// 	return ((char *)str);
-// }
-
-/* #include <string.h>
-int	main(void)
-{
-	char *substr = "this is a string, i need to find something like T1293 in";
-	char *str = "T1293";
-	
-	printf("%s", ft_strnstr(str, substr, 100));
-	printf("\n%s", strstr(str, substr));
-} */
