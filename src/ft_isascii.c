@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-
+// assembly code generated is better with unsigned char
 int	ft_isascii(int c)
 {
 	return (c >= 0 && c <= 127);

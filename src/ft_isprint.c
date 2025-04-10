@@ -14,5 +14,8 @@
 
 int	ft_isprint(int c)
 {
-	return (c >= 32 && c <= 126);
+	unsigned char	byte;
+
+	byte = (unsigned char) c;
+	return (byte >= 32 && byte <= 126);
 }

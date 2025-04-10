@@ -11,8 +11,12 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-
+// assembly code generated is better with unsigned char
+// check if inline code is passable
 int	ft_isalpha(int c)
 {
-	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
+	unsigned char	byte;
+
+	byte = (unsigned char) c;
+	return ((byte >= 'a' && byte <= 'z') || (byte >= 'A' && byte <= 'Z'));
 }

@@ -14,5 +14,8 @@
 
 int	ft_isdigit(int c)
 {
-	return (c >= '0' && c <= '9');
+	unsigned char	byte;
+
+	byte = (unsigned char) c;
+	return (byte >= '0' && byte <= '9');
 }
