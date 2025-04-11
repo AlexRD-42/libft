@@ -16,7 +16,7 @@ char	*ft_strchr(const char *str, int c)
 {
 	unsigned char	byte;
 
-	byte = (unsigned char) c;
+	byte = (unsigned char) (c & 0x7F);
 	if (byte == 0)
 		return ((char *)(str + ft_strlen(str)));
 	while (*str != 0)

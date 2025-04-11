@@ -1,18 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/07 11:25:04 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/10 17:02:30 by adeimlin         ###   ########.fr       */
+/*   Created: 2025/04/07 20:18:37 by adeimlin          #+#    #+#             */
+/*   Updated: 2025/04/10 18:42:38 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isascii(int c)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	return (c >= 0 && c <= 127);
+	t_list	*new_lst;
+	t_list	*new_node;
+
+	if (lst == NULL || f == NULL || del == NULL)
+		return (NULL);
+	new_lst = NULL;
+	while (lst != NULL)
+	{
+		new_node = ft_lstnew(f(lst->content));
+		if (new_node == NULL)
+		{
+			ft_lstclear(&new_lst, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&new_lst, new_node);
+		lst = lst->next;
+	}
+	return (new_lst);
 }

@@ -16,6 +16,19 @@ size_t	ft_strlen1(const char *str)
 	return (i);
 }
 
+size_t	ft_strlcat0(char *dst, const char *src, size_t dst_size)
+{
+	char	*odst;
+
+	odst = dst;
+	while (dst_size > 0 && *dst != 0)
+	{
+		dst++;
+		dst_size--;
+	}
+	return (dst - odst + ft_strlcpy(dst, src, dst_size));
+}
+
 size_t	ft_strlcat1(char *dst, const char *src, size_t dst_size)
 {
 	char	*odst;

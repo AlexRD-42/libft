@@ -28,7 +28,7 @@ int32_t	ft_atoi(const char *num_str)
 	}
 	else if (*num_str == '+')
 		num_str++;
-	while (*num_str >= '0' && *num_str <= '9')
+	while (ft_isdigit(*num_str))
 		number = number * 10 - (*num_str++ - '0');
 	return (sign * number);
 }
