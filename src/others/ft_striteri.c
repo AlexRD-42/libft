@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/07 10:47:52 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/10 16:34:52 by adeimlin         ###   ########.fr       */
+/*   Created: 2025/04/07 11:34:16 by adeimlin          #+#    #+#             */
+/*   Updated: 2025/04/10 16:52:50 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-char	*ft_itoa(int32_t n)
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	int32_t	sign;
-	char	str[12];
-	char	*ptr;
+	unsigned int	i;
 
-	if (n == 0)
-		return (ft_strdup("0"));
-	sign = (n < 0);
-	ptr = str + 11;
-	*ptr = 0;
-	while (n != 0)
+	if (s == NULL)
+		return ;
+	i = 0;
+	while (s[i] != 0)
 	{
-		*(--ptr) = (!sign - sign) * (n % 10) + '0';
-		n /= 10;
+		f(i, s + i);
+		i++;
 	}
-	if (sign == 1)
-		*(--ptr) = '-';
-	return (ft_strdup(ptr));
 }

@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/07 10:47:52 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/10 16:34:52 by adeimlin         ###   ########.fr       */
+/*   Created: 2025/04/07 20:18:37 by adeimlin          #+#    #+#             */
+/*   Updated: 2025/04/10 18:42:38 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-char	*ft_itoa(int32_t n)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	int32_t	sign;
-	char	str[12];
-	char	*ptr;
+	t_list	*new_lst;
+	t_list	*new_node;
 
-	if (n == 0)
-		return (ft_strdup("0"));
-	sign = (n < 0);
-	ptr = str + 11;
-	*ptr = 0;
-	while (n != 0)
+	if (lst == NULL || f == NULL || del == NULL)
+		return (NULL);
+	new_lst = NULL;
+	while (lst != NULL)
 	{
-		*(--ptr) = (!sign - sign) * (n % 10) + '0';
-		n /= 10;
+		new_node = ft_lstnew(f(lst->content));
+		if (new_node == NULL)
+		{
+			ft_lstclear(&new_lst, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&new_lst, new_node);
+		lst = lst->next;
 	}
-	if (sign == 1)
-		*(--ptr) = '-';
-	return (ft_strdup(ptr));
+	return (new_lst);
 }

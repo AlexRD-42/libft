@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_average.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/07 10:47:52 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/10 16:34:52 by adeimlin         ###   ########.fr       */
+/*   Created: 2025/04/12 17:46:03 by adeimlin          #+#    #+#             */
+/*   Updated: 2025/04/12 17:46:03 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-char	*ft_itoa(int32_t n)
+float	ft_average(float *array, uint32_t size)
 {
-	int32_t	sign;
-	char	str[12];
-	char	*ptr;
+	float		sum;
+	uint32_t	i;
 
-	if (n == 0)
-		return (ft_strdup("0"));
-	sign = (n < 0);
-	ptr = str + 11;
-	*ptr = 0;
-	while (n != 0)
+	sum = 0;
+	i = 0;
+	while (i < size)
 	{
-		*(--ptr) = (!sign - sign) * (n % 10) + '0';
-		n /= 10;
+		sum += *array;
+		array++;
+		i++;
 	}
-	if (sign == 1)
-		*(--ptr) = '-';
-	return (ft_strdup(ptr));
+	return (sum / size);
 }

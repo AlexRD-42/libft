@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_ischar.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/07 10:47:52 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/10 16:34:52 by adeimlin         ###   ########.fr       */
+/*   Created: 2025/04/12 20:19:19 by adeimlin          #+#    #+#             */
+/*   Updated: 2025/04/12 20:19:19 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-char	*ft_itoa(int32_t n)
+int	ft_isalpha(int c)
 {
-	int32_t	sign;
-	char	str[12];
-	char	*ptr;
+	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
+}
 
-	if (n == 0)
-		return (ft_strdup("0"));
-	sign = (n < 0);
-	ptr = str + 11;
-	*ptr = 0;
-	while (n != 0)
-	{
-		*(--ptr) = (!sign - sign) * (n % 10) + '0';
-		n /= 10;
-	}
-	if (sign == 1)
-		*(--ptr) = '-';
-	return (ft_strdup(ptr));
+int	ft_isdigit(int c)
+{
+	return (c >= '0' && c <= '9');
+}
+
+int	ft_isspace(int c)
+{
+	return (c == 32 || (c >= 9 && c <= 13));
+}
+
+int	ft_isprint(int c)
+{
+	return (c >= 32 && c <= 126);
+}
+
+int	ft_isascii(int c)
+{
+	return (!(c >> 7));
 }

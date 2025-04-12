@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libft.h"
+#include "../include/libft.h"
 
 int64_t	ft_fibonacci(int64_t index)
 {

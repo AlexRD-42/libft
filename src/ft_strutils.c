@@ -1,25 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_strutils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/07 10:47:52 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/10 16:34:52 by adeimlin         ###   ########.fr       */
+/*   Created: 2025/04/12 20:55:34 by adeimlin          #+#    #+#             */
+/*   Updated: 2025/04/12 20:55:34 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-char	*ft_itoa(int32_t n)
+void	ft_putchar_fd(char c, int fd)
+{
+	if (fd == -1)
+		return ;
+	write(fd, &c, 1);
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	if (fd == -1 || s == NULL)
+		return ;
+	write(fd, s, ft_strlen(s));
+}
+
+void	ft_putendl_fd(char *s, int fd)
+{
+	if (fd == -1 || s == NULL)
+		return ;
+	ft_putstr_fd(s, fd);
+	ft_putchar_fd('\n', fd);
+}
+
+void	ft_putnbr_fd(int n, int fd)
 {
 	int32_t	sign;
 	char	str[12];
 	char	*ptr;
 
+	if (fd == -1)
+		return ;
 	if (n == 0)
-		return (ft_strdup("0"));
+	{
+		write(fd, "0", 1);
+		return ;
+	}
 	sign = (n < 0);
 	ptr = str + 11;
 	*ptr = 0;
@@ -30,5 +57,15 @@ char	*ft_itoa(int32_t n)
 	}
 	if (sign == 1)
 		*(--ptr) = '-';
-	return (ft_strdup(ptr));
+	write(fd, ptr, ft_strlen(ptr));
+}
+
+size_t	ft_strlen(const char *str)
+{
+	const char	*ostr;
+
+	ostr = str;
+	while (*str != 0)
+		str++;
+	return (str - ostr);
 }

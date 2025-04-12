@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libft.h"
+#include "../include/libft.h"
 
-int64_t	ft_power(int64_t nb, int64_t power)
+int64_t	ft_power(int64_t number, int64_t power)
 {
 	int64_t	base;
 
@@ -20,8 +20,8 @@ int64_t	ft_power(int64_t nb, int64_t power)
 		return (0);
 	else if (power == 0)
 		return (1);
-	base = nb;
+	base = number;
 	while (power-- > 1)
-		nb = nb * base;
-	return (nb);
+		number = number * base;
+	return (number);
 }

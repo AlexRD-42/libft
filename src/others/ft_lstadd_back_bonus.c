@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/07 10:47:52 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/10 16:34:52 by adeimlin         ###   ########.fr       */
+/*   Created: 2025/04/07 19:32:45 by adeimlin          #+#    #+#             */
+/*   Updated: 2025/04/10 17:02:40 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-char	*ft_itoa(int32_t n)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	int32_t	sign;
-	char	str[12];
-	char	*ptr;
+	t_list	*last;
 
-	if (n == 0)
-		return (ft_strdup("0"));
-	sign = (n < 0);
-	ptr = str + 11;
-	*ptr = 0;
-	while (n != 0)
+	if (lst == NULL || new == NULL)
+		return ;
+	if (*lst == NULL)
 	{
-		*(--ptr) = (!sign - sign) * (n % 10) + '0';
-		n /= 10;
+		*lst = new;
+		return ;
 	}
-	if (sign == 1)
-		*(--ptr) = '-';
-	return (ft_strdup(ptr));
+	last = ft_lstlast(*lst);
+	last->next = new;
 }
