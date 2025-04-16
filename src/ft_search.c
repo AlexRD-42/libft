@@ -12,12 +12,10 @@
 
 #include "../include/libft.h"
 
-void	*ft_memchr(const void *addr_void, int c, size_t n)
+void	*ft_memchr(const void *addr_void, uint8_t byte, size_t n)
 {
 	const unsigned char	*addr;
-	unsigned char		byte;
 
-	byte = (unsigned char) (c & 0xFF);
 	addr = (const unsigned char *) addr_void;
 	while (n > 0)
 	{
@@ -29,36 +27,30 @@ void	*ft_memchr(const void *addr_void, int c, size_t n)
 	return (NULL);
 }
 
-char	*ft_strchr(const char *str, int c)
+char	*ft_strchr(const char *str, unsigned char c)
 {
-	unsigned char	byte;
-
-	byte = (unsigned char) (c & 0x7F);
-	if (byte == 0)
+	if (c == 0)
 		return ((char *)(str + ft_strlen(str)));
 	while (*str != 0)
 	{
-		if (*str == byte)
+		if (*str == c)
 			return ((char *) str);
 		str++;
 	}
 	return (NULL);
 }
 
-char	*ft_strrchr(const char *str, int c)
+char	*ft_strrchr(const char *str, unsigned char c)
 {
-	size_t			len;
-	unsigned char	byte;
+	char	*end;
 
-	byte = (unsigned char) (c & 0x7F);
-	len = ft_strlen(str);
-	if (byte == 0)
-		return ((char *)(str + len));
-	while (len > 0)
+	end = (char *) (str + ft_strlen(str));
+	if (c == 0)
+		return (end);
+	while (--end >= str)
 	{
-		len--;
-		if (str[len] == byte)
-			return ((char *) str + len);
+		if (*end == c)
+			return (end);
 	}
 	return (NULL);
 }
@@ -96,6 +88,22 @@ char	*ft_strnstr(const char *str, const char *substr, size_t len)
 			return ((char *) str);
 		str++;
 		len--;
+	}
+	return (NULL);
+}
+
+char *ft_strpbrk(const char *str, const char *charset)
+{
+	unsigned char	lookup_table[256];
+
+	ft_memset(lookup_table, 0, 256);
+	while (*charset != 0)
+		lookup_table[(unsigned char) *charset++] = 1;
+	while (*str != 0)
+	{
+		if (lookup_table[(unsigned char) *str] == 1)
+			return ((char *)str);
+		str++;
 	}
 	return (NULL);
 }

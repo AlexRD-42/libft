@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "../../include/libft.h"
 
 int64_t	ft_isprime(int64_t number)
 {

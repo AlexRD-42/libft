@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_splitmix64.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/07 11:31:56 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/10 17:04:35 by adeimlin         ###   ########.fr       */
+/*   Created: 2025/04/13 17:34:46 by adeimlin          #+#    #+#             */
+/*   Updated: 2025/04/13 17:34:46 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "../../include/libft.h"
 
-char	*ft_strtrim(char const *s1, char const *set)
+uint64_t	splitmix64(uint64_t seed)
 {
-	char	*end;
-
-	if (s1 == NULL)
-		return (NULL);
-	end = (char *) s1 + ft_strlen(s1) - (*s1 != 0);
-	while (ft_strchr(set, *s1) != NULL)
-		s1++;
-	while (end > s1 && ft_strchr(set, *end) != NULL)
-		end--;
-	if (s1 > end)
-		return (ft_strdup(""));
-	return (ft_substr(s1, 0, end - s1 + 1));
+	uint64_t result = (seed += 0x9E3779B97f4A7C15);
+	result = (result ^ (result >> 30)) * 0xBF58476D1CE4E5B9;
+	result = (result ^ (result >> 27)) * 0x94D049BB133111EB;
+	return (result ^ (result >> 31));
 }

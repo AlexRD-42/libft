@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "../../include/libft.h"
 
 float	ft_average(float *array, uint32_t size)
 {

@@ -12,27 +12,27 @@
 
 #include "../include/libft.h"
 
-int	ft_isalpha(int c)
+int8_t	ft_isalpha(int c)
 {
 	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
 }
 
-int	ft_isdigit(int c)
+int8_t	ft_isdigit(int c)
 {
 	return (c >= '0' && c <= '9');
 }
 
-int	ft_isspace(int c)
+int8_t	ft_isspace(int c)
 {
 	return (c == 32 || (c >= 9 && c <= 13));
 }
 
-int	ft_isprint(int c)
+int8_t	ft_isprint(int c)
 {
 	return (c >= 32 && c <= 126);
 }
 
-int	ft_isascii(int c)
+int8_t	ft_isascii(int c)
 {
 	return (!(c >> 7));
 }

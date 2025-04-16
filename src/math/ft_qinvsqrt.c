@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   ft_qrsqrt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/07 19:23:29 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/10 16:29:53 by adeimlin         ###   ########.fr       */
+/*   Created: 2025/04/13 10:28:32 by adeimlin          #+#    #+#             */
+/*   Updated: 2025/04/13 10:28:32 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "../../include/libft.h"
 
-t_list	*ft_lstlast(t_list *lst)
+// This is faster than receiving a t_32 (thank god)
+float	ft_qinvsqrt(float number)
 {
-	if (lst == NULL)
-		return (NULL);
-	while (lst->next != NULL)
-		lst = lst->next;
-	return (lst);
+	t_32	result;
+
+	result.f = number;
+	result.ui  = 0x5f3759df - (result.ui >> 1);
+	result.f  = result.f * (1.5f - (number * 0.5f * result.f * result.f));
+	return (result.f);
 }

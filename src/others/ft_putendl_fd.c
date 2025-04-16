@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_power.c                                         :+:      :+:    :+:   */
+/*   ft_putendl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/11 15:32:43 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/11 15:32:43 by adeimlin         ###   ########.fr       */
+/*   Created: 2025/04/12 22:42:08 by adeimlin          #+#    #+#             */
+/*   Updated: 2025/04/12 22:42:08 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/libft.h"
 
-// Change to square the squares (log n)
-int64_t	ft_power(int64_t number, int64_t power)
+void	ft_putendl_fd(char *s, int fd)
 {
-	int64_t	base;
-
-	if (power < 0)
-		return (0);
-	else if (power == 0)
-		return (1);
-	base = number;
-	while (power-- > 1)
-		number = number * base;
-	return (number);
+	if (fd == -1 || s == NULL)
+		return ;
+	ft_putstr_fd(s, fd);
+	ft_putchar_fd('\n', fd);
 }

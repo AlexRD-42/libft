@@ -10,6 +10,8 @@
                 "${fileDirname}\\*.c",
 				"-Wall",
 				"-Wextra",
+				// "-O3",
+				// "-flto",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],

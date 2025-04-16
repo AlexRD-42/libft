@@ -12,54 +12,6 @@
 
 #include "../include/libft.h"
 
-void	ft_putchar_fd(char c, int fd)
-{
-	if (fd == -1)
-		return ;
-	write(fd, &c, 1);
-}
-
-void	ft_putstr_fd(char *s, int fd)
-{
-	if (fd == -1 || s == NULL)
-		return ;
-	write(fd, s, ft_strlen(s));
-}
-
-void	ft_putendl_fd(char *s, int fd)
-{
-	if (fd == -1 || s == NULL)
-		return ;
-	ft_putstr_fd(s, fd);
-	ft_putchar_fd('\n', fd);
-}
-
-void	ft_putnbr_fd(int n, int fd)
-{
-	int32_t	sign;
-	char	str[12];
-	char	*ptr;
-
-	if (fd == -1)
-		return ;
-	if (n == 0)
-	{
-		write(fd, "0", 1);
-		return ;
-	}
-	sign = (n < 0);
-	ptr = str + 11;
-	*ptr = 0;
-	while (n != 0)
-	{
-		*(--ptr) = (!sign - sign) * (n % 10) + '0';
-		n /= 10;
-	}
-	if (sign == 1)
-		*(--ptr) = '-';
-	write(fd, ptr, ft_strlen(ptr));
-}
-
 size_t	ft_strlen(const char *str)
 {
 	const char	*ostr;
@@ -68,4 +20,71 @@ size_t	ft_strlen(const char *str)
 	while (*str != 0)
 		str++;
 	return (str - ostr);
+}
+
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	char	*end;
+
+	if (s1 == NULL)
+		return (NULL);
+	end = (char *) s1 + ft_strlen(s1) - (*s1 != 0);
+	while (ft_strchr(set, *s1) != NULL)
+		s1++;
+	while (end > s1 && ft_strchr(set, *end) != NULL)
+		end--;
+	if (s1 > end)
+		return (ft_strdup(""));
+	return (ft_substr(s1, 0, end - s1 + 1));
+}
+
+static char	**ft_checkstr(char **str_array, size_t count)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < count)
+	{
+		if (str_array[i] == NULL)
+			break ;
+		i++;
+	}
+	if (i == count)
+		return (str_array);
+	i = 0;
+	while (i < count)
+	{
+		if (str_array[i] != NULL)
+			free(str_array[i]);
+		i++;
+	}
+	free(str_array);
+	return (NULL);
+}
+
+// Malloc with strlen / c occurences
+char	**ft_split(char const *s, char c)
+{
+	char		**str_array;
+	int64_t		len;
+	size_t		count;
+
+	len = 0;
+	count = (s[0] != c && s[0] != 0) || (s[0] == c && s[(*s != 0)] != c);
+	while (s[len++] != 0)
+		count += s[len] == c && s[len + 1] != c && s[len + 1] != 0;
+	str_array = malloc((count + 1) * sizeof(char *));
+	count = 0;
+	if (str_array == NULL)
+		return (NULL);
+	while (*s != 0)
+	{
+		len = ft_strchr(s, c) - s;
+		len = (len < 0) * ft_strlen(s) + (len > 0) * len;
+		if (len > 0)
+			str_array[count++] = ft_substr(s, 0, len);
+		s += (s[len] != 0) + len;
+	}
+	str_array[count] = 0;
+	return (ft_checkstr(str_array, count));
 }

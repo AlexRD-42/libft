@@ -64,6 +64,6 @@ void	*ft_calloc(size_t arr_size, size_t type_size)
 	array = (void *) malloc (arr_size * type_size);
 	if (array == NULL)
 		return (NULL);
-	ft_bzero(array, type_size * arr_size);
+	ft_memset(array, 0, type_size * arr_size);
 	return (array);
 }
