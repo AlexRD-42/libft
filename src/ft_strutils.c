@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:55:34 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/12 20:55:34 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/17 20:18:33 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ size_t	ft_strlen(const char *str)
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*end;
+	const char	*end;
 
 	if (s1 == NULL)
 		return (NULL);
-	end = (char *) s1 + ft_strlen(s1) - (*s1 != 0);
-	while (ft_strchr(set, *s1) != NULL)
+	while (*s1 && ft_strchr(set, *s1) != NULL)
 		s1++;
-	while (end > s1 && ft_strchr(set, *end) != NULL)
-		end--;
+	end = s1 + ft_strlen(s1) - 1;
 	if (s1 > end)
 		return (ft_strdup(""));
+	while (end > s1 && ft_strchr(set, *end) != NULL)
+		end--;
 	return (ft_substr(s1, 0, end - s1 + 1));
 }
 

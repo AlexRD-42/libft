@@ -5,7 +5,7 @@
 #define STRINGIFY(x) #x
 
 #define num_runs 100
-#define num_iter 20
+#define num_iter 40
 
 #define fnc	2
 #define fn0 ft_fibonacci

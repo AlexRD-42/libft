@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:50:30 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/15 15:50:30 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/17 15:52:11 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,54 +67,54 @@ int64_t	ft_atoi(const char *num_str)
 }
 
 // init to 0?   
-int64_t	ft_atoi_base(const char *str, const char *base)
-{
-	const char		*start = ft_strpbrk(str, base);
-	const int64_t	radix = ft_strlen(base);
-	const uint64_t	sign = ((start > str) && (*(start - 1) == '-')) - 1;
-	int64_t			number;
-	uint8_t			lookup_table[256];
+// int64_t	ft_atoi_base(const char *str, const char *base)
+// {
+// 	const char		*start = ft_strpbrk(str, base);
+// 	const int64_t	radix = ft_strlen(base);
+// 	const uint64_t	sign = ((start > str) && (*(start - 1) == '-')) - 1;
+// 	int64_t			number;
+// 	uint8_t			lookup_table[256];
 
-	if (start == NULL || base == NULL || radix < 2)
-		return (0);
-	ft_memset(lookup_table, 255, 256);
-	number = -1;
-	while (++number < radix)
-		lookup_table[(unsigned char) base[number]] = number;
-	number = 0;
-	while (*start && lookup_table[(unsigned char) *start] < 255)
-		number = number * radix - lookup_table[(unsigned char) *start++];
-	return ((number ^ sign) - sign);
-}
+// 	if (start == NULL || base == NULL || radix < 2)
+// 		return (0);
+// 	ft_memset(lookup_table, 255, 256);
+// 	number = -1;
+// 	while (++number < radix)
+// 		lookup_table[(unsigned char) base[number]] = number;
+// 	number = 0;
+// 	while (*start && lookup_table[(unsigned char) *start] < 255)
+// 		number = number * radix - lookup_table[(unsigned char) *start++];
+// 	return ((number ^ sign) - sign);
+// }
 
-int64_t	ft_atoi_base(const char *num_str, const char *base)
-{
-	int64_t			number;
-	int8_t			sign;
-	const int64_t	radix = ft_strlen(base);
-	int8_t			lookup_table[128];
+// int64_t	ft_atoi_base(const char *num_str, const char *base)
+// {
+// 	int64_t			number;
+// 	int8_t			sign;
+// 	const int64_t	radix = ft_strlen(base);
+// 	int8_t			lookup_table[128];
 
-	ft_memset(lookup_table, 0, 128);
-	number = -1;
-	while (++number < radix)
-		lookup_table[(unsigned char) base[number]] = number;
-	number = 0;
-	sign = -1;
-	while (ft_isspace(*num_str))
-		num_str++;
-	if (*num_str == '-')
-	{
-		num_str++;
-		sign = -sign;
-	}
-	else if (*num_str == '+')
-		num_str++;
-	while (*num_str && lookup_table[(unsigned char) *num_str] != 0)
-		number = number * radix - lookup_table[(unsigned char) *num_str++];
-	return (sign * number);
-}
+// 	ft_memset(lookup_table, 0, 128);
+// 	number = -1;
+// 	while (++number < radix)
+// 		lookup_table[(unsigned char) base[number]] = number;
+// 	number = 0;
+// 	sign = -1;
+// 	while (ft_isspace(*num_str))
+// 		num_str++;
+// 	if (*num_str == '-')
+// 	{
+// 		num_str++;
+// 		sign = -sign;
+// 	}
+// 	else if (*num_str == '+')
+// 		num_str++;
+// 	while (*num_str && lookup_table[(unsigned char) *num_str] != 0)
+// 		number = number * radix - lookup_table[(unsigned char) *num_str++];
+// 	return (sign * number);
+// }
 
-int main()
-{
-	int x = ft_atoi_base("FFFF", "0123456789ABCDEF");
-}
+// int main()
+// {
+// 	int x = ft_atoi_base("FFFF", "0123456789ABCDEF");
+// }
