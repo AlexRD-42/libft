@@ -63,18 +63,28 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dst_size)
 	return (dst - odst);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(const char *src1, const char *src2)
 {
-	size_t	str_size;
-	char	*str;
+	const char	*osrc1 = src1;
+	const char	*osrc2 = src2;
+	char		*str;
+	size_t		len;
 
-	if (s1 == NULL || s1 == NULL)
+	if (src1 == NULL || src2 == NULL)
 		return (NULL);
-	str_size = ft_strlen(s1) + ft_strlen(s2) + 1;
-	str = (char *) malloc (str_size);
+	while (*src1 != 0)
+		src1++;
+	while (*src2 != 0)
+		src2++;
+	len = (src1 - osrc1) + (src2 - osrc2);
+	str = (char *) malloc (len + 1);
 	if (str == NULL)
 		return (NULL);
-	ft_strlcpy(str, s1, str_size);
-	ft_strlcat(str, s2, str_size);
+	str += len;
+	*str = 0;
+	while (src2 > osrc2)
+		*--str = *--src2;
+	while (src1 > osrc1)
+		*--str = *--src1;
 	return (str);
 }

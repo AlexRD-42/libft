@@ -2,14 +2,18 @@
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "C/C++: gcc build active file",
-            "command": "/usr/bin/gcc",
+            "label": "C/C++: gcc.exe build active file",
+            "command": "C:\\libs\\mingw64\\bin\\gcc.exe",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${fileDirname}/*.c",
+                "${fileDirname}\\*.c",
+				"-Wall",
+				"-Wextra",
+				// "-O3",
+				// "-flto",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}.a"
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
             "options": {
                 "cwd": "${fileDirname}"

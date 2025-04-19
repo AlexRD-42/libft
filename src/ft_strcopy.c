@@ -44,9 +44,8 @@ char	*ft_strncpy(char *dst, const char *src, size_t n)
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dst_size)
 {
-	char const	*osrc;
+	char const	*osrc = src;
 
-	osrc = src;
 	while (*src != 0 && dst_size > 1)
 	{
 		*dst++ = *src++;
@@ -59,35 +58,50 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dst_size)
 	return (src - osrc);
 }
 
-char	*ft_strdup(const char *str)
+char	*ft_strdup(const char *src)
 {
-	size_t	str_size;
-	char	*new_str;
+	char	*osrc;
+	char	*str;
 
-	str_size = ft_strlen(str) + 1;
-	new_str = (char *) malloc(str_size);
-	if (new_str == NULL)
+	osrc = src;
+	while (*src != 0)
+		src++;
+	str = (char *) malloc(src - osrc + 1);
+	if (str == NULL)
 		return (NULL);
-	ft_strlcpy(new_str, str, str_size);
-	return (new_str);
+	str += src - osrc;
+	*str = 0;
+	while (src > osrc)
+		*--str = *--src;
+	return (str);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+// Before substr is allocated, it is used as a temp variable to store
+// the starting position of (str + start), to limit the max length
+char	*ft_substr(const char *str, size_t start, size_t len)
 {
-	char	*substr;
-	size_t	str_len;
+	const char	*ostr = str;
+	char		*substr;
 
-	str_len = ft_strlen(s);
-	if (s == NULL)
+	if (str == NULL)
 		return (NULL);
-	if (start >= str_len)
-		return (ft_strdup(""));
-	str_len -= start;
-	if (len > str_len)
-		len = str_len;
+	while (*str != 0)
+		str++;
+	substr = (char *) ostr + start;
+	if (substr > str)
+		return (NULL);
+	if (substr + len > str)
+		len = str - substr;
+	str = substr + len;
 	substr = (char *) malloc (len + 1);
 	if (substr == NULL)
 		return (NULL);
-	ft_strlcpy(substr, s + start, len + 1);
+	substr += len;
+	*substr = 0;
+	while (len > 0)
+	{
+		*--substr = *--str;
+		len--;
+	}
 	return (substr);
 }

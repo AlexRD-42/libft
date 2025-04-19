@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_heap.c                                          :+:      :+:    :+:   */
+/*   ft_memory.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/12 20:41:24 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/12 20:41:24 by adeimlin         ###   ########.fr       */
+/*   Created: 2025/04/19 11:54:09 by adeimlin          #+#    #+#             */
+/*   Updated: 2025/04/19 11:54:09 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,41 +29,15 @@ void	*ft_memcpy(void *dst_void, const void *src_void, size_t n)
 	return (dst_void);
 }
 
-void	*ft_memmove(void *dst_void, const void *src_void, size_t n)
+// Reallocates memory to a bigger size, copies old array
+// If the old array is NULL, this is effectively just malloc
+void	*ft_realloc(void *old_array, size_t old_size, size_t new_size)
 {
-	char		*dst;
-	const char	*src;
+	void	*new_array;
 
-	dst = (char *) dst_void;
-	src = (const char *) src_void;
-	if (n == 0 || dst == src)
-		return (dst_void);
-	if ((uintptr_t) dst < (uintptr_t) src)
-	{
-		while (n > 0)
-		{
-			n--;
-			*dst++ = *src++;
-		}
-	}
-	else
-	{
-		while (n > 0)
-		{
-			n--;
-			dst[n] = src[n];
-		}
-	}
-	return (dst_void);
-}
-
-void	*ft_calloc(size_t arr_size, size_t type_size)
-{
-	void	*array;
-
-	array = (void *) malloc (arr_size * type_size);
-	if (array == NULL)
-		return (NULL);
-	ft_memset(array, 0, type_size * arr_size);
-	return (array);
+	new_array = (void *) malloc (new_size);
+	if (new_array != NULL && old_array != NULL)
+		ft_memcpy(new_array, old_array, old_size);
+	free(old_array);
+	return (new_array);
 }

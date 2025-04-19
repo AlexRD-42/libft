@@ -12,35 +12,36 @@
 
 #include "../include/libft.h"
 
-void	ft_putstr(char *s, int fd)
+void	ft_putstr(char *str, int fd)
 {
-	if (fd == -1 || s == NULL)
+	const char	*ostr = str;
+
+	if (fd == -1 || str == NULL)
 		return ;
-	write(fd, s, ft_strlen(s));
+	while (*str != 0)
+		str++;
+	write(fd, ostr, str - ostr);
 }
 
-void	ft_putnbr(int n, int fd)
+// Code duplication for itoa, so far unavoidable
+void	ft_putnbr(int64_t n, int fd)
 {
-	int32_t	sign;
-	char	str[12];
-	char	*ptr;
+	const int8_t	sign = (n >= 0) - (n < 0);
+	char			array[21];
+	char			*ptr;
 
 	if (fd == -1)
 		return ;
-	if (n == 0)
-	{
-		write(fd, "0", 1);
-		return ;
-	}
-	sign = (n < 0);
-	ptr = str + 11;
+	ptr = array + 20;
 	*ptr = 0;
+	*(--ptr) = sign * (n % 10) + '0';
+	n = sign * (n / 10);
 	while (n != 0)
 	{
-		*(--ptr) = (!sign - sign) * (n % 10) + '0';
+		*(--ptr) = (n % 10) + '0';
 		n /= 10;
 	}
-	if (sign == 1)
+	if (sign == -1)
 		*(--ptr) = '-';
-	write(fd, ptr, ft_strlen(ptr));
+	write(fd, ptr, array + 20 - ptr);
 }

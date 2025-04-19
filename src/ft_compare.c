@@ -14,13 +14,11 @@
 
 int32_t	ft_memcmp(const void *addr1_void, const void *addr2_void, size_t data_size)
 {
-	const unsigned char	*addr1;
-	const unsigned char	*addr2;
+	const uint8_t	*addr1 = (const uint8_t *) addr1_void;
+	const uint8_t	*addr2 = (const uint8_t *) addr2_void;
 
 	if (addr1_void == addr2_void)
 		return (0);
-	addr1 = (const unsigned char *) addr1_void;
-	addr2 = (const unsigned char *) addr2_void;
 	while (data_size > 0)
 	{
 		if (*addr1 != *addr2)
@@ -34,13 +32,11 @@ int32_t	ft_memcmp(const void *addr1_void, const void *addr2_void, size_t data_si
 
 int32_t	ft_memrcmp(const void *addr1_void, const void *addr2_void, size_t data_size)
 {
-	const unsigned char	*addr1;
-	const unsigned char	*addr2;
+	const uint8_t	*addr1 = (const uint8_t *) addr1_void + data_size - 1;
+	const uint8_t	*addr2 = (const uint8_t *) addr2_void + data_size - 1;
 
 	if (addr1_void == addr2_void)
 		return (0);
-	addr1 = (const unsigned char *) addr1_void + data_size - 1;
-	addr2 = (const unsigned char *) addr2_void + data_size - 1;
 	while (data_size > 0)
 	{
 		if (*addr1 != *addr2)
