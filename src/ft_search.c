@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:31:56 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/12 20:31:56 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/19 15:58:49 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,13 @@ char *ft_strpbrk(const char *str, const char *charset)
 
 	ft_memset(lookup_table, 0, 256);
 	while (*charset != 0)
-		lookup_table[(unsigned char) *charset++] = 1;
-	while (*str != 0)
 	{
-		if (lookup_table[(unsigned char) *str] == 1)
-			return ((char *)str);
-		str++;
+		lookup_table[(unsigned char) *charset] = 1;
+		charset++;
 	}
+	while (lookup_table[(unsigned char) *str] == 0)
+		str++;
+	if (*str != 0)
+		return (str);
 	return (NULL);
 }
