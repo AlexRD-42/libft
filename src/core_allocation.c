@@ -1,52 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_heap.c                                          :+:      :+:    :+:   */
+/*   core_allocation.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:41:24 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/12 20:41:24 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/22 13:31:35 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-void	*ft_memmove(void *dst_void, const void *src_void, size_t n)
-{
-	char		*dst;
-	const char	*src;
-
-	dst = (char *) dst_void;
-	src = (const char *) src_void;
-	if (n == 0 || dst == src)
-		return (dst_void);
-	if ((uintptr_t) dst < (uintptr_t) src)
-	{
-		while (n > 0)
-		{
-			n--;
-			*dst++ = *src++;
-		}
-	}
-	else
-	{
-		while (n > 0)
-		{
-			n--;
-			dst[n] = src[n];
-		}
-	}
-	return (dst_void);
-}
-
+// See if there is an efficient overflow handling
 void	*ft_calloc(size_t arr_size, size_t type_size)
 {
-	void	*array;
+	void			*array;
+	const size_t	total_size = arr_size * type_size;
 
-	array = (void *) malloc (arr_size * type_size);
+	array = (void *) malloc (total_size);
 	if (array == NULL)
 		return (NULL);
-	ft_memset(array, 0, type_size * arr_size);
+	ft_memset(array, 0, total_size);
 	return (array);
+}
+
+// Reallocates memory to a bigger size, copies old array
+// If the old array is NULL, this is effectively just malloc
+void	*ft_realloc(void *old_array, size_t old_size, size_t new_size)
+{
+	void	*new_array;
+
+	new_array = (void *) malloc (new_size);
+	if (new_array != NULL)
+	{
+		*((uint8_t *) new_array) = 0;
+		if (old_array != NULL)
+			ft_memcpy(new_array, old_array, old_size);
+	}
+	free(old_array);
+	return (new_array);
 }

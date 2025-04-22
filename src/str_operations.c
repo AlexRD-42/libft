@@ -1,42 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strutils.c                                      :+:      :+:    :+:   */
+/*   fts_operations.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:55:34 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/17 20:18:33 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/22 12:48:32 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
-
-size_t	ft_strlen(const char *str)
-{
-	const char	*ostr;
-
-	ostr = str;
-	while (*str != 0)
-		str++;
-	return (str - ostr);
-}
-
-char	*ft_strtrim(char const *s1, char const *set)
-{
-	const char	*end;
-
-	if (s1 == NULL)
-		return (NULL);
-	while (*s1 && ft_strchr(set, *s1) != NULL)
-		s1++;
-	end = s1 + ft_strlen(s1) - 1;
-	if (s1 > end)
-		return (ft_strdup(""));
-	while (end > s1 && ft_strchr(set, *end) != NULL)
-		end--;
-	return (ft_substr(s1, 0, end - s1 + 1));
-}
 
 static char	**ft_checkstr(char **str_array, size_t count)
 {
@@ -87,4 +61,31 @@ char	**ft_split(char const *s, char c)
 	}
 	str_array[count] = 0;
 	return (ft_checkstr(str_array, count));
+}
+
+// (end - 1) to avoid segfault and to not use the null terminator as LUT index
+char	*ft_strtrim(const char *str, const char *charset)
+{
+	char		*new_str;
+	const char	*end;
+	uint8_t		lookup_table[256];
+
+	ft_memset(lookup_table, 0, 256);
+	while (*charset != 0)
+		lookup_table[(uint8_t) *charset++] = 1;
+	while (lookup_table[(uint8_t) *str] != 0)
+		str++;
+	end = str;
+	while (*end != 0)
+		end++;
+	while ((end - 1) > str && lookup_table[(uint8_t) *(end - 1)] != 0)
+		end--;
+	new_str = (char *) malloc(end - str + 1);
+	if (new_str == NULL)
+		return (NULL);
+	new_str += end - str;
+	*new_str = 0;
+	while (end > str)
+		*--new_str = *--end;
+	return (new_str);
 }

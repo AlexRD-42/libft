@@ -1,43 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memory.c                                        :+:      :+:    :+:   */
+/*   mem_find.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 11:54:09 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/19 11:54:09 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/22 13:06:07 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-void	*ft_memcpy(void *dst_void, const void *src_void, size_t n)
+void	*ft_memchr(const void *addr_void, uint8_t byte, size_t n)
 {
-	char		*dst;
-	const char	*src;
+	const unsigned char	*addr;
 
-	dst = (char *) dst_void;
-	src = (const char *) src_void;
-	if (dst == src)
-		return (dst_void);
+	addr = (const unsigned char *) addr_void;
 	while (n > 0)
 	{
-		*dst++ = *src++;
+		if (*addr == byte)
+			return ((void *) addr);
 		n--;
+		addr++;
 	}
-	return (dst_void);
+	return (NULL);
 }
 
-// Reallocates memory to a bigger size, copies old array
-// If the old array is NULL, this is effectively just malloc
-void	*ft_realloc(void *old_array, size_t old_size, size_t new_size)
-{
-	void	*new_array;
-
-	new_array = (void *) malloc (new_size);
-	if (new_array != NULL && old_array != NULL)
-		ft_memcpy(new_array, old_array, old_size);
-	free(old_array);
-	return (new_array);
-}

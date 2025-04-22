@@ -1,31 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_search.c                                        :+:      :+:    :+:   */
+/*   ft_strfind.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:31:56 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/19 15:58:49 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/21 20:15:55 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
-
-void	*ft_memchr(const void *addr_void, uint8_t byte, size_t n)
-{
-	const unsigned char	*addr;
-
-	addr = (const unsigned char *) addr_void;
-	while (n > 0)
-	{
-		if (*addr == byte)
-			return ((void *) addr);
-		n--;
-		addr++;
-	}
-	return (NULL);
-}
 
 char	*ft_strchr(const char *str, unsigned char c)
 {
@@ -52,6 +37,23 @@ char	*ft_strrchr(const char *str, unsigned char c)
 		if (*end == c)
 			return (end);
 	}
+	return (NULL);
+}
+
+char *ft_strpbrk(const char *str, const char *charset)
+{
+	unsigned char	lookup_table[256];
+
+	ft_memset(lookup_table, 0, 256);
+	while (*charset != 0)
+	{
+		lookup_table[(unsigned char) *charset] = 1;
+		charset++;
+	}
+	while (lookup_table[(unsigned char) *str] == 0)
+		str++;
+	if (*str != 0)
+		return (str);
 	return (NULL);
 }
 
@@ -89,22 +91,5 @@ char	*ft_strnstr(const char *str, const char *substr, size_t len)
 		str++;
 		len--;
 	}
-	return (NULL);
-}
-
-char *ft_strpbrk(const char *str, const char *charset)
-{
-	unsigned char	lookup_table[256];
-
-	ft_memset(lookup_table, 0, 256);
-	while (*charset != 0)
-	{
-		lookup_table[(unsigned char) *charset] = 1;
-		charset++;
-	}
-	while (lookup_table[(unsigned char) *str] == 0)
-		str++;
-	if (*str != 0)
-		return (str);
 	return (NULL);
 }

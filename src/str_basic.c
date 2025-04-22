@@ -1,51 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_compare.c                                       :+:      :+:    :+:   */
+/*   fts_basic.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/12 20:25:35 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/12 20:25:35 by adeimlin         ###   ########.fr       */
+/*   Created: 2025/04/12 20:55:34 by adeimlin          #+#    #+#             */
+/*   Updated: 2025/04/22 12:49:45 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-int32_t	ft_memcmp(const void *addr1_void, const void *addr2_void, size_t data_size)
+size_t	ft_strlen(const char *str)
 {
-	const uint8_t	*addr1 = (const uint8_t *) addr1_void;
-	const uint8_t	*addr2 = (const uint8_t *) addr2_void;
+	const char	*ostr;
 
-	if (addr1_void == addr2_void)
-		return (0);
-	while (data_size > 0)
-	{
-		if (*addr1 != *addr2)
-			return (*addr1 - *addr2);
-		addr1++;
-		addr2++;
-		data_size--;
-	}
-	return (0);
+	ostr = str;
+	while (*str != 0)
+		str++;
+	return (str - ostr);
 }
 
-int32_t	ft_memrcmp(const void *addr1_void, const void *addr2_void, size_t data_size)
+size_t	ft_replace(char *str, unsigned char old_char, unsigned char new_char)
 {
-	const uint8_t	*addr1 = (const uint8_t *) addr1_void + data_size - 1;
-	const uint8_t	*addr2 = (const uint8_t *) addr2_void + data_size - 1;
+	size_t	count;
 
-	if (addr1_void == addr2_void)
-		return (0);
-	while (data_size > 0)
+	count = 0;
+	while (*str != 0)
 	{
-		if (*addr1 != *addr2)
-			return (*addr1 - *addr2);
-		addr1--;
-		addr2--;
-		data_size--;
+		if (*str == old_char)
+		{
+			*str = new_char;
+			count++;
+		}
+		str++;
 	}
-	return (0);
+	return (count);
 }
 
 int32_t	ft_strcmp(const char *str1, const char *str2)
