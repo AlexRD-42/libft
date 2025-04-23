@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:35:33 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/15 14:35:33 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/23 00:56:19 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static inline void	ft_bwdcpy(uint8_t *dst, const uint8_t *src, size_t n)
 // 3. Copy word by word
 // 4. Perform tail copy byte by byte
 
+// Possible to index tail with word copying by and masking the excess and OR the result
 void	*ft_memcpy(void *dst_void, const void *src_void, size_t n)
 {
 	const size_t		words = n / sizeof(uintptr_t);
@@ -59,6 +60,5 @@ void	*ft_memcpy(void *dst_void, const void *src_void, size_t n)
 	{
 		
 	}
-
 	return (dst_void);
 }

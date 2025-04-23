@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fts_operations.c                                   :+:      :+:    :+:   */
+/*   str_operations.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:55:34 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/22 12:48:32 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/23 00:59:46 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	**ft_checkstr(char **str_array, size_t count)
 }
 
 // Malloc with strlen / c occurences
-char	**ft_split(char const *s, char c)
+char	**ft_split(const char *s, char c)
 {
 	char		**str_array;
 	int64_t		len;

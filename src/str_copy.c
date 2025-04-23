@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fts_copy.c                                         :+:      :+:    :+:   */
+/*   str_copy.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:25:16 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/22 12:50:08 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/23 09:41:59 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*ft_strncpy(char *dst, const char *src, size_t n)
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dst_size)
 {
-	char const	*osrc = src;
+	const char	*osrc = src;
 
 	while (*src != 0 && dst_size > 1)
 	{
