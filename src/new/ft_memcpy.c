@@ -6,11 +6,11 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:35:33 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/23 00:56:19 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/23 22:47:27 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/libft.h"
+#include "../../include/libft.h"
 
 static inline void	ft_fwdcpy(uint8_t *dst, const uint8_t *src, size_t n)
 {

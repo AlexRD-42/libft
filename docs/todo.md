@@ -23,3 +23,7 @@ f = (v & (v - 1)) == 0;
 Note that 0 is incorrectly considered a power of 2 here. To remedy this, use:
 
 f = v && !(v & (v - 1));
+
+# Core Utils:
+Memory:	memcpy, memset, realloc, 
+String:	strlen, strchr, strfind, 

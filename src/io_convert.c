@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_convert.c                                       :+:      :+:    :+:   */
+/*   io_convert.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:50:30 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/21 20:06:40 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/04/26 11:28:13 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,20 @@
 // array[66] to hold all digits of a 64 bit signed integer with base 2
 // Negative sign might not be appropriate for binary or hex
 // Mirror changes here to putnbr
-char	*ft_itoa(int64_t n)
+char	*ft_itoa(int64_t number)
 {
-	const int8_t	sign = (n >= 0) - (n < 0);
+	const int8_t	sign = (number >= 0) - (number < 0);
 	char			array[21];
 	char			*ptr;
 
 	ptr = array + 20;
 	*ptr = 0;
-	*(--ptr) = sign * (n % 10) + '0';
-	n = sign * (n / 10);
-	while (n != 0)
+	*(--ptr) = sign * (number % 10) + '0';
+	number = sign * (number / 10);
+	while (number != 0)
 	{
-		*(--ptr) = (n % 10) + '0';
-		n /= 10;
+		*(--ptr) = (number % 10) + '0';
+		number /= 10;
 	}
 	if (sign == -1)
 		*(--ptr) = '-';
@@ -43,7 +43,7 @@ int64_t	ft_atoi(const char *num_str)
 
 	number = 0;
 	sign = -1;
-	while (ft_isspace(*num_str))
+	while (*num_str == 32 || (*num_str >= 9 && *num_str <= 13))
 		num_str++;
 	if (*num_str == '-')
 	{
@@ -52,7 +52,7 @@ int64_t	ft_atoi(const char *num_str)
 	}
 	else if (*num_str == '+')
 		num_str++;
-	while (ft_isdigit(*num_str))
+	while (*num_str >= '0' && *num_str <= '9')
 		number = number * 10 - (*num_str++ - '0');
 	return (sign * number);
 }
