@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:50:30 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/26 11:28:13 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/05/12 10:37:40 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int64_t	ft_atoi(const char *num_str)
 
 	number = 0;
 	sign = -1;
-	while (*num_str == 32 || (*num_str >= 9 && *num_str <= 13))
+	while (*num_str == ' ' || (*num_str >= '\t' && *num_str <= '\v'))
 		num_str++;
 	if (*num_str == '-')
 	{

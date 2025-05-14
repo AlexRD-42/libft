@@ -1,3 +1,6 @@
+# Create an io file that contains basic functionality for printf
+	Same for memory file
+
 # Improve ft_power for perfect squares
 
 # fused multiply add
