@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 11:54:09 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/05/14 09:39:21 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/05/16 11:11:01 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	*ft_memrcpy(void *dst_void, const void *src_void, size_t length)
 		length -= sizeof(int *);
 		*((uintptr_t *)dst) = *((uintptr_t *)src);
 	}
-	while (length > 0)
+	while (length-- > 0)
 		*--dst = *--src;
 	return (dst_void);
 }

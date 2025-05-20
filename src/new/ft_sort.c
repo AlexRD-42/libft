@@ -1,68 +1,76 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bubble_sort.c                                   :+:      :+:    :+:   */
+/*   ft_sort.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/11 16:31:46 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/11 16:31:46 by adeimlin         ###   ########.fr       */
+/*   Created: 2025/05/19 15:00:59 by adeimlin          #+#    #+#             */
+/*   Updated: 2025/05/19 17:02:43 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include <stdint.h>
+#include <stddef.h>
 
-void	ft_bubble_sort(void *array_void, size_t array_size, size_t data_size)
+void	ft_bubble_sort(int32_t *array, size_t length)
 {
-	int8_t			swapped;
-	unsigned char	*end;
-	unsigned char	*temp;
-	unsigned char	*array;
+	uint_fast8_t	swapped;
+	int32_t			temp;
+	size_t			i;
+	size_t			j;
 
-	swapped = 1;
-	array = (unsigned char *) array_void;
-	end = (unsigned char *) array_void + data_size * array_size - data_size;
-	while (array < end && swapped != 0)
+	i = 0;
+	while (i < length - 1 && swapped != 0)
 	{
+		j = 0;
 		swapped = 0;
-		temp = array;
-		while (temp < end)
+		while (j < length - i - 1)
 		{
-			if (ft_memrcmp((temp), (temp + data_size), data_size) > 0)
+			if (array[j + 1] < array[j])
 			{
-				ft_gswap((temp), (temp + data_size), data_size);
+				temp = array[j + 1];
+				array[j + 1] = array[j];
+				array[j] = temp;
 				swapped = 1;
 			}
-			temp += data_size;
+			j++;
 		}
-		end -= data_size;
+		i++;
 	}
 }
 
-void	ft_reverse(void *array_void, size_t size)
+void	ft_selection_sort(int32_t *array, size_t length)
 {
-	unsigned char	*start;
-	unsigned char	*end;
-	unsigned char	buffer;
+	int32_t	temp;
+	int32_t	*min;
+	int32_t	*end;
+	int32_t	*ptr;
 
-	start = (unsigned char *) array_void;
-	end = start + size - 1;
-	while (start < end)
+	end = array + length;
+	while (array < end - 1)
 	{
-		buffer = *start;
-		*start = *end;
-		*end = buffer;
-		start++;
-		end--;
+		min = array;
+		ptr = array + 1;	
+		while (ptr < end)
+		{
+			if (*ptr < *min)
+				min = ptr;
+			ptr++;
+		}
+		temp = *array;
+		*array = *min;
+		*min = temp;
+		array++;
 	}
 }
 
-int main()
+#include <stdio.h>
+int	main(void)
 {
-	int32_t array[] = {1, 3, 4, 2, 1, 6, 8};
-	int32_t n = sizeof(array)/sizeof(int32_t);
-	ft_bubble_sort(array, n, sizeof(int32_t));
+	int32_t array[16] = {1, 5, 6, 2, 7, 9, 6, -1, -6, 20, 30, 4, 8, -50, 100, 0};
 
-	for (int i=0; i < n; i++)
-		printf("%d, ", array[i]);
+	ft_selection_sort(array, 16);
+	for (int i = 0; i < 16; i++)
+		printf("%d,", array[i]);
 }
