@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sort.c                                          :+:      :+:    :+:   */
+/*   ft_array_sort.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 15:00:59 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/05/19 17:02:43 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/05/24 14:08:56 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,33 @@ void	ft_selection_sort(int32_t *array, size_t length)
 	}
 }
 
+void	ft_insertion_sort(int32_t *array, size_t length)
+{
+	size_t	i;
+	size_t	j;
+	int32_t	key;
+
+	i = 1;
+	while (i < length)
+	{
+		j = i;
+		key = array[i];
+		while (j > 0 && array[j - 1] > key)
+		{
+			array[j] = array[j - 1];
+			j--;
+		}
+		array[j] = key;
+		i++;
+	}
+}
+
 #include <stdio.h>
 int	main(void)
 {
 	int32_t array[16] = {1, 5, 6, 2, 7, 9, 6, -1, -6, 20, 30, 4, 8, -50, 100, 0};
 
-	ft_selection_sort(array, 16);
+	ft_insertion_sort(array, 16);
 	for (int i = 0; i < 16; i++)
 		printf("%d,", array[i]);
 }
