@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 11:28:28 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/05/22 16:02:16 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/05/26 12:22:09 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	print_bits_table(uint8_t byte)
     static const uint32_t	nibble[16] = {0x30303030, 0x30303031, 0x30303130, 0x30303131,
 		0x30313030, 0x30313031, 0x30313130, 0x30313131, 0x31303030, 0x31303031,
 		0x31303130, 0x31303131, 0x31313030, 0x31313031, 0x31313130, 0x31313131};
-	const uint64_t x = ((uint64_t)nibble[byte >> 4] << 32) | nibble[byte & 0x0F];
+	const uint64_t			x = ((uint64_t)nibble[byte >> 4] << 32) | nibble[byte & 0x0F];
 
 	write(1, &x, 8);
 }
