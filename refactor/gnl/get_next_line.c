@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:07:58 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/12 16:27:31 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/12 17:04:30 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ ssize_t	ft_read(int fd, char *buffer, size_t *index, char **str)
 	return (bytes_read);
 }
 
-// By null terminating the buffer, the main loop has one less condition
-// and one less variable to keep track of (bytes_read)
+// By null terminating the buffer, there are potential alignment issues
+// But to avoid this, i would need another static bytes_read variable
 char	*get_next_line(int fd)
 {
 	static char		buffer[BUFFER_SIZE + 1] = {0};

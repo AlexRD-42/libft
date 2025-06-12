@@ -6,14 +6,12 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:19:17 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/11 17:47:58 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/12 17:04:57 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
 #include <stddef.h>
-
-
 
 char	*ft_strfind(const char *str, const char *charset, unsigned char ref)
 {

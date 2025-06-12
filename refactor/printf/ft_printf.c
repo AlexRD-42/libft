@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 16:04:04 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/11 18:48:47 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/12 17:45:26 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 static
 ssize_t	print_nbr(uint64_t number, const char f, const char *base)
 {
-	const uint_fast8_t	radix = 16 - 6 * (f == 'd' || f == 'i');
-	const uint_fast8_t	sign = (f == 'd' || f == 'i') && (int32_t) number < 0;
 	char				buffer[32];
+	const uint_fast8_t	radix = 10 + 6 * (f == 'x' || f == 'X' || f == 'p');
+	const uint_fast8_t	sign = (f == 'd' || f == 'i') && (int32_t) number < 0;
 	char				*ptr;
 
 	if (f == 'p' && number == 0)
@@ -26,13 +26,12 @@ ssize_t	print_nbr(uint64_t number, const char f, const char *base)
 	ptr = buffer + 31;
 	if (sign != 0)
 		number = (uint32_t)(-(int64_t)number);
-	*ptr = 0;
-	while (1)
+	*ptr = base[(number % radix)];
+	number /= radix;
+	while (number != 0)
 	{
 		*(--ptr) = base[(number % radix)];
 		number /= radix;
-		if (number == 0)
-			break ;
 	}
 	if (sign != 0)
 		*(--ptr) = '-';
@@ -41,7 +40,7 @@ ssize_t	print_nbr(uint64_t number, const char f, const char *base)
 		*(--ptr) = 'x';
 		*(--ptr) = '0';
 	}
-	return (write(1, ptr, 31 - (ptr - buffer)));
+	return (write(1, ptr, 32 - (ptr - buffer)));
 }
 
 static
@@ -50,7 +49,7 @@ ssize_t	print_str(const char *str)
 	const char	*ostr = str;
 
 	if (str == NULL)
-		return (write(1, "(null)", 7));
+		return (write(1, "(null)", 6));
 	while (*str != 0)
 		str++;
 	return (write(1, ostr, str - ostr));
@@ -78,7 +77,7 @@ ssize_t	parse(const char f, va_list args)
 	return (0);
 }
 
-int	ft_printf(const char *str, ...)
+ssize_t	ft_printf(const char *str, ...)
 {
 	ssize_t		bytes;
 	va_list		args;
@@ -91,30 +90,23 @@ int	ft_printf(const char *str, ...)
 		ostr = str;
 		while (*str != '%' && *str != 0)
 			str++;
+		bytes += write(1, ostr, str - ostr + (str[0] == '%' && str[1] == '%'));
 		if (*str == '%' && *(str + 1) == '%')
-		{
-			bytes += write(1, ostr, str - ostr + 1);
-			str += 2;
-		}
-		else
-			bytes += write(1, ostr, str - ostr);
-		if (*str == '%' && *(str + 1) != '%')
+			str++;
+		else if (*str == '%')
 			bytes += parse(*++str, args);
-		str++;
+		str += (*str != 0);
 	}
 	va_end(args);
 	return (bytes);
 }
 
-#include <limits.h>
-#include <stdio.h>
+// #include <limits.h>
+// #include <stdio.h>
 
-// .0 precision makes it so 0 doesn't show but != 0 shows
-// precision lower than 7 makes it so null doesn't show at all
-// #define test ("%.6s", NULL)
-int main()
-{
-	ft_printf("ab%%cd%d", 50);
-	printf("\n");
-	// printf test;
-}
+// int main()
+// {
+// 	ft_printf("ab%%cd%d", 50);
+// 	printf("\n");
+// 	// printf test;
+// }
