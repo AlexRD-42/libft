@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 12:11:22 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/05/28 17:25:23 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/08 21:12:09 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,26 @@ typedef union u_type64
 	int32_t		i[2];
 	uint8_t		b[8];
 }	t_64;
+
+typedef union u_pointers
+{
+	void		*v0;
+	int8_t		*i8;
+	uint8_t		*u8;
+	int32_t		*i32;
+	uint32_t	*u32;
+	int64_t		*i64;
+	uint64_t	*u64;
+	float		*f32;
+	double		*f64;
+}	t_pointers;
+
+typedef struct s_array
+{
+	t_pointers	ptr;
+	size_t		length;
+}	t_array;
+
 
 //----------------------------------------------------------------------------
 
