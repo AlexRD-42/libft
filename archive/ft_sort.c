@@ -6,11 +6,11 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:31:46 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/05/19 15:11:21 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/13 16:19:27 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 void	ft_bubble_sort(void *array_void, size_t array_size, size_t data_size)
 {

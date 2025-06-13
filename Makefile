@@ -1,41 +1,31 @@
-NAME = libft.a
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-AR = ar rcs
-RM = rm -f
-
-SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
-       ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c \
-       ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c \
-       ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c \
-       ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c \
-       ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c \
-       ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
-
-BONUS_SRCS = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
-			 ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c\
-             ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
-
-OBJS = $(SRCS:.c=.o)
-BONUS_OBJS = $(BONUS_SRCS:.c=.o)
+# Configuration ------------------------------- #
+NAME = main
+SRC_PATH = sources
+INC_PATH = $(SRC_PATH)/includes
+OBJ_PATH = $(SRC_PATH)/obj
+VPATH = $(SRC_PATH) $(SRC_PATH)/core $(SRC_PATH)/string $(SRC_PATH)/math $(SRC_PATH)/iostream
+CC = cc -Wall -Wextra -g -I$(INC_PATH)
+SRCS = core_allocation.c core_swap.c mem_basic.c mem_copy.c mem_find.c \
+str_basic.c str_bools.c str_copy.c str_find.c str_join.c str_operations.c \
+list_utils.c sort_array.c io_basic.c io_convert.c
+# --------------------------------------------- #
+OBJS = $(addprefix $(OBJ_PATH)/, $(SRCS:.c=.o))
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(AR) $(NAME) $(OBJS)
+	$(CC) -o $@ $(OBJS) 
 
-bonus: $(OBJS) $(BONUS_OBJS)
-	$(AR) $(NAME) $(OBJS) $(BONUS_OBJS)
-
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+$(OBJ_PATH)/%.o: %.c
+	@mkdir -p $(OBJ_PATH)
+	$(CC) -c $< -o $@
 
 clean:
-	$(RM) $(OBJS) $(BONUS_OBJS)
+	rm -f $(OBJS) 
 
 fclean: clean
-	$(RM) $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

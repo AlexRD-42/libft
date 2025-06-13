@@ -6,11 +6,11 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 11:54:09 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/05/14 09:20:15 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/13 16:19:27 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 // Safe for dst < src
 void	*byte_fwd_copy(void *dst_void, const void *src_void, size_t length)
