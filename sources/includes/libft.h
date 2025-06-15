@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 12:11:22 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/13 18:44:50 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/15 21:35:13 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ typedef struct s_list
 
 //----------------------------------------------------------------------------
 
-// Prototypes: Char Information ----------------------------------------------
-int8_t	ft_isalpha(int c);
-int8_t	ft_isdigit(int c);
-int8_t	ft_isascii(int c);
-int8_t	ft_isprint(int c);
-int8_t	ft_isspace(int c);
+
+// Prototypes: Core ----------------------------------------------------------
+void	*ft_calloc(size_t arr_size, size_t type_size);
+void	*ft_realloc(void *src, size_t src_size, size_t dst_size);
+void	**ft_free_array(void *array, size_t length);
+
 //----------------------------------------------------------------------------
 
 // Prototypes: Math --------------------------------------------------------
@@ -43,10 +43,17 @@ float	ft_average(float *array, uint32_t size);
 int64_t	ft_log(int64_t number, int64_t base); // Note: this function is incomplete
 //----------------------------------------------------------------------------
 
-// Prototypes: Utilities -------------------------------------------------------
-void	ft_swap(char *a, char *b);
-void	ft_gswap(void *a_void, void *b_void, size_t size);
-void	ft_reverse(void *array_void, size_t size);
+// Prototypes: Utilities -----------------------------------------------------
+
+//----------------------------------------------------------------------------
+
+// Prototypes: Char Information ----------------------------------------------
+uint8_t	ft_isalpha(int c);
+uint8_t	ft_isdigit(int c);
+uint8_t	ft_isascii(int c);
+uint8_t	ft_isprint(int c);
+uint8_t	ft_isspace(int c);
+uint8_t	ft_ischarset(const char c, const char *charset);
 //----------------------------------------------------------------------------
 
 // Prototypes: Sort ----------------------------------------------------------
@@ -64,8 +71,10 @@ char	*ft_strncat(char *dst, const char *src, size_t n); // New
 size_t	ft_strlcat(char *dst, const char *src, size_t dst_size);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
-char	**ft_split(char const *s, char c);
+// char	**ft_split(char const *s, char c);
 size_t	ft_replace(char *str, unsigned char to_find, unsigned char c); // New
+size_t	ft_count_words(const char *str, const char c);
+size_t	ft_count_tokens(const char *str, const char *charset, size_t *bytes);
 //----------------------------------------------------------------------------
 
 // Prototypes: String Find ---------------------------------------------------
@@ -84,16 +93,12 @@ char	*ft_strdup(const char *src);
 char	*ft_substr(const char *str, size_t start, size_t length);
 //----------------------------------------------------------------------------
 
-
-size_t	ft_count_words(const char *str, const char *charset);
-
 // Prototypes: Memory --------------------------------------------------------
 void	*ft_memchr(const void *ptr_void, uint8_t byte, size_t length);
 int64_t	ft_memcmp(const void *ptr1_void, const void *ptr2_void, size_t length);
 int64_t	ft_memrcmp(const void *ptr1_void, const void *ptr2_void, size_t length);
 void	*ft_memcpy(void *dst_void, const void *src_void, size_t length);
 void	*ft_memset(void *dst_void, uint8_t byte, size_t n);
-void	*ft_calloc(size_t array_size, size_t data_size);
 //----------------------------------------------------------------------------
 
 // Prototypes: Input/Output --------------------------------------------------

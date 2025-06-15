@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 21:24:42 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/13 20:19:52 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/14 12:49:09 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,3 @@ ssize_t	ft_putnchar(const char c, size_t length)
 	bytes += write(1, buffer, length);
 	return (bytes);
 }
-

@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:41:24 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/13 17:53:23 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/15 21:13:25 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,18 @@ void	*ft_realloc(void *src, size_t src_size, size_t dst_size)
 	}
 	free(src);
 	return (dst);
+}
+
+// Pointer cast is necessary otherwise caller would need to cast void **
+void	**ft_free_array(void *array, size_t length)
+{
+	if (array == NULL)
+		return (NULL);
+	while (length-- > 0)
+	{
+		free(((void **) array)[length]);
+		((void **) array)[length] = NULL;
+	}
+	free(array);
+	return (NULL);
 }

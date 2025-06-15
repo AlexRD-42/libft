@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:41:24 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/13 18:25:48 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/14 00:17:37 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	*ft_memset(void *dst_void, const uint8_t byte, size_t length)
 	return (dst_void);
 }
 
+// Needs optimization
 int64_t	ft_memcmp(const void *ptr1_void, const void *ptr2_void, size_t length)
 {
 	const uint8_t	*ptr1 = (const uint8_t *) ptr1_void;
