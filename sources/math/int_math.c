@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 12:56:46 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/16 16:50:58 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/16 17:25:34 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,14 @@ uint32_t	ft_log2(uint32_t number)
 	return (result);
 }
 
+// uint32_t	ht_log2(uint64_t number)
+// {
+// 	t_64	value;
+
+// 	value.d = (double) number;
+// 	value.ul = (value.ul & 0x7FF0000000000000) >> 52;
+// 	return (value.ul - 1023);
+// }
 // Needs checking
 uint32_t	ft_log(uint64_t number, uint8_t base)
 {

@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 12:11:22 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/16 16:17:34 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/16 17:34:35 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,11 @@ char	*ft_itoa_stack(int64_t number, char *ptr);
 U64		ft_atoi_hex(const char *str);
 int64_t	ft_atoi_base(const char *str, const char *base);
 char	*ft_itoa_base(const int64_t number, const char *base);
+char	*get_next_line(int fd);
+ssize_t	ft_printf(const char *str, ...);
 //----------------------------------------------------------------------------
 
-// Prototypes: Math --------------------------------------------------------
+// Prototypes: Math ----------------------------------------------------------
 float	ft_qinvsqrt(float number);
 float	ft_qsqrt(float number);
 float	ft_average(float *array, uint32_t length);
@@ -58,6 +60,17 @@ int64_t	ft_factorial(int64_t number);
 int64_t	ft_power(int64_t number, uint64_t power);
 size_t	ft_fibonacci(size_t index);
 uint8_t	ft_isprime(size_t number);
+// Prototypes: Array Info ----------------------------------------------------
+size_t	i32_min_index(int32_t *array, size_t length);
+size_t	i32_max_index(int32_t *array, size_t length);
+size_t	i64_min_index(int64_t *array, size_t length);
+size_t	i64_max_index(int64_t *array, size_t length);
+// Prototypes: Number Info ---------------------------------------------------
+int64_t	i64_min(int64_t number1, int64_t number2);
+int64_t	i64_max(int64_t number1, int64_t number2);
+int64_t	i64_abs(int64_t number);
+int64_t	i64_absdiff(int64_t number1, int64_t number2);
+// Prototypes: Linked Lists --------------------------------------------------
 //----------------------------------------------------------------------------
 
 // Prototypes: Strings -------------------------------------------------------
@@ -99,16 +112,6 @@ size_t	ft_count_tokens(const char *str, const char *charset, size_t *bytes);
 //----------------------------------------------------------------------------
 
 // Prototypes: Utilities -----------------------------------------------------
-size_t	i32_min_index(int32_t *array, size_t length);
-size_t	i32_max_index(int32_t *array, size_t length);
-size_t	i64_min_index(int64_t *array, size_t length);
-size_t	i64_max_index(int64_t *array, size_t length);
-// Prototypes: Number Info ---------------------------------------------------
-int64_t	i64_min(int64_t number1, int64_t number2);
-int64_t	i64_max(int64_t number1, int64_t number2);
-int64_t	i64_abs(int64_t number);
-int64_t	i64_absdiff(int64_t number1, int64_t number2);
-// Prototypes: Linked Lists --------------------------------------------------
 t_list	*ft_lstnew(void *content);
 t_list	*ft_lstlast(t_list *lst);
 size_t	ft_lstsize(t_list *lst);
