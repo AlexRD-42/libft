@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:55:34 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/13 16:05:05 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/16 12:48:48 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,15 @@ int32_t	ft_strcmp(const char *str1, const char *str2)
 	return (*(unsigned char *) str1 - *(unsigned char *) str2);
 }
 
-int32_t	ft_strncmp(const char *str1, const char *str2, size_t n)
+int32_t	ft_strncmp(const char *str1, const char *str2, size_t length)
 {
-	while (n > 0)
+	while (length > 0)
 	{
-		if (*str1 != *str2)
+		if (*str1 != *str2 || *str1 == 0)
 			return (*(unsigned char *) str1 - *(unsigned char *) str2);
-		if (*str1 == 0)
-			break ;
 		str1++;
 		str2++;
-		n--;
+		length--;
 	}
 	return (0);
 }

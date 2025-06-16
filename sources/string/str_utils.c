@@ -6,13 +6,12 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 18:29:37 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/15 21:31:49 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/16 16:04:42 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
 #include <stddef.h>
-#include <libft.h>
 
 size_t	ft_count_words(const char *str, const char c)
 {
@@ -55,19 +54,3 @@ size_t	ft_count_tokens(const char *str, const char *charset, size_t *bytes)
 	}
 	return (count);
 }
-
-// #include <stdio.h>
-// int main()
-// {
-// 	char **str_array;
-// 	char str[] = "split  ||this|for|me|||||!|";
-// 	char charset = '|';
-
-// 	str_array = ft_split(str, charset);
-// 	size_t i = 0;
-// 	// while (str_array[i] != NULL)
-// 	// 	free(str_array[i++]);
-// 	// free(str_array[i]);
-// 	free(str_array);
-// 	return (0);
-// }

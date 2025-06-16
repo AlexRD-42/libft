@@ -6,10 +6,11 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:39:41 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/14 13:22:21 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/16 16:23:11 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdint.h>
 #include <stddef.h>
 #include "libft.h"
 
@@ -32,7 +33,7 @@ void	ft_swap(void *a_void, void *b_void, size_t length)
 	}
 	ft_memcpy(buffer, a, length);
 	ft_memcpy(a, b, length);
-	ft_memcpy(b, buffer, length);	
+	ft_memcpy(b, buffer, length);
 }
 
 void	ft_swap8(void *a, void *b)

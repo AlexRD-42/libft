@@ -6,40 +6,33 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:19:19 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/15 21:38:32 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/16 15:00:02 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
 
-uint8_t	ft_isalpha(int c)
+uint8_t	ft_isalpha(int32_t c)
 {
 	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
 }
 
-uint8_t	ft_isdigit(int c)
+uint8_t	ft_isdigit(int32_t c)
 {
 	return (c >= '0' && c <= '9');
 }
 
-uint8_t	ft_isspace(int c)
+uint8_t	ft_isspace(int32_t c)
 {
-	return (c == 32 || (c >= 9 && c <= 13));
+	return (c == ' ' || (c >= '\t' && c <= '\r'));
 }
 
-uint8_t	ft_isprint(int c)
+uint8_t	ft_isprint(int32_t c)
 {
-	return (c >= 32 && c <= 126);
+	return (c >= ' ' && c <= '~');
 }
 
-uint8_t	ft_isascii(int c)
+uint8_t	ft_isascii(int32_t c)
 {
 	return (!(c >> 7));
-}
-
-uint8_t	is_charset(const char c, const char *charset)
-{
-	while (*charset != c && *charset != 0)
-		charset++;
-	return (*charset != 0 || c == 0);
 }

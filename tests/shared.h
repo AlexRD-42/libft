@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 17:26:13 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/05/28 22:36:31 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/16 15:18:59 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,4 +145,3 @@ typedef union u_type128
 	double		d[2];
 	__float128	q;
 }	t_128;
-

@@ -6,11 +6,12 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:55:34 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/15 21:33:19 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/16 16:26:33 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 char	**ft_split(const char *str, const char c)
 {
@@ -39,6 +40,37 @@ char	**ft_split(const char *str, const char c)
 	return (str_array);
 }
 
+// Remember to ask cc alias
+// To do: figure out the difference between str[] and *str
+char	**ft_arena_split(const char *str, const char *charset, size_t *count)
+{
+	char			**array;
+	char			*offset;
+	size_t			length;
+	const size_t	words = ft_count_tokens(str, charset, &length);
+
+	array = malloc(length + words * (sizeof(char *) + 1));
+	if (array == NULL)
+		return (NULL);
+	offset = (char *) array + words * sizeof(char *);
+	*count = 0;
+	while (*str != 0)
+	{
+		while (*str != 0 && ft_ischarset(*str, charset) == 1)
+			str++;
+		length = 0;
+		while (ft_ischarset(str[length], charset) == 0)
+			length++;
+		if (length == 0)
+			break ;
+		array[*count] = ft_memcpy(offset, str, length);
+		array[(*count)++][length] = 0;
+		offset += length + 1;
+		str += length;
+	}
+	return (array);
+}
+
 // (end - 1) to avoid segfault and to not use the null terminator as LUT index
 char	*ft_strtrim(const char *str, const char *charset)
 {
@@ -48,8 +80,8 @@ char	*ft_strtrim(const char *str, const char *charset)
 
 	ft_memset(lookup_table, 0, 256);
 	while (*charset != 0)
-		lookup_table[(uint8_t) *charset++] = 1;
-	while (lookup_table[(uint8_t) *str] != 0)
+		lookup_table[*(uint8_t *) charset++] = 1;
+	while (lookup_table[*(uint8_t *) str] != 0)
 		str++;
 	end = str;
 	while (*end != 0)

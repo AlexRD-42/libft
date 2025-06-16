@@ -6,33 +6,44 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 21:24:42 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/14 12:49:09 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/16 00:28:21 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
 #include <unistd.h>
 
-void	ft_putstr(const char *str, int fd)
+// Hacky but efficient. Warning: DO NOT USE WITH READ-ONLY
+ssize_t	ft_putstr(char *str, int fd, uint8_t newline)
 {
-	const char	*ostr = str;
+	ssize_t	bytes;
+	size_t	length;
 
-	if (fd == -1 || str == NULL)
-		return ;
-	while (*str != 0)
-		str++;
-	write(fd, ostr, str - ostr);
+	if (fd < 0 || str == NULL)
+		return (-1);
+	length = 0;
+	while (str[length] != 0)
+		length++;
+	if (newline != 0)
+	{
+		str[length] = '\n';
+		bytes = write(fd, str, length + 1);
+		str[length] = 0;
+	}
+	else
+		bytes = write(fd, str, length);
+	return (bytes);
 }
 
 // Code duplication for itoa, so far unavoidable
-void	ft_putnbr(int64_t number, int fd)
+ssize_t	ft_putnbr(int64_t number, int fd)
 {
-	const int_fast8_t	sign = (number >= 0) - (number < 0);
-	char				buffer[32];
-	char				*ptr;
+	const int64_t	sign = (number >= 0) - (number < 0);
+	char			buffer[32];
+	char			*ptr;
 
 	if (fd < 0)
-		return ;
+		return (-1);
 	ptr = buffer + 31;
 	*(--ptr) = sign * (number % 10) + '0';
 	number = sign * (number / 10);
@@ -43,16 +54,7 @@ void	ft_putnbr(int64_t number, int fd)
 	}
 	if (sign < 0)
 		*(--ptr) = '-';
-	write(fd, ptr, 32 - (buffer - ptr));
-}
-
-ssize_t	ft_print_bits(const uint8_t byte)
-{
-	uint64_t	expand;
-
-	expand = (((uint64_t)byte * 0x8040201008040201ULL) >> 7);
-	expand = (expand & 0x0101010101010101ULL) | 0x3030303030303030ULL;
-	return (write(1, &expand, 8));
+	return (write(fd, ptr, 32 - (buffer - ptr)));
 }
 
 ssize_t	ft_putnchar(const char c, size_t length)
@@ -73,4 +75,13 @@ ssize_t	ft_putnchar(const char c, size_t length)
 	}
 	bytes += write(1, buffer, length);
 	return (bytes);
+}
+
+ssize_t	ft_putbits(const uint8_t byte)
+{
+	uint64_t	expand;
+
+	expand = (((uint64_t)byte * 0x8040201008040201ULL) >> 7);
+	expand = (expand & 0x0101010101010101ULL) | 0x3030303030303030ULL;
+	return (write(1, &expand, 8));
 }

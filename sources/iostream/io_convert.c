@@ -6,10 +6,12 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:50:30 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/13 20:19:32 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/16 16:22:50 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdint.h>
+#include <stddef.h>
 #include "libft.h"
 
 // Performs bitwise manipulation to compute abs of n without overflowing
@@ -54,68 +56,43 @@ char	*ft_itoa_stack(int64_t number, char *ptr)
 	return (ptr);
 }
 
-int64_t	ft_atoi(const char *num_str)
+int64_t	ft_atoi(const char *str)
 {
 	int64_t	number;
 	int64_t	sign;
 
 	number = 0;
 	sign = -1;
-	while (*num_str == ' ' || (*num_str >= '\t' && *num_str <= '\v'))
-		num_str++;
-	if (*num_str == '-')
+	while (*str == ' ' || (*str >= '\t' && *str <= '\r'))
+		str++;
+	if (*str == '-')
 	{
-		num_str++;
+		str++;
 		sign = -sign;
 	}
-	else if (*num_str == '+')
-		num_str++;
-	while (*num_str >= '0' && *num_str <= '9')
-		number = number * 10 - (*num_str++ - '0');
+	else if (*str == '+')
+		str++;
+	while (*str >= '0' && *str <= '9')
+		number = number * 10 - (*str++ - '0');
 	return (sign * number);
 }
 
-char	*ft_itoa_base(const int64_t n, const char *base)
+// Decide on naming and check if strlen is higher than overflow
+// Open an issue because of uint8_t *
+uint64_t	ft_atoi_hex(const char *str)
 {
-	const int64_t	sign = (n >> 63);
-	const int64_t	radix = ft_strlen(base);
-	char			str[66];
-	char			*ptr;
-	uint64_t		abs_num;
+	uint64_t				number;
+	static const uint8_t	lut[256] = {
+	['0'] = 0, ['1'] = 1, ['2'] = 2, ['3'] = 3, ['4'] = 4,
+	['5'] = 5, ['6'] = 6, ['7'] = 7, ['8'] = 8, ['9'] = 9,
+	['A'] = 10, ['B'] = 11, ['C'] = 12, ['D'] = 13, ['E'] = 14, ['F'] = 15,
+	['a'] = 10, ['b'] = 11, ['c'] = 12, ['d'] = 13, ['e'] = 14, ['f'] = 15};
 
-	if (radix < 2)
-		return (NULL);
-	abs_num = (uint64_t) ((n ^ sign) - sign);
-	ptr = str + 65;
-	*ptr = 0;
-	if (abs_num == 0)
-		*(--ptr) = base[(abs_num % radix)];
-	while (abs_num != 0)
-	{
-		*(--ptr) = base[(abs_num % radix)];
-		abs_num /= radix;
-	}
-	if (sign != 0)
-		*(--ptr) = '-';
-	return (ft_strdup(ptr));
-}
-
-int64_t	ft_atoi_base(const char *str, const char *base)
-{
-	const char		*start = ft_strfind(str, base, 0);
-	const int64_t	radix = ft_strlen(base);
-	const uint64_t	sign = ((start > str) && (*(start - 1) == '-')) - 1;
-	int64_t			number;
-	uint8_t			lookup_table[256];
-
-	if (start == NULL || base == NULL || radix < 2)
-		return (0);
-	ft_memset(lookup_table, 255, 256);
-	number = -1;
-	while (++number < radix)
-		lookup_table[(unsigned char) base[number]] = number;
 	number = 0;
-	while (*start && lookup_table[(unsigned char) *start] < 255)
-		number = number * radix - lookup_table[(unsigned char) *start++];
-	return ((number ^ sign) - sign);
+	while (*str == ' ' || (*str >= '\t' && *str <= '\r'))
+		str++;
+	str += (str[0] == '0' && (str[1] == 'x' || str[1] == 'X')) << 1;
+	while (lut[*(uint8_t *) str] || *str == '0')
+		number = (number << 4) + lut[*(uint8_t *) str++];
+	return (number);
 }

@@ -6,10 +6,13 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:41:24 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/15 21:13:25 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/16 15:45:31 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include <stdint.h>
+#include <stddef.h>
 #include "libft.h"
 
 // See if there is an efficient overflow handling

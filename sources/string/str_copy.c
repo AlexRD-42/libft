@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:25:16 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/13 18:41:57 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/16 14:56:46 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,9 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dst_size)
 
 char	*ft_strdup(const char *src)
 {
-	char	*osrc;
-	char	*str;
+	const char	*osrc = src;
+	char		*str;
 
-	osrc = src;
 	while (*src != 0)
 		src++;
 	str = (char *) malloc(src - osrc + 1);

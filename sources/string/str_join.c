@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:33:45 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/13 16:53:20 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/16 16:03:07 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@ char	*ft_strcat(char *dst, const char *src)
 	return (odst);
 }
 
-char	*ft_strncat(char *dst, const char *src, size_t n)
+char	*ft_strncat(char *dst, const char *src, size_t length)
 {
 	char	*odst;
 
 	odst = dst;
 	while (*dst != 0)
 		dst++;
-	while (*src != 0 && n > 0)
+	while (*src != 0 && length > 0)
 	{
 		*dst++ = *src++;
-		n--;
+		length--;
 	}
 	*dst = 0;
 	return (odst);

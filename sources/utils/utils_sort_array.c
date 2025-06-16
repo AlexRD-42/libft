@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_array.c                                       :+:      :+:    :+:   */
+/*   utils_sort_array.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 15:00:59 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/13 18:57:47 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/16 16:25:47 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
 #include <stddef.h>
-#include "libft.h"
 
 void	ft_bubble_sort(int32_t *array, size_t length)
 {
@@ -52,7 +51,7 @@ void	ft_selection_sort(int32_t *array, size_t length)
 	while (array < end - 1)
 	{
 		min = array;
-		ptr = array + 1;	
+		ptr = array + 1;
 		while (ptr < end)
 		{
 			if (*ptr < *min)
