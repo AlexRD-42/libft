@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:07:58 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/13 10:38:52 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/13 11:57:34 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,33 +66,35 @@ char	*append_str(void *str, void *new_str, size_t len, size_t new_len)
 }
 
 static
-ssize_t	ft_read(int fd, char *buffer, size_t *index, size_t *start)
+ssize_t	ft_read(int fd, char *buffer, size_t *index, char **str)
 {
-	static ssize_t	bytes_read = 0;
+	ssize_t	bytes_read;
 
-	if (*index >= (size_t) bytes_read)
+	if (*index >= BUFFER_SIZE || buffer[*index] == 0)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read > 0)
+		{
+			buffer[bytes_read] = 0;
 			*index = 0;
+		}
 		else if (bytes_read < 0)
 		{
-			bytes_read = 0;
-			*start = 1;
-			*index = 0;
-			return (bytes_read);
+			free(*str);
+			*str = NULL;
 		}
 	}
-	*start = *index;
-	while (buffer[*index] != '\n' && *index < (size_t) bytes_read)
-		(*index)++;
-	*index += (*index < (size_t) bytes_read && buffer[*index] == '\n');
+	else
+		bytes_read = 1;
 	return (bytes_read);
 }
 
+// GNL should have a wrapper function that receives a buffer, bytes_read, starting index and returns 
+// the points where it found a \n. This would enable use of whatever buffer and string memory allocations we want
+// This is important so that the new lines are contiguous in memory for better cache locality
 char	*get_next_line(int fd)
 {
-	static char		buffer[BUFFER_SIZE] = {0};
+	static char		buffer[BUFFER_SIZE + 1] = {0};
 	static size_t	index = 0;
 	char			*str;
 	size_t			length;
@@ -102,17 +104,16 @@ char	*get_next_line(int fd)
 		return (0);
 	str = NULL;
 	length = 0;
-	while (ft_read(fd, buffer, &index, &start) > 0)
+	while (ft_read(fd, buffer, &index, &str) > 0)
 	{
+		start = index;
+		while (buffer[index] != '\n' && buffer[index] != 0)
+			index++;
+		index += (buffer[index] == '\n');
 		str = append_str(str, buffer + start, length, index - start);
 		length += index - start;
 		if (str == NULL || str[length - 1] == '\n')
 			break ;
-	}
-	if (start > index)
-	{
-		free(str);
-		str = NULL;
 	}
 	return (str);
 }
