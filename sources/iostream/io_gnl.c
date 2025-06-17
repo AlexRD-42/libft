@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:07:58 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/16 17:33:10 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/16 22:20:17 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	*gnl_memcpy(void *dst_void, const void *src_void, size_t length)
 	{
 		while (length >= sizeof(uintptr_t))
 		{
-			*((uintptr_t *)dst) = *((uintptr_t *)src);
+			*((uintptr_t *)dst) = *((const uintptr_t *)src);
 			dst += sizeof(uintptr_t);
 			src += sizeof(uintptr_t);
 			length -= sizeof(uintptr_t);

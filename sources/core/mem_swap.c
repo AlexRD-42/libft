@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_swap.c                                       :+:      :+:    :+:   */
+/*   mem_swap.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:39:41 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/16 16:23:11 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/16 20:14:14 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_swap(void *a_void, void *b_void, size_t length)
 
 void	ft_swap8(void *a, void *b)
 {
-	char	temp;
+	uint8_t	temp;
 
 	temp = *(uint8_t *) a;
 	*(uint8_t *) a = *(uint8_t *) b;

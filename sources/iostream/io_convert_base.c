@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 13:58:12 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/16 16:30:07 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/17 09:41:26 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
 
 int64_t	ft_atoi_base(const char *str, const char *base)
 {
-	const uint8_t	*start = (uint8_t *) ft_strfind(str, base, 1);
-	const int64_t	radix = ft_strlen(base);
-	const uint64_t	sign = (((char *)start > str) && (*(start - 1) == '-')) - 1;
-	int64_t			number;
 	uint8_t			lookup_table[256];
+	int64_t			number;
+	const uint8_t	*start = (const uint8_t *) ft_strfind(str, base, 1);
+	const int64_t	radix = (int64_t) ft_strlen(base);
+	const uint64_t	sign = 
+		(((uintptr_t) start > (uintptr_t) str) && (*(start - 1) == '-')) - 1;
 
 	ft_memset(lookup_table, 255, 256);
 	number = -1;
@@ -35,7 +36,7 @@ int64_t	ft_atoi_base(const char *str, const char *base)
 char	*ft_itoa_base(const int64_t number, const char *base)
 {
 	const int64_t	sign = (number >> 63);
-	const int64_t	radix = ft_strlen(base);
+	const int64_t	radix = (int64_t) ft_strlen(base);
 	char			str[66];
 	char			*ptr;
 	uint64_t		abs_num;

@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:55:34 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/16 16:26:33 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/17 16:54:45 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,14 @@ char	**ft_split(const char *str, const char c)
 
 // Remember to ask cc alias
 // To do: figure out the difference between str[] and *str
+// To do: see if count is updated properly
 char	**ft_arena_split(const char *str, const char *charset, size_t *count)
 {
 	char			**array;
 	char			*offset;
 	size_t			length;
-	const size_t	words = ft_count_tokens(str, charset, &length);
+	uint8_t			lut[256];
+	const size_t	words = ft_count_tokens(str, ft_setlut256(lut, charset), &length);
 
 	array = malloc(length + words * (sizeof(char *) + 1));
 	if (array == NULL)
@@ -71,6 +73,34 @@ char	**ft_arena_split(const char *str, const char *charset, size_t *count)
 	return (array);
 }
 
+// Change this back to uint32_t once you figured out strtoull
+int32_t	*ft_split_numbers(const char *str, const char *charset, size_t *count)
+{
+	int32_t		*array;
+	size_t			length;
+	uint8_t			lut[256];
+	const uint8_t	*ustr = (const uint8_t *) str;
+	const size_t	tokens = ft_count_tokens(str, ft_setlut256(lut, charset), NULL);
+
+	array = malloc(tokens * sizeof(int32_t));
+	if (array == NULL)
+		return (NULL);
+	*count = 0;
+	while (*ustr != 0)
+	{
+		while (lut[*ustr] == 1)
+			ustr++;
+		length = 0;
+		while (lut[ustr[length]] == 0)
+			length++;
+		if (length == 0)
+			break ;
+		array[(*count)++] = ft_atoi((const char *) ustr);
+		ustr += length;
+	}
+	return (array);
+}
+
 // (end - 1) to avoid segfault and to not use the null terminator as LUT index
 char	*ft_strtrim(const char *str, const char *charset)
 {
@@ -80,8 +110,8 @@ char	*ft_strtrim(const char *str, const char *charset)
 
 	ft_memset(lookup_table, 0, 256);
 	while (*charset != 0)
-		lookup_table[*(uint8_t *) charset++] = 1;
-	while (lookup_table[*(uint8_t *) str] != 0)
+		lookup_table[*(const uint8_t *) charset++] = 1;
+	while (lookup_table[*(const uint8_t *) str] != 0)
 		str++;
 	end = str;
 	while (*end != 0)

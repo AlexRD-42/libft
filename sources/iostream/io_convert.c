@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:50:30 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/16 16:22:50 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/16 20:15:32 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ uint64_t	ft_atoi_hex(const char *str)
 	while (*str == ' ' || (*str >= '\t' && *str <= '\r'))
 		str++;
 	str += (str[0] == '0' && (str[1] == 'x' || str[1] == 'X')) << 1;
-	while (lut[*(uint8_t *) str] || *str == '0')
-		number = (number << 4) + lut[*(uint8_t *) str++];
+	while (lut[*(const uint8_t *) str] || *str == '0')
+		number = (number << 4) + lut[*(const uint8_t *) str++];
 	return (number);
 }

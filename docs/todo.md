@@ -1,32 +1,16 @@
-# Create an io file that contains basic functionality for printf
-	Same for memory file
-
-# Improve ft_power for perfect squares
-
-# fused multiply add
-
-# learn about brace encapsulation (for loops, or just {})
-
 # Learn about loop unrolling
 
-# https://graphics.stanford.edu/~seander/bithacks.html
+# Remember to use brace encapsulation if necessary
 
-// Use:
-remainder = n & (sizeof(uintptr_t) - 1);
-words = n >> log2(sizeof(uintptr_t));  // e.g., n >> 3 for 8-byte words
+# Create a comprehensive split function that receives a function pointer
+This function pointer should be the action of what to do in the interval found between the separators
+Example:
+,1134,
 
-# asd
- Determining if an integer is a power of 2
+start = &1
+length = 4
 
-unsigned int v; // we want to see if v is a power of 2
-bool f;         // the result goes here 
-
-f = (v & (v - 1)) == 0;
-
-Note that 0 is incorrectly considered a power of 2 here. To remedy this, use:
-
-f = v && !(v & (v - 1));
-
-# Core Utils:
-Memory:	memcpy, memset, realloc, 
-String:	strlen, strchr, strfind, 
+if function pointer
+ah no, this won't work because the return type is fixed. 
+Wait, but it's a pointer of a pointer, meaning you can have whatever the fuck you want there
+It's just for numbers, the size is fixed

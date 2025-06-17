@@ -6,11 +6,12 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 21:24:42 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/16 00:28:21 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/17 09:36:41 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
+#include <stddef.h>
 #include <unistd.h>
 
 // Hacky but efficient. Warning: DO NOT USE WITH READ-ONLY
@@ -54,7 +55,7 @@ ssize_t	ft_putnbr(int64_t number, int fd)
 	}
 	if (sign < 0)
 		*(--ptr) = '-';
-	return (write(fd, ptr, 32 - (buffer - ptr)));
+	return (write(fd, ptr, 32 - (uintptr_t)(ptr - buffer)));
 }
 
 ssize_t	ft_putnchar(const char c, size_t length)
@@ -65,7 +66,7 @@ ssize_t	ft_putnchar(const char c, size_t length)
 
 	i = 0;
 	bytes = 0;
-	buffer[0] = (0x0101010101010101 & UINTPTR_MAX) * c;
+	buffer[0] = (0x0101010101010101 & UINTPTR_MAX) * (const size_t) c;
 	while (length > sizeof(size_t) && i < 256 / sizeof(size_t))
 		buffer[i++] = buffer[0];
 	while (length >= 256)

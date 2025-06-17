@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 12:11:22 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/16 17:34:35 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/17 16:54:16 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "libft_types.h"
 //----------------------------------------------------------------------------
 
+# define CT const
 # define U32 uint32_t
 # define U64 uint64_t
 
@@ -31,7 +32,7 @@ void	*ft_memset(void *dst_void, const uint8_t byte, size_t length);
 int64_t	ft_memcmp(const void *ptr1_void, const void *ptr2_void, size_t length);
 int64_t	ft_memrcmp(const void *ptr1_void, const void *ptr2_void, size_t length);
 void	*ft_memcpy(void *dst_void, const void *src_void, size_t length);
-void	*ft_memchr(const void *ptr_void, uint8_t byte, size_t length);
+CT void	*ft_memchr(const void *ptr_void, uint8_t byte, size_t length);
 //----------------------------------------------------------------------------
 
 // Prototypes: Input/Output --------------------------------------------------
@@ -70,7 +71,6 @@ int64_t	i64_min(int64_t number1, int64_t number2);
 int64_t	i64_max(int64_t number1, int64_t number2);
 int64_t	i64_abs(int64_t number);
 int64_t	i64_absdiff(int64_t number1, int64_t number2);
-// Prototypes: Linked Lists --------------------------------------------------
 //----------------------------------------------------------------------------
 
 // Prototypes: Strings -------------------------------------------------------
@@ -92,11 +92,11 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dst_size);
 char	*ft_strdup(const char *src);
 char	*ft_substr(const char *str, size_t start, size_t length);
 // Prototypes: String Find ---------------------------------------------------
-char	*ft_strchr(const char *str, unsigned char c);
-char	*ft_strrchr(const char *str, unsigned char c);
-char	*ft_strfind(const char *str, const char *charset, unsigned char ref);
-char	*ft_strstr(const char *str, const char *substr);
-char	*ft_strnstr(const char *str, const char *substr, size_t length);
+CT char	*ft_strchr(const char *str, unsigned char c);
+CT char	*ft_strrchr(const char *str, unsigned char c);
+CT char	*ft_strfind(const char *str, const char *charset, unsigned char ref);
+CT char	*ft_strstr(const char *str, const char *substr);
+CT char	*ft_strnstr(const char *str, const char *substr, size_t length);
 // Prototypes: String Join ---------------------------------------------------
 char	*ft_strcat(char *dst, const char *src);
 char	*ft_strncat(char *dst, const char *src, size_t length);
@@ -104,14 +104,16 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dst_size);
 char	*ft_strjoin(const char *src1, const char *src2);
 // Prototypes: String Operations ---------------------------------------------
 char	**ft_split(const char *str, const char c);
+int32_t	*ft_split_numbers(const char *str, const char *charset, size_t *count);
 char	**ft_arena_split(const char *str, const char *charset, size_t *count);
 char	*ft_strtrim(const char *str, const char *charset);
 // Prototypes: String Utils --------------------------------------------------
 size_t	ft_count_words(const char *str, const char c);
-size_t	ft_count_tokens(const char *str, const char *charset, size_t *bytes);
+size_t	ft_count_tokens(const char *str, const uint8_t *lut, size_t *bytes);
 //----------------------------------------------------------------------------
 
 // Prototypes: Utilities -----------------------------------------------------
+uint8_t	*ft_setlut256(uint8_t *lut, const char *charset);
 t_list	*ft_lstnew(void *content);
 t_list	*ft_lstlast(t_list *lst);
 size_t	ft_lstsize(t_list *lst);

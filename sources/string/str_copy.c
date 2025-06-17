@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:25:16 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/16 14:56:46 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/17 10:10:22 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,19 +79,18 @@ char	*ft_strdup(const char *src)
 // the starting position of (str + start), to limit the max length
 char	*ft_substr(const char *str, size_t start, size_t length)
 {
-	const char	*ostr = str;
+	const char	*str_offset = str + start;
 	char		*substr;
 
 	if (str == NULL)
 		return (NULL);
 	while (*str != 0)
 		str++;
-	substr = (char *) ostr + start;
-	if (substr > str)
+	if (str_offset > str)
 		return (NULL);
-	if (substr + length > str)
-		length = str - substr;
-	str = substr + length;
+	if (str_offset + length > str)
+		length = str - str_offset;
+	str = str_offset + length;
 	substr = (char *) malloc (length + 1);
 	if (substr == NULL)
 		return (NULL);
