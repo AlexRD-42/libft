@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 12:11:22 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/17 16:54:16 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/18 16:50:46 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,15 @@ int64_t	ft_power(int64_t number, uint64_t power);
 size_t	ft_fibonacci(size_t index);
 uint8_t	ft_isprime(size_t number);
 // Prototypes: Array Info ----------------------------------------------------
-size_t	i32_min_index(int32_t *array, size_t length);
-size_t	i32_max_index(int32_t *array, size_t length);
-size_t	i64_min_index(int64_t *array, size_t length);
-size_t	i64_max_index(int64_t *array, size_t length);
+size_t	ft_i32min(int32_t *array, size_t length);
+size_t	ft_i32max(int32_t *array, size_t length);
+size_t	ft_i64min(int64_t *array, size_t length);
+size_t	ft_i64max(int64_t *array, size_t length);
 // Prototypes: Number Info ---------------------------------------------------
-int64_t	i64_min(int64_t number1, int64_t number2);
-int64_t	i64_max(int64_t number1, int64_t number2);
-int64_t	i64_abs(int64_t number);
-int64_t	i64_absdiff(int64_t number1, int64_t number2);
+int64_t	ft_imin(int64_t number1, int64_t number2);
+int64_t	ft_imax(int64_t number1, int64_t number2);
+int64_t	ft_iabs(int64_t number);
+int64_t	ft_iabsdiff(int64_t number1, int64_t number2);
 //----------------------------------------------------------------------------
 
 // Prototypes: Strings -------------------------------------------------------

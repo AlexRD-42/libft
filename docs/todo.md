@@ -2,6 +2,10 @@
 
 # Remember to use brace encapsulation if necessary
 
+# Read about malloc fast path, 128 kb limit, tcache and how to monitor with strace
+
+# Post on unix stackexchange asking for suggestions
+
 # Create a comprehensive split function that receives a function pointer
 This function pointer should be the action of what to do in the interval found between the separators
 Example:

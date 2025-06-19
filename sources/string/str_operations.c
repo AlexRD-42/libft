@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:55:34 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/17 16:54:45 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/19 17:32:39 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char	**ft_arena_split(const char *str, const char *charset, size_t *count)
 // Change this back to uint32_t once you figured out strtoull
 int32_t	*ft_split_numbers(const char *str, const char *charset, size_t *count)
 {
-	int32_t		*array;
+	int32_t			*array;
 	size_t			length;
 	uint8_t			lut[256];
 	const uint8_t	*ustr = (const uint8_t *) str;

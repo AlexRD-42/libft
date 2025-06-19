@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 10:24:50 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/17 15:31:23 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/19 17:31:20 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,69 +14,62 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <math.h>
-#include "mlx.h"
-#include "mlx_int.h"
+#include "libft.h"
+#include "fdf.h"
 
-#define WIDTH 640
-#define HEIGHT 480
-
-// uint32_t (*image_array)[img->width] = (uint32_t (*)[img->width])img->data;
-
-void	*mlx_int_new_image(t_xvar *xvar, int width, int height, int format);
-
-static inline
-void	put_pixel(t_img *img, uint32_t x, uint32_t y, uint32_t argb)
+void	draw_line_float(t_img *img, uint32_t x0, uint32_t y0, uint32_t x1, uint32_t y1)
 {
-	((uint32_t (*)[img->width])img->data)[y][x] = argb;
-}
-
-void	ft_mlx_destroy(t_xvar *mlx, t_img *img)
-{
-	mlx_destroy_window(mlx, mlx->win_list);
-	mlx_destroy_image(mlx, img);
-	mlx_destroy_display(mlx);
-	free(mlx);
-}
-
-static
-void	draw_image(t_img *img, char *buffer, size_t bytes_read)
-{
-	size_t	i;
-	size_t	j;
-	size_t	k = 0;
+	const uint32_t	length = ft_imax(ft_iabs((x1 - x0)), ft_iabs((y1 - y0)));
+	const float		dx = (double) (x1 - x0) / (double) length;
+	const float		dy = (double) (y1 - y0) / (double) length;
+	uint32_t		i;
 
 	i = 0;
-	j = 0;
-	while (k < bytes_read)
+	while (i < length)
 	{
-		if (buffer[k] == '\n')
+		cmlx_putpixel(img, x0, y0, 0x00FFFFFF);
+		x0 += dx;
+		y0 += dy;
+		i++;
+	}
+}
+
+void	wireframe(t_img *img, t_fdf_array *array)
+{
+	size_t			row;
+	size_t			col;
+	const float		dx = WIDTH / array->cols;
+	const float		dy = HEIGHT / array->rows;
+	int32_t (*image_array)[array->cols] = (int32_t (*)[array->cols])array->ptr;
+
+	row = 0;
+	while (row < array->rows - 1)
+	{
+		col = 0;
+		while (col < array->cols - 1)
 		{
-			i = 0;
-			j++;
+			// if (image_array[row][col] && image_array[row][col + 1])
+			// 	draw_line(img, col * dx, row * dy, (col + 1) * dx, row * dy);
+			if (image_array[row][col] && image_array[row + 1][col])
+				draw_line_float(img, col * dx, row * dy, col * dx, (row + 1) * dy);	
+			col++;
 		}
-		else
-		{
-			put_pixel(img, i, j, (buffer[k] == '1' && buffer[k + 1] == '0') * 0x00FFFFFF);
-			k += buffer[k] == '1' && buffer[k + 1] == '0';
-			i++;
-		}
-		k++;
+		row++;
 	}
 }
 
 int	main(void)
 {
-	t_xvar	*mlx;
-	t_img	*img;
-	ssize_t	bytes_read;
-	static char	buffer[4096];
+	t_xvar		*mlx;
+	t_img		*img;
+	t_fdf_array	array;
 
+	fdf_read("resources/maps/42.fdf", " \n", &array);
 	mlx = mlx_init();
 	mlx_new_window(mlx, WIDTH, HEIGHT, "Hello world!");
 	img = mlx_int_new_image(mlx, WIDTH, HEIGHT, ZPixmap);
-	bytes_read = ft_read(buffer);
-	draw_image(img, buffer, (size_t) bytes_read);
-	// draw_grid(img);
+	wireframe(img, &array);
+	// draw_line(img, 32, 32, 256, 256);
 	mlx_put_image_to_window(mlx, mlx->win_list, img, 0, 0);
-	ft_mlx_destroy(mlx, img);
+	cmlx_destroy(mlx, img, &array);
 }

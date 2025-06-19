@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mem_find.c                                         :+:      :+:    :+:   */
+/*   fdf_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/19 11:54:09 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/19 11:35:55 by adeimlin         ###   ########.fr       */
+/*   Created: 2025/06/17 18:32:35 by adeimlin          #+#    #+#             */
+/*   Updated: 2025/06/18 15:29:14 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
-#include <stddef.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include "libft.h"
+#include "fdf.h"
 
-// Needs optimization
-const
-void	*ft_memchr(const void *ptr_void, uint8_t byte, size_t length)
-{
-	const uint8_t	*ptr = (const uint8_t *) ptr_void;
-
-	while (length > 0)
-	{
-		if (*ptr == byte)
-			return (ptr);
-		length--;
-		ptr++;
-	}
-	return (NULL);
-}
+// Remember to free and close fds
+// Maybe an Enum would be better
+// static const char *error[] = {
+// 	"Error: Number of columns differ",
+// 	"Error: Failed to allocate memory",
+// 	"Error: Read values do not match",};

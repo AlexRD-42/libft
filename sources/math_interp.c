@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mem_find.c                                         :+:      :+:    :+:   */
+/*   math_interp.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/19 11:54:09 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/19 11:35:55 by adeimlin         ###   ########.fr       */
+/*   Created: 2025/06/18 15:23:56 by adeimlin          #+#    #+#             */
+/*   Updated: 2025/06/18 16:04:40 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
 #include <stddef.h>
 
-// Needs optimization
-const
-void	*ft_memchr(const void *ptr_void, uint8_t byte, size_t length)
+// __always_inline
+uint32_t ft_lerp(int32_t max, int32_t min, int32_t value)
 {
-	const uint8_t	*ptr = (const uint8_t *) ptr_void;
-
-	while (length > 0)
-	{
-		if (*ptr == byte)
-			return (ptr);
-		length--;
-		ptr++;
-	}
-	return (NULL);
+	double var = (double) (value - min) / (double) (max - min);
+	return ((uint32_t) (var * 0x00FFFFFF));
 }
+

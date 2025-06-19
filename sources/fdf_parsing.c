@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fdf_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/13 11:07:55 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/17 17:07:28 by adeimlin         ###   ########.fr       */
+/*   Created: 2025/06/18 16:11:54 by adeimlin          #+#    #+#             */
+/*   Updated: 2025/06/19 17:32:02 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
-#include <unistd.h>
+#include <stddef.h>
 #include <stdlib.h>
-#include <fcntl.h>
+#include <math.h>
 #include "libft.h"
 #include "fdf.h"
 
@@ -21,10 +21,11 @@
 // Could count how many occurrences of a determined character
 // Malloc can be avoided if count words is alias proof
 // Would involve shifting the last two read elements to the start
-size_t	ft_read_size(const char *str)
+static
+size_t	fdf_read_size(const char *str)
 {
 	int32_t	fd;
-	uint8_t	buffer[4096];
+	uint8_t	buffer[16 * 1024];
 	ssize_t	bytes_read;
 	size_t	bytes_total;
 
@@ -44,6 +45,7 @@ size_t	ft_read_size(const char *str)
 	return (bytes_total);
 }
 
+static
 void	fdf_init(const char *str, const uint8_t byte, t_fdf_array *array)
 {
 	const uint8_t	*ustr = (const uint8_t *) str;
@@ -71,11 +73,11 @@ void	fdf_init(const char *str, const uint8_t byte, t_fdf_array *array)
 	}
 }
 
-// This is retarded
+// Need to know if I need to keep a copy of the original input array for view reset
 void	fdf_read(const char *str, const char *charset, t_fdf_array *array)
 {
 	char			*buffer;
-	const size_t	total_memory = ft_read_size(str);
+	const size_t	total_memory = fdf_read_size(str);
 	ssize_t			bytes_read;
 	int32_t			fd;
 
@@ -93,11 +95,4 @@ void	fdf_read(const char *str, const char *charset, t_fdf_array *array)
 	fdf_init(buffer, '\n', array);
 	free(buffer);
 	close(fd);
-}
-
-int	main(void)
-{
-	t_fdf_array	array;
-
-	fdf_read("resources/maps/julia.fdf", " ,\n", &array);
 }

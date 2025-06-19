@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 20:30:05 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/17 15:32:53 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/17 18:30:51 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init_matrix()
 	
 }
 
+// This can be done better by removing the multiplication for indexing
 void	ft_matmult(const t_matrix *ma, const t_matrix *mb, t_matrix *mc)
 {
 	uint32_t	i;
