@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_main.c                                         :+:      :+:    :+:   */
+/*   fdf_others.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 10:24:50 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/20 13:17:44 by adeimlin         ###   ########.fr       */
+/*   Created: 2025/06/20 12:51:33 by adeimlin          #+#    #+#             */
+/*   Updated: 2025/06/20 13:15:06 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,36 @@
 #include <math.h>
 #include "libft.h"
 #include "fdf.h"
-#include "libft_math.h"
 
-int	main(void)
+void	fill_screen(t_img *img, uint32_t argb)
 {
-	t_xvar		*mlx;
-	t_img		*img;
-	t_fdf_array	array;
+	size_t	i;
+	size_t	j;
 
-	fdf_read("resources/maps/elem2.fdf", " \n", &array);
-	mlx = mlx_init();
-	mlx_new_window(mlx, WIDTH, HEIGHT, "Hello world!");
-	img = mlx_int_new_image(mlx, WIDTH, HEIGHT, ZPixmap);
-	mat_chain(&array);
-	draw_lines(img, &array);
-	mlx_put_image_to_window(mlx, mlx->win_list, img, 0, 0);
-	cmlx_destroy(mlx, img, &array);
+	i = 0;
+	while (i < WIDTH)
+	{
+		j = 0;
+		while (j < HEIGHT)
+		{
+			cmlx_putpixel(img, i, j, argb);
+			j++;
+		}
+		i++;
+	}
 }
+
+// dp how many pixels changed
+// void	motion_smoothing(uint8_t dp)
+// {
+// 	static	size_t	total = 0;
+
+// 	total = total << dp + total >> 1;
+// }
+
+// void	motion_smoothing(float dxyz)
+// {
+// 	static float	total = 1;
+
+// 	total *= (dxyz + 0.5);
+// }

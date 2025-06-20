@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:41:24 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/17 10:58:14 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/19 18:59:15 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	*ft_memset(void *dst_void, const uint8_t byte, size_t length)
 {
 	uint8_t			*dst;
-	const size_t	word_byte = byte * (0x0101010101010101 & UINTPTR_MAX);
+	const uintptr_t	word_byte = byte * (0x0101010101010101 & UINTPTR_MAX);
 
 	dst = (uint8_t *) dst_void;
 	while (((uintptr_t)dst & (sizeof(uintptr_t) - 1)) && length > 0)
