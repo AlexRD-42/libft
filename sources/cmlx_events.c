@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 09:34:26 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/21 12:52:50 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/21 12:59:11 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int cmlx_keyup(int keycode, t_vars *vars)
 int cmlx_mousedown(int button, int x, int y, t_vars *vars)
 {
 	static size_t a = 0;
-	ft_putnbr(a % 10, 1);
+	ft_putnbr(a % 10, 1, ',');
 	a++;
 }
 

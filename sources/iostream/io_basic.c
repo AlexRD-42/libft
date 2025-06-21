@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 21:24:42 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/19 22:05:45 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/21 12:56:55 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ ssize_t	ft_putstr(char *str, int fd, uint8_t newline)
 	return (bytes);
 }
 
-// Code duplication for itoa, so far unavoidable (add option for linebreak)
-ssize_t	ft_putnbr(int64_t number, int fd)
+// Code duplication for itoa, so far unavoidable
+// Check if write return is correct
+ssize_t	ft_putnbr(int64_t number, int fd, uint8_t c)
 {
 	const int64_t	sign = (number >= 0) - (number < 0);
 	char			buffer[32];
@@ -46,6 +47,8 @@ ssize_t	ft_putnbr(int64_t number, int fd)
 	if (fd < 0)
 		return (-1);
 	ptr = buffer + 31;
+	if (c != 0)
+		*(--ptr) = c;
 	*(--ptr) = sign * (number % 10) + '0';
 	number = sign * (number / 10);
 	while (number != 0)
