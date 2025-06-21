@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 16:11:54 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/19 22:21:01 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/20 19:58:51 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,50 +46,50 @@ size_t	fdf_read_size(const char *str)
 }
 
 static
-void	fdf_set_index2d(t_fdf_array *array)
+void	fdf_set_index2d(t_vars *vars)
 {
 	size_t	i;
 	int32_t	y_index;
 
 	i = 0;
 	y_index = -1;
-	while (i < array->length)
+	while (i < vars->length)
 	{
-		y_index += (array->ptr[i].x % array->cols) == 0;
-		array->ptr[i].y = y_index * SCALE;
-		array->ptr[i].x = (array->ptr[i].x % array->cols) * SCALE;
-		array->ptr[i].z *= ZSCALE;
+		y_index += (vars->ptr[i].x % vars->cols) == 0;
+		vars->ptr[i].y = y_index * SCALE;
+		vars->ptr[i].x = (vars->ptr[i].x % vars->cols) * SCALE;
+		vars->ptr[i].z *= ZSCALE;
 		i++;
 	}
 }
 
 static
-void	fdf_init(const char *str, const uint8_t byte, t_fdf_array *array)
+void	fdf_init(const char *str, const uint8_t byte, t_vars *vars)
 {
 	const uint8_t	*ustr = (const uint8_t *) str;
 	size_t			i;
 
-	array->rows = 0;
+	vars->rows = 0;
 	while (*ustr != 0)
 	{
-		array->rows += (*ustr == byte);
+		vars->rows += (*ustr == byte);
 		ustr++;
 	}
-	if (array->rows == 0 || array->length % array->rows != 0)
+	if (vars->rows == 0 || vars->length % vars->rows != 0)
 		return ; // Error Handling
-	array->cols = array->length / array->rows;
-	array->min = INT32_MAX;
-	array->max = INT32_MIN;
+	vars->cols = vars->length / vars->rows;
+	vars->min = INT32_MAX;
+	vars->max = INT32_MIN;
 	i = 0;
-	while (i < array->length)
+	while (i < vars->length)
 	{
-		if (array->ptr[i].z > array->max)
-			array->max = array->ptr[i].z;
-		if (array->ptr[i].z < array->min)
-			array->min = array->ptr[i].z;
+		if (vars->ptr[i].z > vars->max)
+			vars->max = vars->ptr[i].z;
+		if (vars->ptr[i].z < vars->min)
+			vars->min = vars->ptr[i].z;
 		i++;
 	}
-	fdf_set_index2d(array);
+	fdf_set_index2d(vars);
 }
 
 t_vtx	fdf_atoi(const uint8_t *ustr, size_t count)
@@ -149,7 +149,7 @@ t_vtx	*fdf_split(const char *str, const char *charset, size_t *count)
 }
 
 // Need to know if I need to keep a copy of the original input array for view reset
-void	fdf_read(const char *str, const char *charset, t_fdf_array *array)
+void	fdf_read(const char *str, const char *charset, t_vars *vars)
 {
 	char			*buffer;
 	const size_t	total_memory = fdf_read_size(str);
@@ -166,8 +166,8 @@ void	fdf_read(const char *str, const char *charset, t_fdf_array *array)
 	if (bytes_read <= 0 || (size_t) bytes_read != total_memory)
 		return ; // Error Handling
 	buffer[bytes_read] = 0;
-	array->ptr = fdf_split(buffer, charset, &(array->length));
-	fdf_init(buffer, '\n', array);
+	vars->ptr = fdf_split(buffer, charset, &(vars->length));
+	fdf_init(buffer, '\n', vars);
 	free(buffer);
 	close(fd);
 }

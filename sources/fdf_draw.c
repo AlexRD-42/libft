@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 15:32:44 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/20 13:33:44 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/20 20:01:55 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,22 +58,22 @@ void	dline_float(t_img *img, t_vtx p0, t_vtx p1)
 }
 
 // Could pre-compute neighbour pairs for better cache prediction and eliminate branching
-void	draw_lines(t_img *img, t_fdf_array *array)
+void	draw_lines(t_vars *vars)
 {
 	size_t	row;
 	size_t	col;
-	t_vtx 	(*vertex)[array->cols] = (t_vtx (*)[array->cols])array->ptr;
+	t_vtx 	(*vertex)[vars->cols] = (t_vtx (*)[vars->cols])vars->ptr;
 
 	row = 0;
-	while (row < array->rows)
+	while (row < vars->rows)
 	{
 		col = 0;
-		while (col < array->cols)
+		while (col < vars->cols)
 		{
-			if (col + 1 < array->cols)
-				dline_float(img, vertex[row][col], vertex[row][col + 1]);
-			if (row + 1 < array->rows)
-				dline_float(img, vertex[row][col], vertex[row + 1][col]);
+			if (col + 1 < vars->cols)
+				dline_float(vars->img, vertex[row][col], vertex[row][col + 1]);
+			if (row + 1 < vars->rows)
+				dline_float(vars->img, vertex[row][col], vertex[row + 1][col]);
 			col++;
 		}
 		row++;

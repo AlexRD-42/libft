@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 20:30:05 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/20 13:29:59 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/21 10:58:08 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,27 @@ void	ft_matmult(const t_matrix *ma, const t_matrix *mb, t_matrix *mc)
 		}
 		i++;
 	}
+}
+
+// Can do affine matrices, and then add projection
+static
+t_mat4	mat4_mul(t_mat4 a, t_mat4 b)
+{
+	size_t	i;
+	t_mat4	result;
+
+	i = 0;
+	while (i < 4)
+	{
+		result.row[i].x = a.row[i].x * b.row[0].x + a.row[i].y * b.row[1].x
+			+ a.row[i].z * b.row[2].x + a.row[i].w * b.row[3].x;
+		result.row[i].y = a.row[i].x * b.row[0].y + a.row[i].y * b.row[1].y
+			+ a.row[i].z * b.row[2].y + a.row[i].w * b.row[3].y;
+		result.row[i].z = a.row[i].x * b.row[0].z + a.row[i].y * b.row[1].z
+			+ a.row[i].z * b.row[2].z + a.row[i].w * b.row[3].z;
+		result.row[i].w = a.row[i].x * b.row[0].w + a.row[i].y * b.row[1].w
+			+ a.row[i].z * b.row[2].w + a.row[i].w * b.row[3].w;
+		i++;
+	}
+	return (result);
 }

@@ -2,6 +2,8 @@
 
 # Remember to use brace encapsulation if necessary
 
+# Create a count words equivalent of GNL
+
 # Read about malloc fast path, 128 kb limit, tcache and how to monitor with strace
 
 # Post on unix stackexchange asking for suggestions

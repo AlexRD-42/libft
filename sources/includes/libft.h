@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 12:11:22 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/18 16:50:46 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/21 11:24:52 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ void	*ft_memset(void *dst_void, const uint8_t byte, size_t length);
 int64_t	ft_memcmp(const void *ptr1_void, const void *ptr2_void, size_t length);
 int64_t	ft_memrcmp(const void *ptr1_void, const void *ptr2_void, size_t length);
 void	*ft_memcpy(void *dst_void, const void *src_void, size_t length);
-CT void	*ft_memchr(const void *ptr_void, uint8_t byte, size_t length);
+
+const void
+*ft_memchr(const void *ptr_void, uint8_t byte, size_t length);
 //----------------------------------------------------------------------------
 
 // Prototypes: Input/Output --------------------------------------------------

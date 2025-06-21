@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 10:24:50 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/20 13:17:44 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/21 12:45:11 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,18 @@
 
 int	main(void)
 {
-	t_xvar		*mlx;
-	t_img		*img;
-	t_fdf_array	array;
+	t_vars vars;
 
-	fdf_read("resources/maps/elem2.fdf", " \n", &array);
-	mlx = mlx_init();
-	mlx_new_window(mlx, WIDTH, HEIGHT, "Hello world!");
-	img = mlx_int_new_image(mlx, WIDTH, HEIGHT, ZPixmap);
-	mat_chain(&array);
-	draw_lines(img, &array);
-	mlx_put_image_to_window(mlx, mlx->win_list, img, 0, 0);
-	cmlx_destroy(mlx, img, &array);
+	fdf_read("resources/maps/elem2.fdf", " \n", &vars);
+	vars.mlx = mlx_init();
+	mlx_new_window(vars.mlx, WIDTH, HEIGHT, "Hello world!");
+	vars.img = mlx_int_new_image(vars.mlx, WIDTH, HEIGHT, ZPixmap);
+	mlx_hook(vars.mlx->win_list, KeyPress, KeyPressMask, cmlx_keydown, &vars);
+	mlx_hook(vars.mlx->win_list, KeyRelease, KeyReleaseMask, cmlx_keyup, &vars);
+	mlx_hook(vars.mlx->win_list, ButtonPress, ButtonPressMask, cmlx_mousedown, &vars);
+	mlx_hook(vars.mlx->win_list, ButtonRelease, ButtonReleaseMask, cmlx_mouseup, &vars);
+	mlx_hook(vars.mlx->win_list, Expose, ExposureMask, cmlx_expose, &vars);
+	mlx_loop(vars.mlx);
+	cmlx_destroy(&vars);
+	return (0);
 }

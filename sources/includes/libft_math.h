@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 15:18:38 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/17 15:30:21 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/21 11:17:17 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 # include <stdint.h>
 # include <stddef.h>
+
+# ifndef EPS
+#  define EPS 0.00000011920929f
+#endif
 
 typedef struct s_matrix
 {
