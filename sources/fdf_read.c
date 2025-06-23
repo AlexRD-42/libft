@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_parsing.c                                      :+:      :+:    :+:   */
+/*   fdf_read.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 16:11:54 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/20 19:58:51 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/22 11:48:35 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,55 +46,9 @@ size_t	fdf_read_size(const char *str)
 }
 
 static
-void	fdf_set_index2d(t_vars *vars)
+t_fdf	fdf_atoi(const uint8_t *ustr, size_t count)
 {
-	size_t	i;
-	int32_t	y_index;
-
-	i = 0;
-	y_index = -1;
-	while (i < vars->length)
-	{
-		y_index += (vars->ptr[i].x % vars->cols) == 0;
-		vars->ptr[i].y = y_index * SCALE;
-		vars->ptr[i].x = (vars->ptr[i].x % vars->cols) * SCALE;
-		vars->ptr[i].z *= ZSCALE;
-		i++;
-	}
-}
-
-static
-void	fdf_init(const char *str, const uint8_t byte, t_vars *vars)
-{
-	const uint8_t	*ustr = (const uint8_t *) str;
-	size_t			i;
-
-	vars->rows = 0;
-	while (*ustr != 0)
-	{
-		vars->rows += (*ustr == byte);
-		ustr++;
-	}
-	if (vars->rows == 0 || vars->length % vars->rows != 0)
-		return ; // Error Handling
-	vars->cols = vars->length / vars->rows;
-	vars->min = INT32_MAX;
-	vars->max = INT32_MIN;
-	i = 0;
-	while (i < vars->length)
-	{
-		if (vars->ptr[i].z > vars->max)
-			vars->max = vars->ptr[i].z;
-		if (vars->ptr[i].z < vars->min)
-			vars->min = vars->ptr[i].z;
-		i++;
-	}
-	fdf_set_index2d(vars);
-}
-
-t_vtx	fdf_atoi(const uint8_t *ustr, size_t count)
-{
-	t_vtx					vertex;
+	t_fdf					fdf;
 	int32_t					sign;
 	static const uint8_t	lut[256] = {
 	['0'] = 0, ['1'] = 1, ['2'] = 2, ['3'] = 3, ['4'] = 4,
@@ -104,31 +58,31 @@ t_vtx	fdf_atoi(const uint8_t *ustr, size_t count)
 
 	sign = (*ustr == '-') - (*ustr != '-');
 	ustr += (*ustr == '-') || (*ustr == '+');
-	vertex.x = count;
-	vertex.y = 0;
-	vertex.z = 0;
-	vertex.argb = 0;
+	fdf.index = count;
+	fdf.height = 0;
+	fdf.color = 0;
 	while (lut[*ustr] || *ustr == '0')
-		vertex.z = vertex.z * 10 - lut[*ustr++];
-	vertex.z *= sign;
+		fdf.height = fdf.height * 10 - lut[*ustr++];
+	fdf.height *= sign;
 	if (*ustr++ == ',')
 	{
 		ustr += (ustr[0] == '0' && (ustr[1] == 'x' || ustr[1] == 'X')) << 1;
 		while (lut[*ustr] || *ustr == '0')
-			vertex.argb = (vertex.argb << 4) + lut[*ustr++];
+			fdf.color = (fdf.color << 4) + lut[*ustr++];
 	}
-	return (vertex);
+	return (fdf);
 }
 
-t_vtx	*fdf_split(const char *str, const char *charset, size_t *count)
+static
+t_fdf	*fdf_split(const char *str, const char *charset, size_t *count)
 {
-	t_vtx			*array;
+	t_fdf			*array;
 	size_t			length;
 	uint8_t			lut[256];
 	const uint8_t	*ustr = (const uint8_t *) str;
 	const size_t	tokens = ft_count_tokens(str, ft_setlut256(lut, charset), NULL);
 
-	array = malloc(tokens * sizeof(t_vtx));
+	array = malloc(tokens * sizeof(t_fdf) * 2);
 	if (array == NULL)
 		return (NULL);
 	*count = 0;
@@ -145,6 +99,7 @@ t_vtx	*fdf_split(const char *str, const char *charset, size_t *count)
 		(*count)++;
 		ustr += length;
 	}
+	*count *= (*count == tokens);	// Error catching
 	return (array);
 }
 
@@ -166,7 +121,8 @@ void	fdf_read(const char *str, const char *charset, t_vars *vars)
 	if (bytes_read <= 0 || (size_t) bytes_read != total_memory)
 		return ; // Error Handling
 	buffer[bytes_read] = 0;
-	vars->ptr = fdf_split(buffer, charset, &(vars->length));
+	vars->fdf = fdf_split(buffer, charset, &(vars->length));
+	vars->vec =  (t_vec3 *) (vars->fdf + vars->length);
 	fdf_init(buffer, '\n', vars);
 	free(buffer);
 	close(fd);

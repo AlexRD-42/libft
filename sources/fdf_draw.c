@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 15:32:44 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/20 20:01:55 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/23 14:37:15 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
+#include <math.h>
 #include "libft.h"
 #include "fdf.h"
 
@@ -34,8 +35,9 @@
 // 	}
 // }
 
-// If i draw the max Z first, i can then stop drawing the line if there was something there already
 // Calculate a gradient that goes from p0 to p1 color (Alpha goes from 00 to FF basically)
+// Everything here should be an integer, floats should only be used to determine p0.X -> p1.X by scaling to display
+// This function should receive integer points, other function responsability to determine this
 static
 void	dline_float(t_img *img, t_vtx p0, t_vtx p1)
 {
@@ -57,13 +59,64 @@ void	dline_float(t_img *img, t_vtx p0, t_vtx p1)
 	}
 }
 
+static
+void	draw(t_vars *vars, t_vec3 fp0, t_vec3 fp1)
+{
+	t_vtx	p0;
+	t_vtx	p1;
+
+	p0.x = 400 + (fp0.x + 1.0f) * 0.5f * 640;
+	p0.y = 300 + (fp0.y + 1.0f) * 0.5f * 480;
+	p1.x = 400 + (fp1.x + 1.0f) * 0.5f * 640;
+	p1.y = 300 + (fp1.y + 1.0f) * 0.5f * 480;
+	if (p1.x > WIDTH || (int) p1.x < 0 || p1.y > HEIGHT || (int) p1.y < 0)
+	{
+		p1.color = 0;
+	}
+	if (p0.x > WIDTH || (int) p0.x < 0 || p0.y > HEIGHT || (int) p0.y < 0)
+	{
+		p1.color = 0;
+	}
+
+	dline_float(vars->img, p0, p1);
+}
+
+static inline
+float	absmaxvec(t_vec3 vec)
+{
+	return (ft_max(ft_abs(vec.z), ft_max(ft_abs(vec.x), ft_abs(vec.y))));
+}
+
+static
+void	normalize(t_vec3 *vec, size_t length)
+{
+	size_t	i;
+	float	max = 0.0f;
+
+	i = 0;
+	while (i < length)
+		max = ft_max(ft_abs(max), absmaxvec(vec[i++]));
+	max = 1.0f / max;
+	i = 0;
+	while (i < length)
+	{
+		vec[i].x *= max;
+		vec[i].y *= max;
+		vec[i].z *= max;
+		i++;
+	}
+}
 // Could pre-compute neighbour pairs for better cache prediction and eliminate branching
+// Total number of pairs = (rows - 1) * cols + (cols - 1) * rows
+// rows * cols - cols + rows * cols - rows
+// = 2 rows*cols - rows - cols
 void	draw_lines(t_vars *vars)
 {
 	size_t	row;
 	size_t	col;
-	t_vtx 	(*vertex)[vars->cols] = (t_vtx (*)[vars->cols])vars->ptr;
+	t_vec3 	(*vector)[vars->cols] = (t_vec3 (*)[vars->cols])vars->vec;
 
+	normalize(vars->vec, vars->length);
 	row = 0;
 	while (row < vars->rows)
 	{
@@ -71,9 +124,9 @@ void	draw_lines(t_vars *vars)
 		while (col < vars->cols)
 		{
 			if (col + 1 < vars->cols)
-				dline_float(vars->img, vertex[row][col], vertex[row][col + 1]);
+				draw(vars, vector[row][col], vector[row][col + 1]);
 			if (row + 1 < vars->rows)
-				dline_float(vars->img, vertex[row][col], vertex[row + 1][col]);
+				draw(vars, vector[row][col], vector[row + 1][col]);
 			col++;
 		}
 		row++;

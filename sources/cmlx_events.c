@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 09:34:26 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/21 12:59:11 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/23 14:37:17 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ int cmlx_expose(t_vars *vars)
 	static uint8_t	index = 0;
 
 	if (index == 0)
-		mat_chain(vars);
+		apply_iso(vars);
 	index = !index;
 }

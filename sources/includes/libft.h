@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 12:11:22 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/21 12:57:16 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/22 12:23:19 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int64_t	ft_factorial(int64_t number);
 int64_t	ft_power(int64_t number, uint64_t power);
 size_t	ft_fibonacci(size_t index);
 uint8_t	ft_isprime(size_t number);
+
 // Prototypes: Array Info ----------------------------------------------------
 size_t	ft_i32min(int32_t *array, size_t length);
 size_t	ft_i32max(int32_t *array, size_t length);
@@ -73,6 +74,11 @@ int64_t	ft_imin(int64_t number1, int64_t number2);
 int64_t	ft_imax(int64_t number1, int64_t number2);
 int64_t	ft_iabs(int64_t number);
 int64_t	ft_iabsdiff(int64_t number1, int64_t number2);
+float	ft_min(float number1, float number2);
+float	ft_max(float number1, float number2);
+float	ft_abs(float number);
+float	ft_absdiff(float number1, float number2);
+
 //----------------------------------------------------------------------------
 
 // Prototypes: Strings -------------------------------------------------------

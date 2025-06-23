@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 11:14:04 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/21 12:45:30 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/23 14:37:16 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 typedef union u_argb
 {
+	uint32_t	argb;
 	struct
 	{
 		uint8_t	a;
@@ -24,16 +25,22 @@ typedef union u_argb
 		uint8_t	g;
 		uint8_t	b;
 	};
-	uint32_t	argb;
 }	t_argb;
 
 typedef struct s_vertex
 {
-	int32_t		x;
-	int32_t		y;
-	int32_t		z;
-	uint32_t	argb;
+	uint32_t	x;
+	uint32_t	y;
+	uint32_t	color;
 }	t_vtx;
+
+// This can be optimized into a vec3 struct
+typedef struct s_fdf
+{
+	uint32_t	index;
+	uint32_t	color;
+	int32_t		height;
+}	t_fdf;
 
 typedef union u_vec2
 {
@@ -123,7 +130,8 @@ typedef struct s_vars
 {
 	t_xvar		*mlx;
 	t_img		*img;
-	t_vtx		*ptr;
+	t_fdf		*fdf;
+	t_vec3		*vec;
 	size_t		length;
 	int32_t		max;
 	int32_t		min;

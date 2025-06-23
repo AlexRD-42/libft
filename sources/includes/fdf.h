@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 15:58:18 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/21 12:52:04 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/22 10:51:50 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 
 void	*mlx_int_new_image(t_xvar *xvar, int width, int height, int format);
 void	fdf_read(const char *str, const char *charset, t_vars *vars);
+void	fdf_init(const char *str, const uint8_t byte, t_vars *vars);
 void	mat_chain(t_vars *vars);
 void	draw_lines(t_vars *vars);
 

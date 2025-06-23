@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 17:36:17 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/20 21:13:47 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/22 22:01:26 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,21 @@ typedef struct s_list
 
 typedef union u_type32
 {
-	uint32_t	ui;
-	int32_t		i;
-	uint8_t		b[4];
-	float		f;
+	uint32_t	u32;
+	int32_t		i32;
+	uint8_t		u8[4];
+	float		f32;
 }	t_32;
 
 typedef union u_type64
 {
-	uint64_t	ul;
-	int64_t		l;
-	double		d;
-	float		f[2];
-	uint32_t	ui[2];
-	int32_t		i[2];
-	uint8_t		b[8];
+	uint64_t	u64;
+	int64_t		i64;
+	double		f64;
+	float		f32[2];
+	uint32_t	u32[2];
+	int32_t		i32[2];
+	uint8_t		u8[8];
 }	t_64;
 
 typedef struct s_array

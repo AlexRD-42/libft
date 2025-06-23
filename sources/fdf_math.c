@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 19:46:31 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/21 12:51:28 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/23 14:37:18 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,28 +53,23 @@ t_mat4	build_matrix(t_params params)
 
 // Maybe updating z isn't necessary
 static inline
-void	mat4_apply_vertex(const t_mat4 *m, t_vtx *v, size_t i, size_t length)
+void	mat4_apply_vertex(const t_mat4 *m, t_vec3 *v, size_t i, size_t length)
 {
-	float	rx;
-	float	ry;
-	float	rz;
-	float	rw;
+	t_vec4	r;
 	float	invw;
 
 	while (i < length)
 	{
-		rx = m->row[0].x * ((float) v[i].x) + m->row[0].y * ((float) v[i].y)
-			+ m->row[0].z * ((float) v[i].z) + m->row[0].w;
-		ry = m->row[1].x * ((float) v[i].x) + m->row[1].y * ((float) v[i].y)
-			+ m->row[1].z * ((float) v[i].z) + m->row[1].w;
-		rz = m->row[2].x * ((float) v[i].x) + m->row[2].y * ((float) v[i].y)
-			+ m->row[2].z * ((float) v[i].z) + m->row[2].w;
-		rw = m->row[3].x * ((float) v[i].x) + m->row[3].y * ((float) v[i].y)
-			+ m->row[3].z * ((float) v[i].z) + m->row[3].w;
-		invw = 1.0f / (rw + (float) (rw > -EPS && rw < EPS));
-		v[i].x = ((int32_t)(rx * invw)) + WIDTH / 2;
-		v[i].y = ((int32_t)(ry * invw)) + HEIGHT / 2;
-		v[i].z = ((int32_t)(rz * invw));
+		r.x = m->a1 * v[i].x + m->a2 * v[i].y + m->a3 * v[i].z + m->a4;
+		r.y = m->b1 * v[i].x + m->b2 * v[i].y + m->b3 * v[i].z + m->b4;
+		r.z = m->c1 * v[i].x + m->c2 * v[i].y + m->c3 * v[i].z + m->c4;
+		r.w = m->d1 * v[i].x + m->d2 * v[i].y + m->d3 * v[i].z + m->d4;
+		invw = 1.0f / (r.w + EPS);
+		if (r.w > -EPS && r.w < EPS)
+			write(1, "OHNO, ", 6);
+		v[i].x = r.x * invw;
+		v[i].y = r.y * invw;
+		v[i].z = r.z * invw;
 		i++;
 	}
 }
@@ -86,7 +81,7 @@ void	mat_chain(t_vars *vars)
 	const t_params	params = {-cx, -cy, 0.0f,  0.5f, 0.0f, 0.0f};
 	const t_mat4	proj = build_matrix(params);
 
-	mat4_apply_vertex(&proj, vars->ptr, 0, vars->length);
+	mat4_apply_vertex(&proj, vars->vec, 0, vars->length);
 	draw_lines(vars);
 	mlx_put_image_to_window(vars->mlx, vars->mlx->win_list, vars->img, 0, 0);
 }
@@ -99,7 +94,7 @@ void	apply_iso(t_vars *vars)
 		{ 1.0000f,  0.0000f,  0.0000f, 0.0f},
 		{ 0.0000f,  0.0000f,  0.0000f, 1.0f}
 	}};
-	mat4_apply_vertex(&iso, vars->ptr, 0, vars->length);
+	mat4_apply_vertex(&iso, vars->vec, 0, vars->length);
 	draw_lines(vars);
 	mlx_put_image_to_window(vars->mlx, vars->mlx->win_list, vars->img, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 15:20:22 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/21 12:46:12 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/22 11:03:50 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,35 @@ void	cmlx_putargb(t_img *img, uint32_t x, uint32_t y, uint32_t src)
 	*dst = (rb_dst & 0x00FF00FF) | ((ga_dst & 0x00FF00FF) << 8);
 }
 
+// __always_inline
+// void	cmlx_putargb(t_img *img, uint32_t x, uint32_t y, uint32_t src)
+// {
+// 	uint32_t	*dst;
+// 	uint64_t	argb_dst;
+// 	uint64_t	argb_src;
+// 	uint64_t	alpha;
+// 	uint64_t	reg64;
+
+// 	alpha = (src >> 24);
+// 	dst = (uint32_t *) (img->data + y * img->width + x);
+// 	argb_dst = (((uint64_t) *dst) & 0xFF00FF00ULL) << 32;
+// 	argb_dst |= ((uint64_t) *dst) & 0x00FF00FFULL;
+// 	argb_src = (((uint64_t) src) & 0xFF00FF00ULL) << 32;
+// 	argb_src |= ((uint64_t) src) & 0x00FF00FFULL;
+// 	reg64 = (argb_dst + (argb_src - argb_dst) * alpha) >> 8;
+// 	reg64 &= 0x00FF00FF00FF00FFULL;
+// 	reg64 = ((reg64 >> 32) | reg64) & 0xFFFFFFFFULL;
+// 	*dst = (uint32_t) reg64;
+// }
+
 void	cmlx_destroy(t_vars *vars)
 {
 	mlx_destroy_window(vars->mlx, vars->mlx->win_list);
 	mlx_destroy_image(vars->mlx, vars->img);
 	mlx_destroy_display(vars->mlx);
 	free(vars->mlx);
-	free(vars->ptr);
-	vars->ptr = NULL;
+	free(vars->fdf); // This already frees vec
+	vars->vec = NULL;
 	vars->mlx = NULL;
+	vars->fdf = NULL;
 }

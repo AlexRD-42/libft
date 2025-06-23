@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:28:32 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/16 16:19:36 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/23 14:37:18 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,20 @@ float	ft_qinvsqrt(float number)
 {
 	t_32	result;
 
-	result.f = number;
-	result.ui = 0x5f3759df - (result.ui >> 1);
-	result.f = result.f * (1.5f - (number * 0.5f * result.f * result.f));
-	return (result.f);
+	result.f32 = number;
+	result.u32 = 0x5f3759df - (result.u32 >> 1);
+	result.f32 = result.f32 * (1.5f - (number * 0.5f * result.f32 * result.f32));
+	return (result.f32);
 }
 
 float	ft_qsqrt(float number)
 {
 	t_32	result;
 
-	result.f = number;
-	result.ui = (result.ui >> 1) + 0x1FBD3EE0;
-	result.f = 0.5f * (result.f + number / result.f);
-	return (result.f);
+	result.f32 = number;
+	result.u32 = (result.u32 >> 1) + 0x1FBD3EE0;
+	result.f32 = 0.5f * (result.f32 + number / result.f32);
+	return (result.f32);
 }
 
 // Check length division
