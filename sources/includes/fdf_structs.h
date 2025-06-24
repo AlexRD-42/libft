@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 11:14:04 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/23 14:37:16 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/25 00:03:37 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ typedef union u_argb
 
 typedef struct s_vertex
 {
-	uint32_t	x;
-	uint32_t	y;
+	int32_t		x;
+	int32_t		y;
 	uint32_t	color;
 }	t_vtx;
 
@@ -132,6 +132,7 @@ typedef struct s_vars
 	t_img		*img;
 	t_fdf		*fdf;
 	t_vec3		*vec;
+	float		zoom;
 	size_t		length;
 	int32_t		max;
 	int32_t		min;

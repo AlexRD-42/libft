@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 15:58:18 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/22 10:51:50 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/24 21:37:27 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@
 
 # define WIDTH 1920
 # define HEIGHT 1080
+# define AR (float) WIDTH / (float) HEIGHT
 # define SCALE 16
-# define ZSCALE 1
+# define ZSCALE 0.3f
 # ifndef EPS
 #  define EPS 0.00000011920929f
 # endif
+# define PI 3.141592653589793238462643383279502884L
 
 void	*mlx_int_new_image(t_xvar *xvar, int width, int height, int format);
 void	fdf_read(const char *str, const char *charset, t_vars *vars);
@@ -42,5 +44,6 @@ int 	cmlx_mousedown(int button, int x, int y, t_vars *vars);
 int 	cmlx_mouseup(int button, int x, int y, t_vars *vars);
 int 	cmlx_expose(t_vars *vars);
 void	apply_iso(t_vars *vars);
-
+void	fdf_rotate(t_vars *vars, float rx, float ry, float rz);
+void	fdf_translate(t_vars *vars, float dx, float dy, float dz);
 #endif

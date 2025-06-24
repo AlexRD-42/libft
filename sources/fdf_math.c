@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 19:46:31 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/23 14:37:18 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/24 23:56:10 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 #include "libft.h"
 #include "fdf.h"
 
-static
-t_mat4	build_matrix(t_params params)
+static inline
+t_mat4	build_pmatrix(t_params params)
 {
 	const t_vec3	vcos = {cosf(params.rx), cosf(params.ry), cosf(params.rz)};
 	const t_vec3	vsin = {sinf(params.rx), sinf(params.ry), sinf(params.rz)};
@@ -33,25 +33,33 @@ t_mat4	build_matrix(t_params params)
 	return (matrix);
 }
 
-// wtf is this abomination jesusss
-// static
-// t_mat4	build_matrix(t_params p, t_frustrum f)
-// {
-// 	const t_vec3	vc = {cosf(p.rx), cosf(p.ry), cosf(p.rz)};
-// 	const t_vec3	vs = {sinf(p.rx), sinf(p.ry), sinf(p.rz)};
-// 	const t_vec4	v1 = {1.0f / tanf(f.fov * 0.5f), -vc.z * vs.y * vc.x + vs.z
-// 		* vs.x, vs.z * vs.y * vc.x + vc.z * vs.x, vc.y * vc.x};
-// 	const t_vec4	v2 = {v1.x / f.ar, v1.x, (f.far + f.near)
-// 		/ (f.near - f.far), 2.0f * f.far * f.near / (f.near - f.far)};
+static inline
+t_mat4	build_mvpmatrix(t_params p, t_frustrum f)
+{
+	const t_vec3	vc = {cosf(p.rx), cosf(p.ry), cosf(p.rz)};
+	const t_vec3	vs = {sinf(p.rx), sinf(p.ry), sinf(p.rz)};
+	const t_vec4	v1 = {1.0f / tanf(f.fov * 0.5f), -vc.z * vs.y * vc.x + vs.z
+		* vs.x, vs.z * vs.y * vc.x + vc.z * vs.x, vc.y * vc.x};
+	const t_vec4	v2 = {v1.x / f.ar, v1.x, (f.far + f.near)
+		/ (f.near - f.far), 2.0f * f.far * f.near / (f.near - f.far)};
 
-// 	return ((t_mat4){{
-// 		{v2.x * vc.z * vc.y, v2.x * -vs.z * vc.y, v2.x * vs.y, v2.x * p.dx},
-// 		{v2.y * (vc.z * vs.y * vs.x + vs.z * vc.x), v2.y * (-vs.z * vs.y * vs.x + vc.z * vc.x), v2.y * (-vc.y * vs.x), v2.y * p.dy},
-// 		{v2.z * v1.y, v2.z * v1.z, v2.z * v1.w, v2.z * p.dz + v2.w},
-// 		{-v1.y, -v1.z, -v1.w, -p.dz}}});
-// }
+	return ((t_mat4){{
+		{v2.x * vc.z * vc.y, v2.x * -vs.z * vc.y, v2.x * vs.y, v2.x * p.dx},
+		{v2.y * (vc.z * vs.y * vs.x + vs.z * vc.x), v2.y * (-vs.z * vs.y * vs.x + vc.z * vc.x), v2.y * (-vc.y * vs.x), v2.y * p.dy},
+		{v2.z * v1.y, v2.z * v1.z, v2.z * v1.w, v2.z * p.dz + v2.w},
+		{-v1.y, -v1.z, -v1.w, -p.dz}}});
+}
 
-// Maybe updating z isn't necessary
+static inline
+float	ft_clamp(const float upper, const float lower, float value)
+{
+	if (value > upper)
+		return (upper);
+	else if (value < lower)
+		return (lower);
+	return (value);
+}
+
 static inline
 void	mat4_apply_vertex(const t_mat4 *m, t_vec3 *v, size_t i, size_t length)
 {
@@ -67,6 +75,9 @@ void	mat4_apply_vertex(const t_mat4 *m, t_vec3 *v, size_t i, size_t length)
 		invw = 1.0f / (r.w + EPS);
 		if (r.w > -EPS && r.w < EPS)
 			write(1, "OHNO, ", 6);
+		// v[i].x = ft_clamp(1.0f, -1.0f, r.x * invw);
+		// v[i].y = ft_clamp(1.0f, -1.0f, r.y * invw);
+		// v[i].z = ft_clamp(1.0f, -1.0f, r.z * invw);
 		v[i].x = r.x * invw;
 		v[i].y = r.y * invw;
 		v[i].z = r.z * invw;
@@ -74,27 +85,35 @@ void	mat4_apply_vertex(const t_mat4 *m, t_vec3 *v, size_t i, size_t length)
 	}
 }
 
-void	mat_chain(t_vars *vars)
+void	fdf_rotate(t_vars *vars, float rx, float ry, float rz)
 {
-	float			cx = (vars->cols - 1) * 0.5f * SCALE;
-	float			cy = (vars->rows - 1) * 0.5f * SCALE;
-	const t_params	params = {-cx, -cy, 0.0f,  0.5f, 0.0f, 0.0f};
-	const t_mat4	proj = build_matrix(params);
-
+	const t_params		params = {0.0f, 0.0f, 0.0f, rx, ry, rz};
+	const t_mat4		proj = build_pmatrix(params);
 	mat4_apply_vertex(&proj, vars->vec, 0, vars->length);
+	ft_memset(vars->img->data, 0, HEIGHT * WIDTH * sizeof(int32_t));
+	draw_lines(vars);
+	mlx_put_image_to_window(vars->mlx, vars->mlx->win_list, vars->img, 0, 0);
+}
+
+void	fdf_translate(t_vars *vars, float dx, float dy, float dz)
+{
+	const t_params		params = {dx, dy, dz, 0.0f, 0.0f, 0.0f};
+	const t_mat4		proj = build_pmatrix(params);
+	mat4_apply_vertex(&proj, vars->vec, 0, vars->length);
+	ft_memset(vars->img->data, 0, HEIGHT * WIDTH * sizeof(int32_t));
 	draw_lines(vars);
 	mlx_put_image_to_window(vars->mlx, vars->mlx->win_list, vars->img, 0, 0);
 }
 
 void	apply_iso(t_vars *vars)
 {
-	const t_mat4 iso = {.row = {
-		{ 0.0000f,  0.7071f, -0.7071f, 0.0f},
-		{ 0.0000f,  0.7071f,  0.7071f, 0.0f},
-		{ 1.0000f,  0.0000f,  0.0000f, 0.0f},
-		{ 0.0000f,  0.0000f,  0.0000f, 1.0f}
-	}};
-	mat4_apply_vertex(&iso, vars->vec, 0, vars->length);
+	const t_params		params = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
+	// const t_frustrum	vport = {1.0f, 1000.0f, 1.6, AR};
+	// const t_mat4		proj = build_mvpmatrix(params, vport);
+	const t_mat4		proj = build_pmatrix(params);
+	mat4_apply_vertex(&proj, vars->vec, 0, vars->length);
+	// mat4_apply_vertex(&proj, vars->vec, 0, vars->length);
+	ft_memset(vars->img->data, 0, HEIGHT * WIDTH * sizeof(int32_t));
 	draw_lines(vars);
 	mlx_put_image_to_window(vars->mlx, vars->mlx->win_list, vars->img, 0, 0);
 }

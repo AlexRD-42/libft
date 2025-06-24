@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 16:11:54 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/22 11:48:35 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/24 20:18:21 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_fdf	*fdf_split(const char *str, const char *charset, size_t *count)
 	const uint8_t	*ustr = (const uint8_t *) str;
 	const size_t	tokens = ft_count_tokens(str, ft_setlut256(lut, charset), NULL);
 
-	array = malloc(tokens * sizeof(t_fdf) * 2);
+	array = malloc(tokens * (sizeof(t_fdf) + sizeof(t_vec3)));
 	if (array == NULL)
 		return (NULL);
 	*count = 0;
@@ -103,7 +103,6 @@ t_fdf	*fdf_split(const char *str, const char *charset, size_t *count)
 	return (array);
 }
 
-// Need to know if I need to keep a copy of the original input array for view reset
 void	fdf_read(const char *str, const char *charset, t_vars *vars)
 {
 	char			*buffer;
@@ -122,7 +121,7 @@ void	fdf_read(const char *str, const char *charset, t_vars *vars)
 		return ; // Error Handling
 	buffer[bytes_read] = 0;
 	vars->fdf = fdf_split(buffer, charset, &(vars->length));
-	vars->vec =  (t_vec3 *) (vars->fdf + vars->length);
+	vars->vec = (t_vec3 *) (vars->fdf + vars->length);
 	fdf_init(buffer, '\n', vars);
 	free(buffer);
 	close(fd);
