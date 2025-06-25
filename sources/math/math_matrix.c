@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 20:30:05 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/21 10:58:08 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/25 10:59:35 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	ft_matmult(const t_matrix *ma, const t_matrix *mb, t_matrix *mc)
 	}
 }
 
-// Can do affine matrices, and then add projection
 static
 t_mat4	mat4_mul(t_mat4 a, t_mat4 b)
 {

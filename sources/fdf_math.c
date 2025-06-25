@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 19:46:31 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/24 23:56:10 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/25 12:33:15 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,21 +51,13 @@ t_mat4	build_mvpmatrix(t_params p, t_frustrum f)
 }
 
 static inline
-float	ft_clamp(const float upper, const float lower, float value)
+void	mat4_apply_vertex(const t_mat4 *m, t_vec4 *v, size_t length)
 {
-	if (value > upper)
-		return (upper);
-	else if (value < lower)
-		return (lower);
-	return (value);
-}
-
-static inline
-void	mat4_apply_vertex(const t_mat4 *m, t_vec3 *v, size_t i, size_t length)
-{
+	size_t	i;
 	t_vec4	r;
 	float	invw;
 
+	i = 0;
 	while (i < length)
 	{
 		r.x = m->a1 * v[i].x + m->a2 * v[i].y + m->a3 * v[i].z + m->a4;
@@ -75,9 +67,6 @@ void	mat4_apply_vertex(const t_mat4 *m, t_vec3 *v, size_t i, size_t length)
 		invw = 1.0f / (r.w + EPS);
 		if (r.w > -EPS && r.w < EPS)
 			write(1, "OHNO, ", 6);
-		// v[i].x = ft_clamp(1.0f, -1.0f, r.x * invw);
-		// v[i].y = ft_clamp(1.0f, -1.0f, r.y * invw);
-		// v[i].z = ft_clamp(1.0f, -1.0f, r.z * invw);
 		v[i].x = r.x * invw;
 		v[i].y = r.y * invw;
 		v[i].z = r.z * invw;
@@ -89,20 +78,20 @@ void	fdf_rotate(t_vars *vars, float rx, float ry, float rz)
 {
 	const t_params		params = {0.0f, 0.0f, 0.0f, rx, ry, rz};
 	const t_mat4		proj = build_pmatrix(params);
-	mat4_apply_vertex(&proj, vars->vec, 0, vars->length);
-	ft_memset(vars->img->data, 0, HEIGHT * WIDTH * sizeof(int32_t));
-	draw_lines(vars);
-	mlx_put_image_to_window(vars->mlx, vars->mlx->win_list, vars->img, 0, 0);
+	mat4_apply_vertex(&proj, vars->vec, vars->length);
+	// ft_memset(vars->img->data, 0, HEIGHT * WIDTH * sizeof(int32_t));
+	// draw_lines(vars);
+	// mlx_put_image_to_window(vars->mlx, vars->mlx->win_list, vars->img, 0, 0);
 }
 
 void	fdf_translate(t_vars *vars, float dx, float dy, float dz)
 {
 	const t_params		params = {dx, dy, dz, 0.0f, 0.0f, 0.0f};
 	const t_mat4		proj = build_pmatrix(params);
-	mat4_apply_vertex(&proj, vars->vec, 0, vars->length);
-	ft_memset(vars->img->data, 0, HEIGHT * WIDTH * sizeof(int32_t));
-	draw_lines(vars);
-	mlx_put_image_to_window(vars->mlx, vars->mlx->win_list, vars->img, 0, 0);
+	mat4_apply_vertex(&proj, vars->vec, vars->length);
+	// ft_memset(vars->img->data, 0, HEIGHT * WIDTH * sizeof(int32_t));
+	// draw_lines(vars);
+	// mlx_put_image_to_window(vars->mlx, vars->mlx->win_list, vars->img, 0, 0);
 }
 
 void	apply_iso(t_vars *vars)
@@ -111,9 +100,9 @@ void	apply_iso(t_vars *vars)
 	// const t_frustrum	vport = {1.0f, 1000.0f, 1.6, AR};
 	// const t_mat4		proj = build_mvpmatrix(params, vport);
 	const t_mat4		proj = build_pmatrix(params);
-	mat4_apply_vertex(&proj, vars->vec, 0, vars->length);
+	mat4_apply_vertex(&proj, vars->vec, vars->length);
 	// mat4_apply_vertex(&proj, vars->vec, 0, vars->length);
-	ft_memset(vars->img->data, 0, HEIGHT * WIDTH * sizeof(int32_t));
-	draw_lines(vars);
-	mlx_put_image_to_window(vars->mlx, vars->mlx->win_list, vars->img, 0, 0);
+	// ft_memset(vars->img->data, 0, HEIGHT * WIDTH * sizeof(int32_t));
+	// draw_lines(vars);
+	// mlx_put_image_to_window(vars->mlx, vars->mlx->win_list, vars->img, 0, 0);
 }

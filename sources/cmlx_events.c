@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 09:34:26 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/25 00:16:24 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/25 12:36:57 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,42 +24,32 @@
 // 2 KeyRelease
 int cmlx_keydown(int keycode, t_vars *vars)
 {
-	static int a = 0;
-
 	if (keycode == XK_Escape)
 		return (mlx_loop_end(vars->mlx));
-	if (keycode == XK_f)
-		a = !a;
-	if (a == 0)
-	{
-		if (keycode == XK_Up)
-			fdf_rotate(vars, -PI/16, 0, 0);
-		if (keycode == XK_Down)
-			fdf_rotate(vars, PI/16, 0, 0);
-		if (keycode == XK_Left)
-			fdf_rotate(vars, 0, -PI/16, 0);
-		if (keycode == XK_Right)
-			fdf_rotate(vars, 0, PI/16, 0);
-		if (keycode == XK_q)
-			fdf_rotate(vars, 0, 0, -PI/16);
-		if (keycode == XK_e)
-			fdf_rotate(vars, 0, 0, PI/16);
-	}
-	else
-	{
-		if (keycode == XK_Up)
-			fdf_translate(vars, 0, -0.1f, 0);
-		if (keycode == XK_Down)
-			fdf_translate(vars, 0, 0.1f, 0);
-		if (keycode == XK_Left)
-			fdf_translate(vars, -0.1f, 0, 0);
-		if (keycode == XK_Right)
-			fdf_translate(vars, 0.1f, 0, 0);
-		if (keycode == XK_q)
-			fdf_translate(vars, 0, 0, -0.1f);
-		if (keycode == XK_e)
-			fdf_translate(vars, 0, 0, +0.1f);
-	}
+	if (keycode == XK_w)
+		fdf_rotate(vars, -PI/16, 0, 0);
+	if (keycode == XK_s)
+		fdf_rotate(vars, PI/16, 0, 0);
+	if (keycode == XK_a)
+		fdf_rotate(vars, 0, -PI/16, 0);
+	if (keycode == XK_d)
+		fdf_rotate(vars, 0, PI/16, 0);
+	if (keycode == XK_q)
+		fdf_rotate(vars, 0, 0, -PI/16);
+	if (keycode == XK_e)
+		fdf_rotate(vars, 0, 0, PI/16);
+	if (keycode == XK_Up)
+		fdf_translate(vars, 0, -0.2f, 0);
+	if (keycode == XK_Down)
+		fdf_translate(vars, 0, 0.2f, 0);
+	if (keycode == XK_Left)
+		fdf_translate(vars, -0.2f, 0, 0);
+	if (keycode == XK_Right)
+		fdf_translate(vars, 0.2f, 0, 0);
+	// if (keycode == XK_q)
+	// 	fdf_translate(vars, 0, 0, -0.1f);
+	// if (keycode == XK_e)
+	// 	fdf_translate(vars, 0, 0, +0.1f);
 }
 
 // 3 KeyPress

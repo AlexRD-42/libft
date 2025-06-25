@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 12:11:22 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/22 12:23:19 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/25 09:46:49 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ const void
 //----------------------------------------------------------------------------
 
 // Prototypes: Input/Output --------------------------------------------------
+ssize_t	ft_read_size(const char *filename);
 ssize_t	ft_putstr(char *str, int fd, uint8_t newline);
 ssize_t	ft_putnbr(int64_t number, int fd, uint8_t c);
 ssize_t	ft_putnchar(const char c, size_t length);

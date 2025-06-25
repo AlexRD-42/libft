@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 15:32:44 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/25 00:04:03 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/25 11:04:51 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	dline_float(t_img *img, t_vtx p0, t_vtx p1)
 // But the slope of the line should be preseved when clamping
 // If all points are outside of the draw region, no-op
 static
-void	draw(t_vars *vars, t_vec3 fp0, t_vec3 fp1)
+void	draw(t_vars *vars, t_vec4 fp0, t_vec4 fp1)
 {
 	t_vtx	p0;
 	t_vtx	p1;
@@ -67,7 +67,7 @@ void	draw_lines(t_vars *vars)
 {
 	size_t	row;
 	size_t	col;
-	t_vec3 	(*vector)[vars->cols] = (t_vec3 (*)[vars->cols])vars->vec;
+	t_vec4 	(*vector)[vars->cols] = (t_vec4 (*)[vars->cols])vars->vec;
 
 	row = 0;
 	while (row < vars->rows)

@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 12:51:33 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/24 20:35:17 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/25 12:25:06 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,22 @@ void	fill_screen(t_img *img, uint32_t argb)
 		}
 		i++;
 	}
+}
+static inline
+float	fdf_lerp(const int32_t min, const int32_t max, const int32_t val)
+{
+	// return ((float)(((double)((min + val) << 1) / (double)(max + min)) - 1.0));
+	return (((val - min) * 2.0f) / (max - min) - 1.0f);
+}
+
+static inline
+float	ft_clamp(const float upper, const float lower, float value)
+{
+	if (value > upper)
+		return (upper);
+	else if (value < lower)
+		return (lower);
+	return (value);
 }
 
 static inline
