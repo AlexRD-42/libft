@@ -14,10 +14,9 @@ fdf_main.c cmlx_functions.c cmlx_events.c fdf_draw.c fdf_read.c fdf_math.c
 # Flags --------------------------------------- #
 # For now turn off -Wsign-conversion
 # CC = cc -Wall -Wextra $(addprefix -I,$(INC_PATH)) -flto=auto -fstrict-aliasing
-CC = gcc-13 -Wall -Wextra $(addprefix -I,$(INC_PATH)) -flto=auto -fstrict-aliasing -lXext -lX11 -lm -lz
+CC = cc -Wall -Wextra $(addprefix -I,$(INC_PATH)) -flto=auto -fstrict-aliasing -lXext -lX11 -lm -lz
 DEBUG = -g -Wpedantic -Wcast-qual -Wfloat-equal -Wswitch-default -Wduplicated-branches -Wduplicated-cond
 SANITIZERS = -fsanitize=address,undefined,leak -fno-omit-frame-pointer
-
 FAST = -march=native -O3 -ffast-math
 # --------------------------------------------- #
 OBJS = $(addprefix $(OBJ_PATH)/, $(SRCS:.c=.o))

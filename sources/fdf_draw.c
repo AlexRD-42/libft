@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 15:32:44 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/25 11:04:51 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/25 17:47:48 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,30 @@ void	dline_float(t_img *img, t_vtx p0, t_vtx p1)
 // But the slope of the line should be preseved when clamping
 // If all points are outside of the draw region, no-op
 static
-void	draw(t_vars *vars, t_vec4 fp0, t_vec4 fp1)
+void	draw_neighbours(t_vars *vars, size_t row, size_t col)
 {
 	t_vtx	p0;
 	t_vtx	p1;
+	t_vec4 	(*vector)[vars->cols] = (t_vec4 (*)[vars->cols])vars->vec;
+	t_vtx 	(*vertex)[vars->cols] = (t_vtx (*)[vars->cols])vars->vtx;
 
-	p0.x = (fp0.x + 1.0f) * 0.5f * vars->cols * vars->zoom;
-	p0.y = (fp0.y + 1.0f) * 0.5f * vars->rows * vars->zoom;
-	p1.x = (fp1.x + 1.0f) * 0.5f * vars->cols * vars->zoom;
-	p1.y = (fp1.y + 1.0f) * 0.5f * vars->rows * vars->zoom;
-	dline_float(vars->img, p0, p1);
+	p0.x = (vector[row][col].x + 1.0f) * 0.5f * WIDTH * vars->zoom;
+	p0.y = (vector[row][col].y + 1.0f) * 0.5f * HEIGHT * vars->zoom;
+	p0.color = vertex[row][col].color;
+	if (col + 1 < vars->cols)
+	{
+		p1.x = (vector[row][col + 1].x + 1.0f) * 0.5f * WIDTH * vars->zoom;
+		p1.y = (vector[row][col + 1].y + 1.0f) * 0.5f * HEIGHT * vars->zoom;
+		p1.color = vertex[row][col + 1].color;
+		dline_float(vars->img, p0, p1);
+	}
+	if (row + 1 < vars->rows)
+	{
+		p1.x = (vector[row + 1][col].x + 1.0f) * 0.5f * WIDTH * vars->zoom;
+		p1.y = (vector[row + 1][col].y + 1.0f) * 0.5f * HEIGHT * vars->zoom;
+		p1.color = vertex[row + 1][col].color;
+		dline_float(vars->img, p0, p1);
+	}
 }
 
 // Could pre-compute neighbour pairs for better cache prediction and eliminate branching
@@ -67,7 +81,6 @@ void	draw_lines(t_vars *vars)
 {
 	size_t	row;
 	size_t	col;
-	t_vec4 	(*vector)[vars->cols] = (t_vec4 (*)[vars->cols])vars->vec;
 
 	row = 0;
 	while (row < vars->rows)
@@ -75,10 +88,7 @@ void	draw_lines(t_vars *vars)
 		col = 0;
 		while (col < vars->cols)
 		{
-			if (col + 1 < vars->cols)
-				draw(vars, vector[row][col], vector[row][col + 1]);
-			if (row + 1 < vars->rows)
-				draw(vars, vector[row][col], vector[row + 1][col]);
+			draw_neighbours(vars, row, col);
 			col++;
 		}
 		row++;

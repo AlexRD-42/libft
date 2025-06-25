@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 09:34:26 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/25 12:36:57 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/25 17:49:47 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,30 +26,14 @@ int cmlx_keydown(int keycode, t_vars *vars)
 {
 	if (keycode == XK_Escape)
 		return (mlx_loop_end(vars->mlx));
-	if (keycode == XK_w)
-		fdf_rotate(vars, -PI/16, 0, 0);
-	if (keycode == XK_s)
-		fdf_rotate(vars, PI/16, 0, 0);
-	if (keycode == XK_a)
-		fdf_rotate(vars, 0, -PI/16, 0);
-	if (keycode == XK_d)
-		fdf_rotate(vars, 0, PI/16, 0);
-	if (keycode == XK_q)
-		fdf_rotate(vars, 0, 0, -PI/16);
-	if (keycode == XK_e)
-		fdf_rotate(vars, 0, 0, PI/16);
-	if (keycode == XK_Up)
-		fdf_translate(vars, 0, -0.2f, 0);
-	if (keycode == XK_Down)
-		fdf_translate(vars, 0, 0.2f, 0);
-	if (keycode == XK_Left)
-		fdf_translate(vars, -0.2f, 0, 0);
-	if (keycode == XK_Right)
-		fdf_translate(vars, 0.2f, 0, 0);
-	// if (keycode == XK_q)
-	// 	fdf_translate(vars, 0, 0, -0.1f);
-	// if (keycode == XK_e)
-	// 	fdf_translate(vars, 0, 0, +0.1f);
+	vars->params.rx += ((keycode == XK_w) - (keycode == XK_s)) * PI/16;
+	vars->params.ry += ((keycode == XK_a) - (keycode == XK_d)) * PI/16;
+	vars->params.rz += ((keycode == XK_e) - (keycode == XK_q)) * PI/16;
+	vars->params.dx += ((keycode == XK_Right) - (keycode == XK_Left)) * PI/16;
+	vars->params.dy += ((keycode == XK_Down) - (keycode == XK_Up)) * PI/16;
+	vars->params.dz += 0;
+	if (keycode == XK_r)
+		fdf_create_vector(vars);
 }
 
 // 3 KeyPress
@@ -67,20 +51,14 @@ int cmlx_mousedown(int button, int32_t ix, int32_t iy, t_vars *vars)
 	const float		dx = x - (float) ix / WIDTH;
 	const float		dy = y - (float) iy / HEIGHT;
 
-	if (button == 1)
-	{
-		fdf_translate(vars, dx, dy, 0.0f);
-	}
-	else if (button == 4)
-	{
+	// if (button == 1)
+	// {
+	// 	fdf_translate(vars, dx, dy, 0.0f);
+	// }
+	if (button == 4)
 		vars->zoom += 0.1f;
-		fdf_rotate(vars, 0, 0, 0);
-	}
 	else if (button == 5)
-	{
-		vars->zoom -= ft_max(0.0f, 0.1f);
-		fdf_rotate(vars, 0, 0, 0);
-	}
+		vars->zoom = ft_max(vars->zoom - 0.1f, 0.1f);
 }
 
 // 5 ButtonRelease

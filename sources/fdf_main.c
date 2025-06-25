@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 10:24:50 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/25 12:17:57 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/25 17:52:37 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,21 @@ void	fdf_error(t_vars *vars, uint8_t error_code, int32_t fd)
 
 int		cmlx_loop(t_vars *vars)
 {
+	fdf_create_vector(vars);
 	ft_memset(vars->img->data, 0, HEIGHT * WIDTH * sizeof(int32_t));
+	apply_vertex(vars, vars->vec);
 	draw_lines(vars);
 	mlx_put_image_to_window(vars->mlx, vars->mlx->win_list, vars->img, 0, 0);
 }
 
 void	init_vars(t_vars *vars)
 {
+	vars->params.rx = 0.0f;
+	vars->params.ry = 0.0f;
+	vars->params.rz = 0.0f;
+	vars->params.dx = 0.0f;
+	vars->params.dy = 0.0f;
+	vars->params.dz = 0.0f;
 	vars->mlx = NULL;
 	vars->vtx = NULL;
 	fdf_read("resources/maps/elem2.fdf", " \n", vars);

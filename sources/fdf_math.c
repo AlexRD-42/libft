@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 19:46:31 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/25 12:33:15 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/25 17:49:58 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,35 +74,26 @@ void	mat4_apply_vertex(const t_mat4 *m, t_vec4 *v, size_t length)
 	}
 }
 
-void	fdf_rotate(t_vars *vars, float rx, float ry, float rz)
+void	apply_vertex(t_vars *vars, t_vec4 *v)
 {
-	const t_params		params = {0.0f, 0.0f, 0.0f, rx, ry, rz};
-	const t_mat4		proj = build_pmatrix(params);
-	mat4_apply_vertex(&proj, vars->vec, vars->length);
-	// ft_memset(vars->img->data, 0, HEIGHT * WIDTH * sizeof(int32_t));
-	// draw_lines(vars);
-	// mlx_put_image_to_window(vars->mlx, vars->mlx->win_list, vars->img, 0, 0);
-}
+	const t_mat4	m = build_pmatrix(vars->params);
+	size_t			i;
+	t_vec4			r;
+	float			invw;
 
-void	fdf_translate(t_vars *vars, float dx, float dy, float dz)
-{
-	const t_params		params = {dx, dy, dz, 0.0f, 0.0f, 0.0f};
-	const t_mat4		proj = build_pmatrix(params);
-	mat4_apply_vertex(&proj, vars->vec, vars->length);
-	// ft_memset(vars->img->data, 0, HEIGHT * WIDTH * sizeof(int32_t));
-	// draw_lines(vars);
-	// mlx_put_image_to_window(vars->mlx, vars->mlx->win_list, vars->img, 0, 0);
-}
-
-void	apply_iso(t_vars *vars)
-{
-	const t_params		params = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
-	// const t_frustrum	vport = {1.0f, 1000.0f, 1.6, AR};
-	// const t_mat4		proj = build_mvpmatrix(params, vport);
-	const t_mat4		proj = build_pmatrix(params);
-	mat4_apply_vertex(&proj, vars->vec, vars->length);
-	// mat4_apply_vertex(&proj, vars->vec, 0, vars->length);
-	// ft_memset(vars->img->data, 0, HEIGHT * WIDTH * sizeof(int32_t));
-	// draw_lines(vars);
-	// mlx_put_image_to_window(vars->mlx, vars->mlx->win_list, vars->img, 0, 0);
+	i = 0;
+	while (i < vars->length)
+	{
+		r.x = m.a1 * v[i].x + m.a2 * v[i].y + m.a3 * v[i].z + m.a4;
+		r.y = m.b1 * v[i].x + m.b2 * v[i].y + m.b3 * v[i].z + m.b4;
+		r.z = m.c1 * v[i].x + m.c2 * v[i].y + m.c3 * v[i].z + m.c4;
+		r.w = m.d1 * v[i].x + m.d2 * v[i].y + m.d3 * v[i].z + m.d4;
+		invw = 1.0f / (r.w + EPS);
+		if (r.w > -EPS && r.w < EPS)
+			write(1, "OHNO, ", 6);
+		v[i].x = r.x * invw;
+		v[i].y = r.y * invw;
+		v[i].z = r.z * invw;
+		i++;
+	}
 }

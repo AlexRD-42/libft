@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 15:23:56 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/25 10:17:55 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/25 17:10:37 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,3 @@ uint32_t ft_ilerp(int32_t max, int32_t min, int32_t value)
 	double var = (double) (value - min) / (double) (max - min);
 	return ((uint32_t) (var * 0x00FFFFFF));
 }
-
