@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 12:11:22 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/25 09:46:49 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/26 17:37:51 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	*ft_realloc(void *src, size_t src_size, size_t dst_size);
 void	**ft_free_array(void *array, size_t length);
 // Prototypes: Memory --------------------------------------------------------
 void	*ft_memset(void *dst_void, const uint8_t byte, size_t length);
+void	*ft_bzero(void *dst_void, size_t length);
 int64_t	ft_memcmp(const void *ptr1_void, const void *ptr2_void, size_t length);
 int64_t	ft_memrcmp(const void *ptr1_void, const void *ptr2_void, size_t length);
 void	*ft_memcpy(void *dst_void, const void *src_void, size_t length);
@@ -66,10 +67,10 @@ size_t	ft_fibonacci(size_t index);
 uint8_t	ft_isprime(size_t number);
 
 // Prototypes: Array Info ----------------------------------------------------
-size_t	ft_i32min(int32_t *array, size_t length);
-size_t	ft_i32max(int32_t *array, size_t length);
-size_t	ft_i64min(int64_t *array, size_t length);
-size_t	ft_i64max(int64_t *array, size_t length);
+void	ft_i32v(int32_t *array, size_t length, int32_t *min, int32_t *max);
+void	ft_i32p(int32_t *array, size_t length, size_t *min, size_t *max);
+void	ft_i64v(int64_t *array, size_t length, int64_t *min, int64_t *max);
+void	ft_i64p(int64_t *array, size_t length, size_t *min, size_t *max);
 // Prototypes: Number Info ---------------------------------------------------
 int64_t	ft_imin(int64_t number1, int64_t number2);
 int64_t	ft_imax(int64_t number1, int64_t number2);

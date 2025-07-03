@@ -6,12 +6,13 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 19:03:49 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/18 16:37:14 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/26 18:41:22 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
 
+// __always_inline
 int64_t	ft_imin(int64_t number1, int64_t number2)
 {
 	if (number1 <= number2)
@@ -20,6 +21,7 @@ int64_t	ft_imin(int64_t number1, int64_t number2)
 		return (number2);
 }
 
+// __always_inline
 int64_t	ft_imax(int64_t number1, int64_t number2)
 {
 	if (number1 >= number2)
@@ -28,6 +30,7 @@ int64_t	ft_imax(int64_t number1, int64_t number2)
 		return (number2);
 }
 
+// __always_inline
 int64_t	ft_iabs(int64_t number)
 {
 	if (number >= 0)
@@ -36,6 +39,7 @@ int64_t	ft_iabs(int64_t number)
 		return (-number);
 }
 
+// __always_inline
 int64_t	ft_iabsdiff(int64_t number1, int64_t number2)
 {
 	if (number1 >= number2)

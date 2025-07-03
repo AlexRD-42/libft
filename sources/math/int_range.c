@@ -6,73 +6,77 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 18:59:40 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/18 16:50:20 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/06/26 14:43:02 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
 #include <stddef.h>
 
-size_t	ft_i32min(int32_t *array, size_t length)
+void	ft_i32v(int32_t *array, size_t length, int32_t *min, int32_t *max)
 {
 	size_t	i;
-	size_t	min;
 
-	min = 0;
+	*min = array[0];
+	*max = array[0];
 	i = 1;
 	while (i < length)
 	{
-		if (array[i] < array[min])
-			min = i;
+		if (array[i] < *min)
+			*min = array[i];
+		if (array[i] > *max)
+			*max = array[i];
 		i++;
 	}
-	return (min);
 }
 
-size_t	ft_i32max(int32_t *array, size_t length)
+void	ft_i32p(int32_t *array, size_t length, size_t *min, size_t *max)
 {
 	size_t	i;
-	size_t	max;
 
-	max = 0;
+	*min = 0;
+	*max = 0;
 	i = 1;
 	while (i < length)
 	{
-		if (array[i] > array[max])
-			max = i;
+		if (array[i] < array[*min])
+			*min = i;
+		if (array[i] > array[*max])
+			*max = i;
 		i++;
 	}
-	return (max);
 }
 
-size_t	ft_i64min(int64_t *array, size_t length)
+void	ft_i64v(int64_t *array, size_t length, int64_t *min, int64_t *max)
 {
 	size_t	i;
-	size_t	min;
 
-	min = 0;
+	*min = array[0];
+	*max = array[0];
 	i = 1;
 	while (i < length)
 	{
-		if (array[i] < array[min])
-			min = i;
+		if (array[i] < *min)
+			*min = array[i];
+		if (array[i] > *max)
+			*max = array[i];
 		i++;
 	}
-	return (min);
 }
 
-size_t	ft_i64max(int64_t *array, size_t length)
+void	ft_i64p(int64_t *array, size_t length, size_t *min, size_t *max)
 {
 	size_t	i;
-	size_t	max;
 
-	max = 0;
+	*min = 0;
+	*max = 0;
 	i = 1;
 	while (i < length)
 	{
-		if (array[i] > array[max])
-			max = i;
+		if (array[i] < array[*min])
+			*min = i;
+		if (array[i] > array[*max])
+			*max = i;
 		i++;
 	}
-	return (max);
 }
