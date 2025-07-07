@@ -6,14 +6,14 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:41:24 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/07/07 17:37:41 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/07/07 20:13:22 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdint.h>
 #include <stddef.h>
-#include "libft.h"
+#include "libft_memory.h"
 
 // See if there is an efficient overflow handling
 void	*ft_calloc(size_t arr_size, size_t type_size)

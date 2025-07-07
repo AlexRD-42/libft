@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 20:30:05 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/07/07 18:38:43 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/07/07 20:37:13 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include "libft_math.h"
 
+// Create dot product function
 void	ft_matmult(const t_matrix *ma, const t_matrix *mb, t_matrix *mc)
 {
 	uint32_t	i;

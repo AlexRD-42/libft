@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 09:45:51 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/07/07 19:01:45 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/07/07 20:34:58 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 #include <stddef.h>
 #include <unistd.h>
 #include <fcntl.h>
-// Count how many bytes are needed for a contiguous read
-// Could count how many occurrences of a determined character
-// Malloc can be avoided if count words is alias proof
-// Would involve shifting the last two read elements to the start
+
 ssize_t	ft_read_size(const char *filename)
 {
 	const int32_t	fd = open(filename, O_RDONLY);

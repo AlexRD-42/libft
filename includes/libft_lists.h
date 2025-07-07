@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lookup_tables.c                                    :+:      :+:    :+:   */
+/*   libft_lists.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/17 16:40:16 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/07/07 20:39:03 by adeimlin         ###   ########.fr       */
+/*   Created: 2025/07/07 19:50:13 by adeimlin          #+#    #+#             */
+/*   Updated: 2025/07/07 19:58:01 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdint.h>
-#include "libft_memory.h"
+#ifndef LIBFT_LISTS_H
+# define LIBFT_LISTS_H
 
-// lut = 0 not separator, lut = 1 is separator, lut = 255 is null terminator
-uint8_t	*ft_setlut256(uint8_t *lut, const char *charset)
+# include <stdint.h>
+# include <stddef.h>
+
+typedef struct s_list
 {
-	ft_memset(lut, 0, 256);
-	while (*charset != 0)
-		lut[*(const uint8_t *) charset++] = 1;
-	lut[0] = 0xFF;
-	return (lut);
-}
+	void			*content;
+	struct s_list	*next;
+}	t_list;
+
+t_list		*ft_lstnew(void *content);
+t_list		*ft_lstlast(t_list *lst);
+size_t		ft_lstsize(t_list *lst);
+void		ft_lstadd_front(t_list **lst, t_list *new);
+void		ft_lstadd_back(t_list **lst, t_list *new);
+
+#endif

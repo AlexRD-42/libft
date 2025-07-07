@@ -6,13 +6,13 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:50:30 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/19 17:59:59 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/07/07 20:36:08 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
 #include <stddef.h>
-#include "libft.h"
+#include "libft_string.h"
 
 // Performs bitwise manipulation to compute abs of n without overflowing
 // array[66] to hold all digits of a 64 bit signed integer with base 2

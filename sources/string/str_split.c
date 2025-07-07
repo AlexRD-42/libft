@@ -6,11 +6,14 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:55:34 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/07/07 18:59:55 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/07/07 20:38:20 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft_string.h"
+#include "libft_memory.h"
+#include "libft_utils.h"
+#include "libft_iostream.h"
 #include <stdlib.h>
 
 char	**ft_split(const char *str, const char c)

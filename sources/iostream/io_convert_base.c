@@ -6,13 +6,14 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 13:58:12 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/17 09:41:26 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/07/07 20:35:45 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
 #include <stddef.h>
-#include <libft.h>
+#include "libft_memory.h"
+#include "libft_string.h"
 
 int64_t	ft_atoi_base(const char *str, const char *base)
 {
