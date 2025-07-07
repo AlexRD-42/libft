@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:25:16 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/17 10:10:22 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/07/07 18:36:17 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,6 @@ char	*ft_strncpy(char *dst, const char *src, size_t length)
 	return (odst);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dst_size)
-{
-	const char	*osrc = src;
-
-	while (*src != 0 && dst_size > 1)
-	{
-		*dst++ = *src++;
-		dst_size--;
-	}
-	if (dst_size != 0)
-		*dst = 0;
-	while (*src != 0)
-		src++;
-	return (src - osrc);
-}
-
 char	*ft_strdup(const char *src)
 {
 	const char	*osrc = src;
@@ -65,7 +49,7 @@ char	*ft_strdup(const char *src)
 
 	while (*src != 0)
 		src++;
-	str = (char *) malloc(src - osrc + 1);
+	str = (char *) malloc((size_t)(src - osrc + 1));
 	if (str == NULL)
 		return (NULL);
 	str += src - osrc;
@@ -89,7 +73,7 @@ char	*ft_substr(const char *str, size_t start, size_t length)
 	if (str_offset > str)
 		return (NULL);
 	if (str_offset + length > str)
-		length = str - str_offset;
+		length = (size_t)(str - str_offset);
 	str = str_offset + length;
 	substr = (char *) malloc (length + 1);
 	if (substr == NULL)

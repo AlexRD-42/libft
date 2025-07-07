@@ -6,14 +6,13 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 20:30:05 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/25 10:59:35 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/07/07 18:38:43 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
 #include <stddef.h>
 #include <stdlib.h>
-#include <math.h>
 #include "libft_math.h"
 
 void	ft_matmult(const t_matrix *ma, const t_matrix *mb, t_matrix *mc)

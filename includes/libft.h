@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 12:11:22 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/26 17:37:51 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/07/07 18:29:38 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ float	ft_absdiff(float number1, float number2);
 // Prototypes: Strings -------------------------------------------------------
 size_t	ft_strlen(const char *str);
 size_t	ft_replace(char *str, unsigned char old_char, unsigned char new_char);
-int32_t	ft_strcmp(const char *str1, const char *str2);
 int32_t	ft_strncmp(const char *str1, const char *str2, size_t length);
 // Prototypes: String Bools --------------------------------------------------
 uint8_t	ft_isalpha(int32_t c);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mem_copy.c                                         :+:      :+:    :+:   */
+/*   memory.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/19 11:54:09 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/26 17:55:17 by adeimlin         ###   ########.fr       */
+/*   Created: 2025/07/07 17:35:52 by adeimlin          #+#    #+#             */
+/*   Updated: 2025/07/07 17:37:14 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,55 @@ void	*ft_memcpy(void *dst_void, const void *src_void, size_t length)
 	while (length > 0)
 	{
 		*dst++ = *src++;
+		length--;
+	}
+	return (dst_void);
+}
+
+void	*ft_bzero(void *dst_void, size_t length)
+{
+	uint8_t	*dst;
+
+	dst = (uint8_t *) dst_void;
+	while (((uintptr_t)dst & (sizeof(uintptr_t) - 1)) && length > 0)
+	{
+		*dst++ = 0u;
+		length--;
+	}
+	while (length >= sizeof(uintptr_t))
+	{
+		*((uintptr_t *)dst) = 0UL;
+		dst += sizeof(uintptr_t);
+		length -= sizeof(uintptr_t);
+	}
+	while (length > 0)
+	{
+		*dst++ = 0u;
+		length--;
+	}
+	return (dst_void);
+}
+
+void	*ft_memset(void *dst_void, const uint8_t byte, size_t length)
+{
+	uint8_t			*dst;
+	const uintptr_t	word_byte = byte * (0x0101010101010101 & UINTPTR_MAX);
+
+	dst = (uint8_t *) dst_void;
+	while (((uintptr_t)dst & (sizeof(uintptr_t) - 1)) && length > 0)
+	{
+		*dst++ = byte;
+		length--;
+	}
+	while (length >= sizeof(uintptr_t))
+	{
+		*((uintptr_t *)dst) = word_byte;
+		dst += sizeof(uintptr_t);
+		length -= sizeof(uintptr_t);
+	}
+	while (length > 0)
+	{
+		*dst++ = byte;
 		length--;
 	}
 	return (dst_void);

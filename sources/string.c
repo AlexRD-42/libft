@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_basic.c                                        :+:      :+:    :+:   */
+/*   string.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/12 20:55:34 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/16 22:11:12 by adeimlin         ###   ########.fr       */
+/*   Created: 2025/07/07 17:38:44 by adeimlin          #+#    #+#             */
+/*   Updated: 2025/07/07 18:30:30 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,39 +15,49 @@
 
 size_t	ft_strlen(const char *str)
 {
-	const char	*ostr;
+	const char	*ostr = str;
 
-	ostr = str;
 	while (*str != 0)
 		str++;
-	return (str - ostr);
+	return ((size_t)(str - ostr));
 }
 
-size_t	ft_replace(char *str, unsigned char old_char, unsigned char new_char)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dst_size)
 {
-	size_t	count;
+	const char	*osrc = src;
 
-	count = 0;
-	while (*str != 0)
+	while (*src != 0 && dst_size > 1)
 	{
-		if (*str == old_char)
-		{
-			*str = new_char;
-			count++;
-		}
-		str++;
+		*dst++ = *src++;
+		dst_size--;
 	}
-	return (count);
+	if (dst_size != 0)
+		*dst = 0;
+	while (*src != 0)
+		src++;
+	return ((size_t)(src - osrc));
 }
 
-int32_t	ft_strcmp(const char *str1, const char *str2)
+size_t	ft_strlcat(char *dst, const char *src, size_t dst_size)
 {
-	while (*str1 != 0 && *str1 == *str2)
+	char	*odst;
+
+	odst = dst;
+	while (dst_size > 0 && *dst != 0)
 	{
-		str1++;
-		str2++;
+		dst++;
+		dst_size--;
 	}
-	return (*(const uint8_t *) str1 - *(const uint8_t *) str2);
+	while (*src != 0 && dst_size > 1)
+	{
+		*dst++ = *src++;
+		dst_size--;
+	}
+	if (dst_size != 0)
+		*dst = 0;
+	while (*src++ != 0)
+		dst++;
+	return ((size_t)(dst - odst));
 }
 
 int32_t	ft_strncmp(const char *str1, const char *str2, size_t length)

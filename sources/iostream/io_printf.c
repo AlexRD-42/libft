@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 16:04:04 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/16 17:35:29 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/07/07 18:40:21 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ ssize_t	print_nbr(uint64_t number, const char f, const char *base)
 		*(--ptr) = 'x';
 		*(--ptr) = '0';
 	}
-	return (write(1, ptr, 32 - (ptr - buffer)));
+	return (write(1, ptr, (size_t)(32 - (ptr - buffer))));
 }
 
 static

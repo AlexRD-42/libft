@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:41:24 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/19 19:08:48 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/07/07 17:37:41 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	*ft_calloc(size_t arr_size, size_t type_size)
 	array = (void *) malloc (total_size);
 	if (array == NULL)
 		return (NULL);
-	ft_memset(array, 0, total_size);
+	ft_bzero(array, total_size);
 	return (array);
 }
 
