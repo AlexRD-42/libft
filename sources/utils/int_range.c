@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 18:59:40 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/06/26 14:43:02 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/11/27 15:26:19 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	ft_i32p(int32_t *array, size_t length, size_t *min, size_t *max)
 	}
 }
 
+// give this a god damn name
 void	ft_i64v(int64_t *array, size_t length, int64_t *min, int64_t *max)
 {
 	size_t	i;

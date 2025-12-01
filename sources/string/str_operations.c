@@ -6,11 +6,12 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:55:34 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/07/07 18:44:37 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/10/15 15:15:54 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft_string.h"
+#include "libft_memory.h"
 #include <stdlib.h>
 
 // (end - 1) to avoid segfault and to not use the null terminator as LUT index

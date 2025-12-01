@@ -6,11 +6,11 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:31:56 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/07/07 18:30:03 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/10/15 15:15:15 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft_string.h"
 #include <stdint.h>
 #include <stddef.h>
 

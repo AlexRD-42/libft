@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 16:04:04 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/11/25 16:30:48 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/11/30 23:51:40 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,11 @@ ssize_t	parse(const char f, va_list *args)
 	return (0);
 }
 
-ssize_t	ft_printf(const char *str, ...)
+ssize_t	ft_printf(const char *restrict str, ...)
 {
+	char		buffer[65536];
 	ssize_t		bytes;
+	size_t		length;
 	va_list		args;
 	const char	*ostr;
 
@@ -91,12 +93,12 @@ ssize_t	ft_printf(const char *str, ...)
 		ostr = str;
 		while (*str != '%' && *str != 0)
 			str++;
-		bytes += write(1, ostr, str - ostr + (str[0] == '%' && str[1] == '%'));
-		if (*str == '%' && *(str + 1) == '%')
+		if (str[0] == '%' && str[1] == '%')
 			str++;
 		else if (*str == '%')
 			bytes += parse(*++str, &args);
-		str += (*str != 0);
+		length = (size_t)(str - ostr);
+		
 	}
 	va_end(args);
 	return (bytes);

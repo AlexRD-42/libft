@@ -5,7 +5,7 @@
       "name": "Debug Executable (LLDB)",
       "type": "lldb",
       "request": "launch",
-      "program": "${workspaceFolder}/build/libft.a",
+      "program": "${workspaceFolder}/build/main",
       "cwd": "${workspaceFolder}",
 	  "console": "integratedTerminal",
       "args": [],
