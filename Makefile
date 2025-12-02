@@ -30,7 +30,7 @@ $(OBJ_PATH)/%.o: %.c | $(OBJ_PATH)
 # 	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIBS) $(LFLAGS)
 
 # Linking Rule
-$(NAME): $(OBJS)
+$(BIN): $(OBJS)
 	ar rcs -o $@ $(OBJS)
 
 # Directory Rule ------------------------------ #

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memory.c                                           :+:      :+:    :+:   */
+/*   mem_write.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 17:35:52 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/12/02 09:56:03 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/12/02 10:39:32 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 #include <stdlib.h>
 
 static
-void	*ft_memrcpy(void *dst_void, const void *src_void, size_t length)
+void	*stt_memrcpy(void *vdst, const void *vsrc, size_t length)
 {
 	char		*dst;
-	const char	*src = (const char *) src_void + length;
+	const char	*src = (const char *) vsrc + length;
 
-	if ((uintptr_t) dst_void == (uintptr_t) src_void)
-		return (dst_void);
-	dst = ((char *) dst_void) + length;
+	if ((uintptr_t) vdst == (uintptr_t) vsrc)
+		return (vdst);
+	dst = ((char *) vdst) + length;
 	while (length > sizeof(uintptr_t)
 		&& (((uintptr_t)dst | (uintptr_t)src) & (sizeof(uintptr_t) - 1)))
 	{
@@ -41,17 +41,17 @@ void	*ft_memrcpy(void *dst_void, const void *src_void, size_t length)
 		*--dst = *--src;
 		length--;
 	}
-	return (dst_void);
+	return (vdst);
 }
 
-void	*ft_memcpy(void *dst_void, const void *src_void, size_t length)
+void	*ft_memmove(void *vdst, const void *vsrc, size_t length)
 {
 	char		*dst;
-	const char	*src = (const char *) src_void;
+	const char	*src = (const char *) vsrc;
 
-	if ((uintptr_t) dst_void >= (uintptr_t) src_void)
-		return (ft_memrcpy(dst_void, src_void, length));
-	dst = (char *) dst_void;
+	if ((uintptr_t) vdst >= (uintptr_t) vsrc)
+		return (stt_memrcpy(vdst, vsrc, length));
+	dst = (char *) vdst;
 	while (length > sizeof(uintptr_t)
 		&& (((uintptr_t)dst | (uintptr_t)src) & (sizeof(uintptr_t) - 1)))
 	{
@@ -70,7 +70,21 @@ void	*ft_memcpy(void *dst_void, const void *src_void, size_t length)
 		*dst++ = *src++;
 		length--;
 	}
-	return (dst_void);
+	return (vdst);
+}
+
+void	*ft_memcpy(void *vdst, const void *vsrc, size_t length)
+{
+	unsigned char	 *dst;
+	const unsigned char *src = vsrc;
+
+	dst = vdst;
+	while (length > 0)
+	{
+		*dst++ = *src++;
+		length--;
+	}
+	return (vdst);
 }
 
 void	*ft_bzero(void *dst_void, size_t length)
@@ -97,12 +111,12 @@ void	*ft_bzero(void *dst_void, size_t length)
 	return (dst_void);
 }
 
-void	*ft_memset(void *dst_void, const uint8_t byte, size_t length)
+void	*ft_memset(void *vdst, const uint8_t byte, size_t length)
 {
 	uint8_t			*dst;
 	const uintptr_t	word_byte = byte * (0x0101010101010101 & UINTPTR_MAX);
 
-	dst = (uint8_t *) dst_void;
+	dst = (uint8_t *) vdst;
 	while (((uintptr_t)dst & (sizeof(uintptr_t) - 1)) && length > 0)
 	{
 		*dst++ = byte;
@@ -119,18 +133,5 @@ void	*ft_memset(void *dst_void, const uint8_t byte, size_t length)
 		*dst++ = byte;
 		length--;
 	}
-	return (dst_void);
-}
-
-// See if there is an efficient overflow handling
-void	*ft_calloc(size_t arr_size, size_t type_size)
-{
-	void			*array;
-	const size_t	total_size = arr_size * type_size;
-
-	array = (void *) malloc (total_size);
-	if (array == NULL)
-		return (NULL);
-	ft_memset(array, 0, total_size);
-	return (array);
+	return (vdst);
 }

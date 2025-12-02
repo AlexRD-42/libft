@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 21:28:00 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/07/07 20:38:47 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/12/02 10:37:12 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,25 +47,25 @@ size_t	ft_lstsize(t_list *lst)
 	return (i);
 }
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+void	ft_lstadd_front(t_list **lst, t_list *new_lst)
 {
-	if (lst == NULL || new == NULL)
+	if (lst == NULL || new_lst == NULL)
 		return ;
-	new->next = *lst;
-	*lst = new;
+	new_lst->next = *lst;
+	*lst = new_lst;
 }
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstadd_back(t_list **lst, t_list *new_lst)
 {
 	t_list	*last;
 
-	if (lst == NULL || new == NULL)
+	if (lst == NULL || new_lst == NULL)
 		return ;
 	if (*lst == NULL)
 	{
-		*lst = new;
+		*lst = new_lst;
 		return ;
 	}
 	last = ft_lstlast(*lst);
-	last->next = new;
+	last->next = new_lst;
 }

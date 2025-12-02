@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 09:47:44 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/12/02 10:28:54 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/12/02 10:43:06 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ char		ft_toupper(int c);
 void		*ft_calloc(size_t arr_size, size_t type_size);
 void		*ft_bzero(void *vdst, size_t length);
 void		*ft_memcpy(void *vdst, const void *vsrc, size_t length);
+void		*ft_memmove(void *vdst, const void *vsrc, size_t length);
 int64_t		ft_memcmp(const void *vptr1, const void *vptr2, size_t length);
 const void	*ft_memchr(const void *vptr, uint8_t byte, size_t length);
 //----------------------------------------------------------------------------
