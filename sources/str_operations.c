@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:55:34 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/12/02 09:43:02 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/12/02 10:18:54 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,9 @@
 #include <stdlib.h>
 
 void	*ft_memset(void *vdst, const uint8_t byte, size_t length);
-
-// Pointer cast is necessary otherwise caller would need to cast void **
-void	**ft_free_array(void *array, size_t length)
-{
-	if (array == NULL)
-		return (NULL);
-	while (length-- > 0)
-	{
-		free(((void **) array)[length]);
-		((void **) array)[length] = NULL;
-	}
-	free(array);
-	return (NULL);
-}
+size_t	ft_count_words(const char *str, const char c);
+void	**ft_free_array(void *array, size_t length);
+char	*ft_strdup(const char *src);
 
 // Before substr is allocated, it is used as a temp variable to store
 // the starting position of (str + start), to limit the max length
@@ -86,22 +75,6 @@ char	*ft_strtrim(const char *str, const char *charset)
 	return (new_str);
 }
 
-size_t	ft_count_words(const char *str, const char c)
-{
-	size_t	count;
-
-	count = 0;
-	while (*str == c && *str != 0)
-		str++;
-	count = (*str != 0);
-	while (*str != 0)
-	{
-		count += (str[0] == c) && (str[1] != c) && (str[1] != 0);
-		str++;
-	}
-	return (count);
-}
-
 char	**ft_split(const char *str, const char c)
 {
 	char		**str_array;
@@ -127,4 +100,36 @@ char	**ft_split(const char *str, const char c)
 	}
 	str_array[count] = NULL;
 	return (str_array);
+}
+
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+{
+	unsigned int	i;
+
+	if (s == NULL)
+		return ;
+	i = 0;
+	while (s[i] != 0)
+	{
+		f(i, s + i);
+		i++;
+	}
+}
+
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+{
+	char			*new_str;
+	unsigned int	i;
+
+	new_str = ft_strdup(s);
+	if (new_str == NULL)
+		return (NULL);
+	i = 0;
+	while (new_str[i] != 0)
+	{
+		new_str[i] = f(i, new_str[i]);
+		i++;
+	}
+	new_str[i] = 0;
+	return (new_str);
 }

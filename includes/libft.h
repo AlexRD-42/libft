@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 09:47:44 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/12/02 10:03:57 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/12/02 10:28:54 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ void		*ft_realloc(void *src, size_t src_size, size_t dst_size);
 // Prototypes: IO ------------------------------------------------------------
 char		*get_next_line(int fd);
 ssize_t		ft_printf(const char *str, ...);
-ssize_t		ft_putstr(char *str, int fd, char c);
-ssize_t		ft_putnbr(int64_t number, int fd, char c);
+ssize_t		ft_putstr_fd(char *str, int fd);
+ssize_t		ft_putnbr_fd(int64_t number, int fd);
+void		ft_putchar_fd(char c, int fd);
+void		ft_putendl_fd(char *s, int fd);
 // Prototypes: Strings -------------------------------------------------------
 size_t		ft_strlen(const char *str);
 int32_t		ft_strncmp(const char *str1, const char *str2, size_t length);
@@ -38,6 +40,7 @@ uint8_t		ft_isdigit(int32_t c);
 uint8_t		ft_isspace(int32_t c);
 uint8_t		ft_isprint(int32_t c);
 uint8_t		ft_isascii(int32_t c);
+char		ft_isalnum(int c);
 // Prototypes: String Copy ---------------------------------------------------
 char		*ft_strcpy(char *dst, const char *src);
 char		*ft_strncpy(char *dst, const char *src, size_t length);
@@ -46,7 +49,6 @@ char		*ft_substr(const char *str, size_t start, size_t length);
 // Prototypes: String Find ---------------------------------------------------
 const char	*ft_strchr(const char *str, uint8_t c);
 const char	*ft_strrchr(const char *str, uint8_t c);
-const char	*ft_strfind(const char *str, const char *charset, uint8_t ref);
 const char	*ft_strstr(const char *str, const char *substr);
 const char	*ft_strnstr(const char *str, const char *substr, size_t length);
 // Prototypes: String Join ---------------------------------------------------
@@ -56,10 +58,14 @@ char		*ft_strjoin(const char *src1, const char *src2);
 // Prototypes: String Operations ---------------------------------------------
 char		**ft_split(const char *str, const char c);
 char		*ft_strtrim(const char *str, const char *charset);
+void		ft_striteri(char *s, void (*f)(unsigned int, char*));
+char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 // Prototypes: String Utils --------------------------------------------------
 size_t		ft_count_words(const char *str, const char c);
 int64_t		ft_atoi(const char *num_str);
 char		*ft_itoa(int64_t number);
+char		ft_tolower(int c);
+char		ft_toupper(int c);
 // Prototypes: Memory --------------------------------------------------------
 void		*ft_calloc(size_t arr_size, size_t type_size);
 void		*ft_bzero(void *vdst, size_t length);

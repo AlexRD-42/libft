@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:19:19 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/07/07 17:45:01 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/12/02 10:11:25 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,7 @@ uint8_t	ft_isspace(int32_t c)
 	return (c == ' ' || (c >= '\t' && c <= '\r'));
 }
 
-uint8_t	ft_isprint(int32_t c)
+char	ft_isalnum(int c)
 {
-	return (c >= ' ' && c <= '~');
-}
-
-uint8_t	ft_isascii(int32_t c)
-{
-	return (!(c >> 7));
+	return (ft_isalpha(c) || ft_isdigit(c));
 }

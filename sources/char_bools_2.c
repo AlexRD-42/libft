@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   char_bools_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/12 22:43:29 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/04/12 22:43:29 by adeimlin         ###   ########.fr       */
+/*   Created: 2025/12/02 10:10:06 by adeimlin          #+#    #+#             */
+/*   Updated: 2025/12/02 10:11:04 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/libft.h"
+#include <stdint.h>
 
-void	ft_putchar_fd(char c, int fd)
+uint8_t	ft_isprint(int32_t c)
 {
-	if (fd == -1)
-		return ;
-	write(fd, &c, 1);
+	return (c >= ' ' && c <= '~');
+}
+
+uint8_t	ft_isascii(int32_t c)
+{
+	return (!(c >> 7));
 }

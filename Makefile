@@ -1,5 +1,5 @@
 # Configuration ------------------------------- #
-NAME = main
+NAME = libft.a
 BUILD_PATH = build
 INC_PATH = includes
 OBJ_PATH = $(BUILD_PATH)/obj
@@ -8,8 +8,9 @@ VPATH = sources
 
 # Files --------------------------------------- #
 LIBS =
-SRCS = char_bools.c io_convert.c io_gnl.c io_printf.c io_put.c list_utils.c \
-mem_read.c mem_write.c str_join.c str_operations.c str_read.c str_write.c
+SRCS = char_bools.c char_bools_2.c str_convert.c io_gnl.c io_printf.c io_put.c list_utils.c \
+mem_read.c mem_write.c str_join.c str_operations.c str_read.c str_write.c \
+list_operations.c utils.c
 OBJS = $(addprefix $(OBJ_PATH)/, $(SRCS:.c=.o))
 
 # Flags --------------------------------------- #
@@ -24,13 +25,13 @@ FAST = -march=native -O3 -ffast-math
 $(OBJ_PATH)/%.o: %.c | $(OBJ_PATH)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Linking Rule -------------------------------- #
-$(BIN): $(OBJS) | $(BUILD_PATH)
-	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIBS) $(LFLAGS)
+# # Linking Rule -------------------------------- #
+# $(BIN): $(OBJS) | $(BUILD_PATH)
+# 	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIBS) $(LFLAGS)
 
 # Linking Rule
-# $(NAME): $(OBJS)
-# 	ar rcs -o $@ $(OBJS)
+$(NAME): $(OBJS)
+	ar rcs -o $@ $(OBJS)
 
 # Directory Rule ------------------------------ #
 $(OBJ_PATH):
