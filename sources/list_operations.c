@@ -6,14 +6,14 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 19:48:14 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/12/02 10:35:38 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/12/02 10:45:59 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
 #include <stddef.h>
 #include <stdlib.h>
-#include "libft_lists.h"
+#include "libft.h"
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {

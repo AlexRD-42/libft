@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 09:47:44 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/12/02 10:43:06 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/12/02 10:45:07 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 # include <stdint.h>
 # include <stddef.h>
 # include <unistd.h>
+
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}	t_list;
 
 void		**ft_free_array(void *array, size_t length);
 void		*ft_memset(void *vdst, const uint8_t byte, size_t length);
@@ -73,6 +79,16 @@ void		*ft_memcpy(void *vdst, const void *vsrc, size_t length);
 void		*ft_memmove(void *vdst, const void *vsrc, size_t length);
 int64_t		ft_memcmp(const void *vptr1, const void *vptr2, size_t length);
 const void	*ft_memchr(const void *vptr, uint8_t byte, size_t length);
+// Prototypes: Lists ---------------------------------------------------------
+t_list		*ft_lstnew(void *content);
+t_list		*ft_lstlast(t_list *lst);
+size_t		ft_lstsize(t_list *lst);
+void		ft_lstadd_front(t_list **lst, t_list *new_lst);
+void		ft_lstadd_back(t_list **lst, t_list *new_lst);
+void		ft_lstclear(t_list **lst, void (*del)(void *));
+void		ft_lstdelone(t_list *lst, void (*del)(void	*));
+void		ft_lstiter(t_list *lst, void (*f)(void *));
+t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 //----------------------------------------------------------------------------
 
 #endif

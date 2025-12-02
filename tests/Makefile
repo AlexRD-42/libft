@@ -6,9 +6,9 @@ RM = rm -f
 
 SRCS = char_bools.c char_bools_2.c str_convert.c io_gnl.c io_printf.c io_put.c  \
 mem_read.c mem_write.c str_join.c str_operations.c str_read.c str_write.c \
-utils.c list_operations.c list_utils.c
+utils.c
 
-BONUS_SRCS = 
+BONUS_SRCS = list_utils.c list_operations.c
 
 OBJS = $(SRCS:.c=.o)
 BONUS_OBJS = $(BONUS_SRCS:.c=.o)

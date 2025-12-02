@@ -6,12 +6,12 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 21:28:00 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/12/02 10:37:12 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/12/02 10:46:04 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "libft_lists.h"
+#include "libft.h"
 
 t_list	*ft_lstnew(void *content)
 {
