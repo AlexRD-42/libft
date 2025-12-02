@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mem_find.c                                         :+:      :+:    :+:   */
+/*   mem_read.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 11:54:09 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/07/07 20:09:47 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/12/02 09:59:17 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 // Needs optimization
 const
-void	*ft_memchr(const void *ptr_void, uint8_t byte, size_t length)
+void	*ft_memchr(const void *vptr, uint8_t byte, size_t length)
 {
-	const uint8_t	*ptr = (const uint8_t *) ptr_void;
+	const uint8_t	*ptr = (const uint8_t *) vptr;
 
 	while (length > 0)
 	{
@@ -30,12 +30,12 @@ void	*ft_memchr(const void *ptr_void, uint8_t byte, size_t length)
 }
 
 // Needs optimization
-int64_t	ft_memcmp(const void *ptr1_void, const void *ptr2_void, size_t length)
+int64_t	ft_memcmp(const void *vptr1, const void *vptr2, size_t length)
 {
-	const uint8_t	*ptr1 = (const uint8_t *) ptr1_void;
-	const uint8_t	*ptr2 = (const uint8_t *) ptr2_void;
+	const uint8_t	*ptr1 = (const uint8_t *) vptr1;
+	const uint8_t	*ptr2 = (const uint8_t *) vptr2;
 
-	if (ptr1_void == ptr2_void)
+	if (vptr1 == vptr2)
 		return (0);
 	while (length > 0)
 	{
@@ -48,12 +48,12 @@ int64_t	ft_memcmp(const void *ptr1_void, const void *ptr2_void, size_t length)
 	return (0);
 }
 
-int64_t	ft_memrcmp(const void *ptr1_void, const void *ptr2_void, size_t length)
+int64_t	ft_memrcmp(const void *vptr1, const void *vptr2, size_t length)
 {
-	const uint8_t	*ptr1 = (const uint8_t *) ptr1_void + length - 1;
-	const uint8_t	*ptr2 = (const uint8_t *) ptr2_void + length - 1;
+	const uint8_t	*ptr1 = (const uint8_t *) vptr1 + length - 1;
+	const uint8_t	*ptr2 = (const uint8_t *) vptr2 + length - 1;
 
-	if (ptr1_void == ptr2_void)
+	if (vptr1 == vptr2)
 		return (0);
 	while (length > 0)
 	{

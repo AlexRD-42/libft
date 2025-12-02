@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_string.h                                     :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/07 19:34:19 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/07/07 20:35:43 by adeimlin         ###   ########.fr       */
+/*   Created: 2025/12/02 09:47:44 by adeimlin          #+#    #+#             */
+/*   Updated: 2025/12/02 10:03:57 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_STRINGS_H
-# define LIBFT_STRINGS_H
+#ifndef LIBFT_H
+# define LIBFT_H
 
 # include <stdint.h>
 # include <stddef.h>
+# include <unistd.h>
 
+void		**ft_free_array(void *array, size_t length);
+void		*ft_memset(void *vdst, const uint8_t byte, size_t length);
+int64_t		ft_memrcmp(const void *vptr1, const void *vptr2, size_t length);
+void		*ft_realloc(void *src, size_t src_size, size_t dst_size);
+
+// Prototypes: IO ------------------------------------------------------------
+char		*get_next_line(int fd);
+ssize_t		ft_printf(const char *str, ...);
+ssize_t		ft_putstr(char *str, int fd, char c);
+ssize_t		ft_putnbr(int64_t number, int fd, char c);
 // Prototypes: Strings -------------------------------------------------------
 size_t		ft_strlen(const char *str);
 int32_t		ft_strncmp(const char *str1, const char *str2, size_t length);
@@ -27,7 +38,6 @@ uint8_t		ft_isdigit(int32_t c);
 uint8_t		ft_isspace(int32_t c);
 uint8_t		ft_isprint(int32_t c);
 uint8_t		ft_isascii(int32_t c);
-uint8_t		ft_ischarset(const char c, const char *charset);
 // Prototypes: String Copy ---------------------------------------------------
 char		*ft_strcpy(char *dst, const char *src);
 char		*ft_strncpy(char *dst, const char *src, size_t length);
@@ -45,15 +55,17 @@ char		*ft_strncat(char *dst, const char *src, size_t length);
 char		*ft_strjoin(const char *src1, const char *src2);
 // Prototypes: String Operations ---------------------------------------------
 char		**ft_split(const char *str, const char c);
-int32_t		\
-*ft_split_numbers(const char *str, const char *charset, size_t *count);
-char		\
-**ft_arena_split(const char *str, const char *charset, size_t *count);
 char		*ft_strtrim(const char *str, const char *charset);
-size_t		ft_replace(char *str, uint8_t old_char, uint8_t new_char);
 // Prototypes: String Utils --------------------------------------------------
 size_t		ft_count_words(const char *str, const char c);
-size_t		ft_count_tokens(const char *str, const uint8_t *lut, size_t *bytes);
+int64_t		ft_atoi(const char *num_str);
+char		*ft_itoa(int64_t number);
+// Prototypes: Memory --------------------------------------------------------
+void		*ft_calloc(size_t arr_size, size_t type_size);
+void		*ft_bzero(void *vdst, size_t length);
+void		*ft_memcpy(void *vdst, const void *vsrc, size_t length);
+int64_t		ft_memcmp(const void *vptr1, const void *vptr2, size_t length);
+const void	*ft_memchr(const void *vptr, uint8_t byte, size_t length);
 //----------------------------------------------------------------------------
 
 #endif

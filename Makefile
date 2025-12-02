@@ -4,17 +4,12 @@ BUILD_PATH = build
 INC_PATH = includes
 OBJ_PATH = $(BUILD_PATH)/obj
 BIN = $(BUILD_PATH)/$(NAME)
-VPATH = sources sources/core sources/string sources/math sources/iostream sources/utils \
-sources/tests
+VPATH = sources
 
 # Files --------------------------------------- #
 LIBS =
-SRCS = ft_buffer.c
-# SRCS = core_allocation.c memory.c mem_find.c mem_swap.c \
-# io_basic.c io_put.c io_convert.c io_convert_base.c io_gnl.c io_printf.c \
-# float_math.c float_limits.c int_limits.c int_math.c int_primes.c int_range.c \
-# string.c char_bools.c str_bools.c str_copy.c str_find.c str_join.c str_operations.c str_utils.c \
-# array_sort.c list_utils.c rng.c lookup_tables.c
+SRCS = char_bools.c io_convert.c io_gnl.c io_printf.c io_put.c list_utils.c \
+mem_read.c mem_write.c str_join.c str_operations.c str_read.c str_write.c
 OBJS = $(addprefix $(OBJ_PATH)/, $(SRCS:.c=.o))
 
 # Flags --------------------------------------- #

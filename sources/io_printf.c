@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 16:04:04 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/11/30 23:51:40 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/12/02 10:02:03 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ ssize_t	print_str(const char *str)
 static
 ssize_t	parse(const char f, va_list *args)
 {
-	static const char	base_table[2][16] = {{'0', '1', '2', '3', '4', '5', '6',
+	static const char	base_tbl[2][16] = {{'0', '1', '2', '3', '4', '5', '6',
 		'7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'}, {'0', '1', '2', '3', '4',
 		'5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'}};
 	char				c;
@@ -67,9 +67,9 @@ ssize_t	parse(const char f, va_list *args)
 	if (f == 's')
 		return (print_str((char *) va_arg(*args, char *)));
 	if (f == 'p')
-		return (print_nbr(va_arg(*args, uintptr_t), f, base_table[f == 'X']));
+		return (print_nbr(va_arg(*args, uintptr_t), f, base_tbl[f == 'X']));
 	if (f == 'd' || f == 'i' || f == 'u' || f == 'x' || f == 'X')
-		return (print_nbr(va_arg(*args, unsigned int), f, base_table[f == 'X']));
+		return (print_nbr(va_arg(*args, unsigned int), f, base_tbl[f == 'X']));
 	if (f == 'c')
 	{
 		c = (char) va_arg(*args, unsigned int);
@@ -78,11 +78,9 @@ ssize_t	parse(const char f, va_list *args)
 	return (0);
 }
 
-ssize_t	ft_printf(const char *restrict str, ...)
+ssize_t	ft_printf(const char *str, ...)
 {
-	char		buffer[65536];
 	ssize_t		bytes;
-	size_t		length;
 	va_list		args;
 	const char	*ostr;
 
@@ -93,12 +91,12 @@ ssize_t	ft_printf(const char *restrict str, ...)
 		ostr = str;
 		while (*str != '%' && *str != 0)
 			str++;
-		if (str[0] == '%' && str[1] == '%')
+		bytes += write(1, ostr, str - ostr + (str[0] == '%' && str[1] == '%'));
+		if (*str == '%' && *(str + 1) == '%')
 			str++;
 		else if (*str == '%')
 			bytes += parse(*++str, &args);
-		length = (size_t)(str - ostr);
-		
+		str += (*str != 0);
 	}
 	va_end(args);
 	return (bytes);

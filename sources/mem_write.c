@@ -6,12 +6,13 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 17:35:52 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/07/07 19:18:15 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/12/02 09:56:03 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
 #include <stddef.h>
+#include <stdlib.h>
 
 static
 void	*ft_memrcpy(void *dst_void, const void *src_void, size_t length)
@@ -119,4 +120,17 @@ void	*ft_memset(void *dst_void, const uint8_t byte, size_t length)
 		length--;
 	}
 	return (dst_void);
+}
+
+// See if there is an efficient overflow handling
+void	*ft_calloc(size_t arr_size, size_t type_size)
+{
+	void			*array;
+	const size_t	total_size = arr_size * type_size;
+
+	array = (void *) malloc (total_size);
+	if (array == NULL)
+		return (NULL);
+	ft_memset(array, 0, total_size);
+	return (array);
 }

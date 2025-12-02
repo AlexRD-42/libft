@@ -6,7 +6,7 @@
 /*   By: adeimlin <adeimlin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:33:45 by adeimlin          #+#    #+#             */
-/*   Updated: 2025/07/07 18:23:32 by adeimlin         ###   ########.fr       */
+/*   Updated: 2025/12/02 10:02:12 by adeimlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,26 @@ char	*ft_strjoin(const char *src1, const char *src2)
 	while (src1 > osrc1)
 		*--str = *--src1;
 	return (str);
+}
+
+size_t	ft_strlcat(char *dst, const char *src, size_t dst_size)
+{
+	char	*odst;
+
+	odst = dst;
+	while (dst_size > 0 && *dst != 0)
+	{
+		dst++;
+		dst_size--;
+	}
+	while (*src != 0 && dst_size > 1)
+	{
+		*dst++ = *src++;
+		dst_size--;
+	}
+	if (dst_size != 0)
+		*dst = 0;
+	while (*src++ != 0)
+		dst++;
+	return ((size_t)(dst - odst));
 }
