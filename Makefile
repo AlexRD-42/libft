@@ -4,13 +4,11 @@ BUILD_PATH = build
 INC_PATH = includes
 OBJ_PATH = $(BUILD_PATH)/obj
 BIN = $(BUILD_PATH)/$(NAME)
-VPATH = sources
+VPATH = sources sources/string sources/memory sources/io sources/misc
 
 # Files --------------------------------------- #
 LIBS =
-SRCS = char_bools.c char_bools_2.c str_convert.c io_gnl.c io_printf.c io_put.c list_utils.c \
-mem_read.c mem_write.c str_join.c str_operations.c str_read.c str_write.c \
-list_operations.c utils.c
+SRCS = str_copy.c
 OBJS = $(addprefix $(OBJ_PATH)/, $(SRCS:.c=.o))
 
 # Flags --------------------------------------- #
